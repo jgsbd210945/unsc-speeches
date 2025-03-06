@@ -12,11 +12,11 @@ wvdem <- tibble(vdem) |>
   mutate(diff_polyarchy = v2x_polyarchy - lag(v2x_polyarchy)) |>
   # Backsliding boolean variable. I'm quantitatively defining it as having decreased in electoral democracy score by more than .005 three years in a row.
   # I also filtered so that the regime has to be at least some semblance of an electoral autocracy (at least) so that hard autocracies getting more autocratic aren't included.
-  mutate(backslided = (diff_polyarchy < 0) &
-           (v2x_regime_amb > 3) &
-           (lag(lag(v2x_polyarchy)) - v2x_polyarchy > 0.01)) |>
+  mutate(backslided = (diff_polyarchy < 0.005) &
+           (v2x_regime_amb > 2) &
+           (lag(lag(v2x_polyarchy)) - v2x_polyarchy > 0.03)) |>
   # Filling it out
-  mutate(backslided = (diff_polyarchy < 0) &
+  mutate(backslided = (diff_polyarchy < -0.001) &
            (backslided |
               (lag(backslided) & lag(backslided, 2))|
               lead(backslided) & lag(backslided) |
