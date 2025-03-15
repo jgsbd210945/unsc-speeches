@@ -2,11 +2,12 @@ library(tidyverse)
 library(vdemdata)
 library(janitor)
 library(countrycode)
+library(tm)
 
 # Loading/Cleaning Data
 
 meetings <- read_tsv("Data/meetings.tsv") |> filter(year > 1990)
-speeches <- read_tsv("Data/speeches.tsv") |> filter(year > 1990)
+speeches <- read_tsv("Data/speeches.tsv") |> filter(year > 1990, state == 1)
 scmakeup <- read_tsv("Data/SC Makeup.tsv") |> mutate(is_SC = TRUE)
 voting <- read_tsv("Data/UNSC Voting.tsv")  |>
 # Multiple cols for Bolivia and Venezuela due to gov't changes/UN Naming conventions.
@@ -68,7 +69,8 @@ mgwreg <- mgdata |> mutate(
     (!backslided & v2x_regime_amb > 6) ~ "entrenched_dem",
     (!backslided & between(v2x_regime_amb, 4, 6)) ~ "entrenched_illib",
     (!backslided & v2x_regime_amb < 4) ~ "entrenched_auto"
-  ))
+  )) |>
+  filter(!is.na(regime))
 
 # Finding highest/lowest scores in polyarchy to filter
 mgdata |> filter(country_text_id %in% c("FRA", "USA", "CHN", "RUS", "GBR")) |>
@@ -87,7 +89,7 @@ mgdata |> filter(country_text_id %in% c("FRA", "USA", "CHN", "RUS", "GBR")) |>
 
 
 # Graphing
-sumvotes_year <- function(df) {
+sumvotes_year <- function(df, merger = mgwreg) {
   df |> pivot_longer(!meeting_record:link,
                      names_to = "country",
                      values_to = "vote",
@@ -103,7 +105,7 @@ sumvotes_year <- function(df) {
               missing = sum(vote == "X") / total,
               .groups = 'drop') |>
     
-    merge(mgwreg, by.x = c("year", "country"), by.y = c("year", "country_text_id")) |>
+    merge(merger, by.x = c("year", "country"), by.y = c("year", "country_text_id")) |>
     as_tibble()
 }
 graph_polyarchy <- function(df, ylower = 0.8){
@@ -128,7 +130,7 @@ graph_diff_polyarchy(voterate)
 
 # Match with France?
 reference = "FRA"
-compare_votes <- function(col, reference){
+compare_votes <- function(col){
   case_when(
     col == "X" ~ "X",
     col == voting[[reference]] ~ "Y",
@@ -145,7 +147,7 @@ matchFR <- voting |>
 graph_polyarchy(matchFR)
 graph_diff_polyarchy(matchFR)
 
- # China
+# China
 reference = "CHN"
 matchCN <- voting |>
   mutate(across(!meeting_record:link, compare_votes)) |>
@@ -153,3 +155,77 @@ matchCN <- voting |>
 
 graph_polyarchy(matchCN)
 graph_diff_polyarchy(matchCN)
+
+# Backsliding to entrenched Directly
+mgwreg$bve <- ifelse(grepl("backslide_", mgwreg$regime), "backsliding",
+                       ifelse(grepl("dem", mgwreg$regime), "democratic",
+                       "entrenched"))
+bve_mg <- sumvotes_year(voting)
+
+bve_mg |> ggplot(aes(x = bve, y = yes)) +
+  geom_boxplot() +
+  ylim(0.65, 1)
+bve_mg |> ggplot(aes(x = regime, y = yes)) +
+  geom_boxplot() +
+  ylim(0.65, 1)
+
+# Rhetoric
+pullspeech <- function(term, loweryear, upperyear) {
+  speeches |>
+    filter(grepl(term, state), between(year, loweryear, upperyear)) |>
+    pull(speech)
+}
+to_tdm <- function(col){
+  Corpus(VectorSource(col)) |>
+    tm_map(removePunctuation, ucp = TRUE) |>
+    TermDocumentMatrix(control = list(
+      stopwords = TRUE,
+      tolower = TRUE,
+      stemming = TRUE,
+      removeNumbers = TRUE,
+      bounds = list(global = c(3, Inf))
+    ))
+}
+freqTerms <- function(tdm){
+  as.matrix(tdm) |>
+    apply(1, sum) |>
+    sort(decreasing = TRUE) |>
+    head(100)
+}
+
+speeches$state <- ifelse(is.na(countrycode(speeches$affiliation, origin = 'country.name', destination = 'iso3c')),
+       speeches$affiliation,
+       countrycode(speeches$affiliation, origin = 'country.name', destination = 'iso3c'))
+
+gen_speech <- speeches |>
+  select(meeting_num, year, month, day, topic, affiliation, speech, state) |>
+  merge(mgwreg, by.x = c("year", "state"), by.y = c("year", "country_text_id"), all.x = TRUE) |>
+  as_tibble()
+
+
+
+
+
+pol_tdm <- pullspeech("POL", 2019, 2019) |>
+  to_tdm()
+freqTerms(pol_tdm)
+
+indo_tdm <- pullspeech("IDN", 2019, 2019) |>
+  to_tdm()
+freqTerms(indo_tdm)
+
+mex_tdm <- pullspeech("MEX", 2021, 2022) |>
+  to_tdm()
+freqTerms(mex_tdm)
+
+ken_tdm <- pullspeech("KEN", 2021, 2022) |>
+  to_tdm()
+freqTerms(ken_tdm)
+
+rus_tdm <- pullspeech("RUS", 2000, 2024) |>
+  to_tdm()
+freqTerms(rus_tdm)
+
+chn_tdm <- pullspeech("CHN", 2000, 2024) |>
+  to_tdm()
+freqTerms(chn_tdm)
