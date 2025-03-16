@@ -4,6 +4,7 @@ library(janitor)
 library(countrycode)
 library(tm)
 library(wrMisc)
+library(tidytext)
 
 # Loading/Cleaning Data
 
@@ -47,7 +48,7 @@ wvdem <- tibble(vdem) |>
   #handling NAs - for 2023's data.
   mutate(backslided = ifelse(is.na(backslided),
                              ((diff_polyarchy < -0.001) & lag(backslided)),
-                             backslided))
+                             backslided)) |>
   ungroup() |>
   filter(year > 1990) |>
   arrange(country_text_id) |>

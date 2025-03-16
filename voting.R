@@ -17,14 +17,17 @@ mgdata |> filter(country_text_id %in% c("FRA", "USA", "CHN", "RUS", "GBR")) |>
 
 
 # Graphing
-sumvotes_year <- function(df, merger = mgwreg) {
+pivot_votes <- function(df){
   df |> pivot_longer(!meeting_record:link,
                      names_to = "country",
                      values_to = "vote",
                      values_drop_na = TRUE) |>
-    select(date, resolution, country, vote) |>
-    mutate(year = year(date)) |>
-    
+    select(date, resolution, country, vote, meeting_topic, title) |>
+    mutate(year = year(date))
+}
+
+sumvotes_year <- function(df, merger = mgwreg) {
+  df |> pivot_votes() |>
     group_by(year, country) |>
     summarize(total = n(),
               yes = sum(vote == "Y") / total,
@@ -37,17 +40,18 @@ sumvotes_year <- function(df, merger = mgwreg) {
     as_tibble()
 }
 graph_polyarchy <- function(df, ylower = 0.8){
-  ggplot(df, aes(v2x_polyarchy, y = yes)) +
-    geom_point(aes(color = regime)) +
-    ylim(ylower, 1) +
-    geom_smooth()
+  ggplot(df, aes(v2x_polyarchy, y = yes, color = regime)) +
+    geom_point() +
+    geom_smooth() +
+    ylim(ylower, 1)
 }
-graph_diff_polyarchy <- function(df, xlower = -0.1, xupper = 0.025, ylower = 0.7) {
-  ggplot(df, aes(diff_polyarchy, y = yes)) +
-    geom_point(aes(color = regime)) +
+graph_diff_polyarchy <- function(df, xlower = -0.08, xupper = 0.01, ylower = 0.75) {
+  ggplot(df, aes(diff_polyarchy, y = yes, color = regime)) +
+    geom_point() +
+    facet_wrap(vars(regime)) +
+    geom_smooth(method = 'lm') +
     xlim(xlower, xupper) +
-    ylim(ylower, 1) +
-    geom_smooth()
+    ylim(ylower, 1)
 }
 
 
@@ -96,3 +100,46 @@ bve_mg |> ggplot(aes(x = bve, y = yes)) +
 bve_mg |> ggplot(aes(x = regime, y = yes)) +
   geom_boxplot() +
   ylim(0.65, 1)
+
+cleaned_voting <- voting
+cleaned_voting$meeting_topic <- tolower(cleaned_voting$meeting_topic) |>
+  removeWords(stopwords()) |>
+  stripWhitespace()
+cleaned_voting$meeting_topic <- gsub(" ", "", cleaned_voting$meeting_topic)
+cleaned_voting$meeting_topic <- gsub("situation", "", cleaned_voting$meeting_topic)
+
+byreg_votes <- cleaned_voting |> pivot_votes() |>
+  merge(mgwreg, by.x = c("year", "country"), by.y = c("year", "country_text_id"),
+        all.x = TRUE) |>
+  as_tibble() |>
+  filter(!is.na(regime)) |>
+  group_by(meeting_topic, regime, year) |>
+  reframe(total = n(),
+            yes = sum(vote == "Y") / total,
+            no = sum(vote == "N") / total,
+            abstain = sum(vote == "A") / total,
+            missing = sum(vote == "X") / total) |>
+  filter(!grepl("admission|election|appointment", meeting_topic)) |>
+  arrange(desc(total))
+
+bve_votes <- cleaned_voting |> pivot_votes() |>
+  merge(mgwreg, by.x = c("year", "country"), by.y = c("year", "country_text_id"),
+        all.x = TRUE) |>
+  as_tibble() |>
+  filter(!is.na(regime)) |>
+  group_by(meeting_topic, bve) |>
+  reframe(total = n(),
+          yes = sum(vote == "Y") / total,
+          no = sum(vote == "N") / total,
+          abstain = sum(vote == "A") / total,
+          missing = sum(vote == "X") / total) |>
+  filter(!grepl("admission|election|appointment", meeting_topic)) |>
+  arrange(desc(total))
+
+bve_votes |> pivot_wider(
+  id_cols = meeting_topic,
+  names_from = bve,
+  values_from = yes) |>
+  arrange(backsliding)
+  
+
