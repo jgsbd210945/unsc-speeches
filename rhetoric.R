@@ -72,7 +72,7 @@ dempct <- (demfreq / sum(demfreq)) * 10000
 
 freqbyregime <- mergeVectors(erodefreq, illibfreq, revertfreq, autofreq, demfreq) |>
   as_tibble() |>
-  mutate(regime = c("Democratic Erosion", "Entrenched Illiberal", "Democratic Reversion", "Entrenched Autocracy", "Entrenched Democracy"),
+  mutate(regime = c("dem_erosion", "entr_illib", "dem_revert", "entr_auto", "entr_dem"),
          .before = 1)
 rmfreq <- apply(freqbyregime, 2, \(col) sum(!is.na(col)))
 rmfreq <- rmfreq <= 1
@@ -81,14 +81,25 @@ freqbyregime <- freqbyregime %>% replace(is.na(.), 0) # Need the old pipe for th
 
 pctbyregime <- mergeVectors(erodepct, illibpct, revertpct, autopct, dempct) |>
   as_tibble() |>
-  mutate(regime = c("Democratic Erosion", "Entrenched Illiberal", "Democratic Reversion", "Entrenched Autocracy", "Entrenched Democracy"),
+  mutate(regime = c("dem_erosion", "entr_illib", "dem_revert", "entr_auto", "entr_dem"),
          .before = 1)
 rmpct <- apply(pctbyregime, 2, \(col) sum(!is.na(col)))
 rmpct <- rmpct <= 1
 pctbyregime <- pctbyregime[,!rmpct]
 pctbyregime <- pctbyregime %>% replace(is.na(.), 0)
 
+specific_terms <- c("regime", "norm", "normat", "standard", "right", "liber", "neoliber", "forc", "peac")
+normlang <- cbind(pctbyregime[specific_terms], pctbyregime[grepl("interv|interfer|selfdet|sover|rights|humanright|humanitarian|peace", colnames(pctbyregime))])
+normlang <- data.table::transpose(normlang, keep.names = "term", make.names = "regime") |>
+  as_tibble() |>
+  arrange(desc(dem_erosion))
 
+pivot_longer(normlang,
+             cols = -term,
+             names_to = "regime",
+             values_to = "per10k") |>
+  ggplot(aes(x = regime, y = log(per10k))) +
+  geom_boxplot()
 
 
 # Case Studies
