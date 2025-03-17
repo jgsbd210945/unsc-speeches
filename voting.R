@@ -6,7 +6,9 @@ voting <- read_tsv("Data/UNSC Voting.tsv")  |>
          Venezuela = coalesce(Venezuela...25, Venezuela...145)) |>
   select(-c(Bolivia...134, Bolivia...142, Venezuela...25, Venezuela...145)) |>
   clean_names() |>
-  mutate(meeting_date = as.Date(meeting_date, format = "%m/%d/%y")) |>
+  mutate(meeting_date = as.Date(meeting_date, format = "%m/%d/%Y"),
+         year = year(date)) |>
+  relocate(year, .after = date) |>
   rename(KOR = "south_korea")
 
 # Converting to country codes for easier matching
@@ -51,8 +53,7 @@ pivot_votes <- function(df){
                      names_to = "country",
                      values_to = "vote",
                      values_drop_na = TRUE) |>
-    select(date, resolution, country, vote, meeting_topic, title) |>
-    mutate(year = year(date))
+    select(date, year, resolution, country, vote, meeting_topic, title)
 }
 
 sumvotes_year <- function(df, merger = mgwreg) {
@@ -165,5 +166,33 @@ bve_test <- bve_votes |> pivot_wider(
   mutate(bve = backsliding / entrenched) |>
   arrange(bve)
   
-bve_test |> print(n = 25)
-bve_test |> arrange(desc(bve)) |> print(n = 25)
+#bve_test |> print(n = 25)
+#bve_test |> arrange(desc(bve)) |> print(n = 25)
+
+# Case studies
+case_study_select <- function(country1, country2, inityear, endyear){
+  cleaned_voting |>
+    select(meeting_record:link, country1, country2) |>
+    filter(between(cleaned_voting$year, inityear, endyear))
+}
+
+caseframe1 <- case_study_select("POL", "PER", 2018, 2019)
+caseframe1 |> sumvotes_year()
+caseframe1 |> 
+  filter((POL != 'Y') | (PER != 'Y')) |>
+  select(meeting_record, date, meeting_topic, abstain, no, yes, POL, PER)
+
+caseframe2 <- case_study_select("TUR", "MEX", 2009, 2010)
+caseframe2 |> sumvotes_year()
+caseframe2 |>
+  filter((TUR != 'Y') | (MEX != 'Y')) |>
+  select(meeting_record, date, meeting_topic, abstain, no, yes, TUR, MEX)
+
+caseframe3 <- case_study_select("RUS", "CHN", 2000, 2024)
+caseframe3 |> sumvotes_year()
+caseframe3 |> filter((RUS != 'Y') | (CHN != 'Y'), (RUS != 'X') | (CHN != 'X')) |>
+  select(meeting_record, meeting_topic, abstain, no, yes, RUS, CHN) |>
+  group_by(meeting_topic, RUS, CHN) |>
+  summarize(count = n(), .groups = 'drop') |>
+  arrange(desc(count)) |>
+  print(n = 72)
