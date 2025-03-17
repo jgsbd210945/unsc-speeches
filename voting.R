@@ -29,22 +29,34 @@ pivot_votes <- function(df){
 sumvotes_year <- function(df, merger = mgwreg) {
   df |> pivot_votes() |>
     group_by(year, country) |>
-    summarize(total = n(),
+    reframe(total = n(),
               yes = sum(vote == "Y") / total,
               no = sum(vote == "N") / total,
               abstain = sum(vote == "A") / total,
-              missing = sum(vote == "X") / total,
-              .groups = 'drop') |>
-    
+              missing = sum(vote == "X") / total) |>
     merge(merger, by.x = c("year", "country"), by.y = c("year", "country_text_id")) |>
     as_tibble()
 }
+
+sumvotes_year_topic <- function(df) {
+  df |> pivot_votes() |>
+    group_by(year, country, topic) |>
+    reframe(total = n(),
+              yes = sum(vote == "Y") / total,
+              no = sum(vote == "N") / total,
+              abstain = sum(vote == "A") / total,
+              missing = sum(vote == "X") / total) |>
+    merge(merger, by.x = c("year", "country"), by.y = c("year", "country_text_id")) |>
+    as_tibble()
+}
+
 graph_polyarchy <- function(df, ylower = 0.8){
   ggplot(df, aes(v2x_polyarchy, y = yes, color = regime)) +
     geom_point() +
     geom_smooth() +
     ylim(ylower, 1)
 }
+
 graph_diff_polyarchy <- function(df, xlower = -0.08, xupper = 0.01, ylower = 0.75) {
   ggplot(df, aes(diff_polyarchy, y = yes, color = regime)) +
     geom_point() +

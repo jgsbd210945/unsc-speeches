@@ -79,6 +79,21 @@ rmfreq <- rmfreq <= 1
 freqbyregime <- freqbyregime[,!rmfreq]
 freqbyregime <- freqbyregime %>% replace(is.na(.), 0) # Need the old pipe for this!
 
+specific_terms <- c("regime", "norm", "normat", "standard", "right", "liber", "neoliber", "forc", "peac")
+
+normnum <- cbind(freqbyregime[specific_terms], freqbyregime[grepl("interv|interfer|selfdet|sover|rights|humanright|humanitarian|peace", colnames(pctbyregime))])
+normnum <- normnum |>
+  mutate(tot_norm = rowSums(select(normnum, matches("^norm")), na.rm = TRUE),
+         tot_sovereign = rowSums(select(normnum, matches("^sovereign")), na.rm = TRUE),
+         tot_peacekeep = rowSums(select(normnum, matches("^peacekeep")), na.rm = TRUE),
+         tot_peacebuild = rowSums(select(normnum, matches("^peacebuild")), na.rm = TRUE),
+         tot_interv = rowSums(select(normnum, matches("^interv")), na.rm = TRUE),
+         tot_humanitarian = rowSums(select(normnum, matches("^humanitarian")), na.rm = TRUE)) |>
+  select(-matches("^norm|^sovereign|^peacekeep|^peacebuild|^interv|^humanitarian")) |>
+  data.table::transpose(keep.names = "term", make.names = "regime") |>
+  as_tibble()
+  
+
 pctbyregime <- mergeVectors(erodepct, illibpct, revertpct, autopct, dempct) |>
   as_tibble() |>
   mutate(regime = c("dem_erosion", "entr_illib", "dem_revert", "entr_auto", "entr_dem"),
@@ -88,20 +103,23 @@ rmpct <- rmpct <= 1
 pctbyregime <- pctbyregime[,!rmpct]
 pctbyregime <- pctbyregime %>% replace(is.na(.), 0)
 
-specific_terms <- c("regime", "norm", "normat", "standard", "right", "liber", "neoliber", "forc", "peac")
 normlang <- cbind(pctbyregime[specific_terms], pctbyregime[grepl("interv|interfer|selfdet|sover|rights|humanright|humanitarian|peace", colnames(pctbyregime))])
-normlang <- data.table::transpose(normlang, keep.names = "term", make.names = "regime") |>
+
+normlang <- normlang |>
+  mutate(tot_norm = rowSums(select(normlang, matches("^norm")), na.rm = TRUE),
+         tot_sovereign = rowSums(select(normlang, matches("^sovereign")), na.rm = TRUE),
+         tot_peacekeep = rowSums(select(normlang, matches("^peacekeep")), na.rm = TRUE),
+         tot_peacebuild = rowSums(select(normlang, matches("^peacebuild")), na.rm = TRUE),
+         tot_interv = rowSums(select(normlang, matches("^interv")), na.rm = TRUE),
+         tot_humanitarian = rowSums(select(normlang, matches("^humanitarian")), na.rm = TRUE)) |>
+  select(-matches("^norm|^sovereign|^peacekeep|^peacebuild|^interv|^humanitarian")) |>
+  data.table::transpose(keep.names = "term", make.names = "regime") |>
   as_tibble() |>
-  arrange(desc(dem_erosion))
-
-pivot_longer(normlang,
-             cols = -term,
-             names_to = "regime",
-             values_to = "per10k") |>
-  ggplot(aes(x = regime, y = log(per10k))) +
-  geom_boxplot()
-
-
+  mutate(bve_erosion = dem_erosion / entr_illib,
+         bve_revert = dem_revert / entr_auto) |>
+  arrange(desc(bve_erosion)) 
+  
+  
 # Case Studies
 pol_tdm <- wf("POL", 2019, 2019)
 polfreq <- freqTerms(pol_tdm)
