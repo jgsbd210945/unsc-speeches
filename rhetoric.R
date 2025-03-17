@@ -1,5 +1,9 @@
 source("main.R")
 
+
+speeches <- read_tsv("Data/speeches.tsv") |> filter(year > 1990, state == 1)
+
+
 speeches$state <- ifelse(is.na(countrycode(speeches$affiliation, origin = 'country.name', destination = 'iso3c')),
                          speeches$affiliation,
                          countrycode(speeches$affiliation, origin = 'country.name', destination = 'iso3c'))
@@ -75,7 +79,6 @@ freqbyregime <- mergeVectors(erodefreq, illibfreq, revertfreq, autofreq, demfreq
   mutate(regime = c("dem_erosion", "entr_illib", "dem_revert", "entr_auto", "entr_dem"),
          .before = 1)
 rmfreq <- apply(freqbyregime, 2, \(col) sum(!is.na(col)))
-rmfreq <- rmfreq <= 1
 freqbyregime <- freqbyregime[,!rmfreq]
 freqbyregime <- freqbyregime %>% replace(is.na(.), 0) # Need the old pipe for this!
 

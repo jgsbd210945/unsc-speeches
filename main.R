@@ -9,25 +9,7 @@ library(tidytext)
 # Loading/Cleaning Data
 
 meetings <- read_tsv("Data/meetings.tsv") |> filter(year > 1990)
-speeches <- read_tsv("Data/speeches.tsv") |> filter(year > 1990, state == 1)
 scmakeup <- read_tsv("Data/SC Makeup.tsv") |> mutate(is_SC = TRUE)
-voting <- read_tsv("Data/UNSC Voting.tsv")  |>
-# Multiple cols for Bolivia and Venezuela due to gov't changes/UN Naming conventions.
-  mutate(Bolivia = coalesce(Bolivia...134, Bolivia...142),
-         Venezuela = coalesce(Venezuela...25, Venezuela...145)) |>
-  select(-c(Bolivia...134, Bolivia...142, Venezuela...25, Venezuela...145)) |>
-  clean_names() |>
-  mutate(meeting_date = as.Date(meeting_date, format = "%m/%d/%y")) |>
-  rename(KOR = "south_korea")
-
-# Converting to country codes for easier matching
-colnames(voting) <- ifelse(is.na(countrycode(colnames(voting), origin = 'country.name', destination = 'iso3c')),
-                           colnames(voting),
-                           countrycode(colnames(voting), origin = 'country.name', destination = 'iso3c'))
-# Removing empty cols
-rm <- apply(voting, 2, \(col) sum(!is.na(col)))
-rm <- rm == 0
-voting <- voting[,!rm]
 
 wvdem <- tibble(vdem) |>
   filter(year > 1975) |> # So I can do the lags correctly. This will be standardized later.
@@ -77,5 +59,4 @@ mgwreg <- mgdata |> mutate(
     (!backslided & v2x_regime_amb < 4) ~ "entrenched_auto"
   )) |>
   filter(!is.na(regime))
-
 

@@ -1,5 +1,34 @@
 source("main.R")
 
+voting <- read_tsv("Data/UNSC Voting.tsv")  |>
+  # Multiple cols for Bolivia and Venezuela due to gov't changes/UN Naming conventions.
+  mutate(Bolivia = coalesce(Bolivia...134, Bolivia...142),
+         Venezuela = coalesce(Venezuela...25, Venezuela...145)) |>
+  select(-c(Bolivia...134, Bolivia...142, Venezuela...25, Venezuela...145)) |>
+  clean_names() |>
+  mutate(meeting_date = as.Date(meeting_date, format = "%m/%d/%y")) |>
+  rename(KOR = "south_korea")
+
+# Converting to country codes for easier matching
+colnames(voting) <- ifelse(is.na(countrycode(colnames(voting), origin = 'country.name', destination = 'iso3c')),
+                           colnames(voting),
+                           countrycode(colnames(voting), origin = 'country.name', destination = 'iso3c'))
+# Removing empty cols
+rm <- apply(voting, 2, \(col) sum(!is.na(col)))
+rm <- rm == 0
+voting <- voting[,!rm]
+
+cleaned_voting <- voting
+cleaned_voting$meeting_topic <- tolower(cleaned_voting$meeting_topic) |>
+  removeWords(stopwords()) |>
+  stripWhitespace()
+cleaned_voting$meeting_topic <- gsub(" ", "", cleaned_voting$meeting_topic)
+cleaned_voting$meeting_topic <- gsub("situation", "", cleaned_voting$meeting_topic)
+
+mgwreg$bve <- ifelse(grepl("backslide_", mgwreg$regime), "backsliding",
+                     ifelse(grepl("dem", mgwreg$regime), "democratic",
+                            "entrenched"))
+
 # Finding highest/lowest scores in polyarchy to filter
 mgdata |> filter(country_text_id %in% c("FRA", "USA", "CHN", "RUS", "GBR")) |>
   group_by(year) |>
@@ -38,18 +67,6 @@ sumvotes_year <- function(df, merger = mgwreg) {
     as_tibble()
 }
 
-sumvotes_year_topic <- function(df) {
-  df |> pivot_votes() |>
-    group_by(year, country, topic) |>
-    reframe(total = n(),
-              yes = sum(vote == "Y") / total,
-              no = sum(vote == "N") / total,
-              abstain = sum(vote == "A") / total,
-              missing = sum(vote == "X") / total) |>
-    merge(merger, by.x = c("year", "country"), by.y = c("year", "country_text_id")) |>
-    as_tibble()
-}
-
 graph_polyarchy <- function(df, ylower = 0.8){
   ggplot(df, aes(v2x_polyarchy, y = yes, color = regime)) +
     geom_point() +
@@ -71,6 +88,7 @@ graph_diff_polyarchy <- function(df, xlower = -0.08, xupper = 0.01, ylower = 0.7
 voterate <- sumvotes_year(voting)
 graph_polyarchy(voterate)
 graph_diff_polyarchy(voterate)
+
 
 # Match with France?
 reference = "FRA"
@@ -101,9 +119,6 @@ graph_polyarchy(matchCN)
 graph_diff_polyarchy(matchCN)
 
 # Backsliding to entrenched Directly
-mgwreg$bve <- ifelse(grepl("backslide_", mgwreg$regime), "backsliding",
-                     ifelse(grepl("dem", mgwreg$regime), "democratic",
-                            "entrenched"))
 bve_mg <- sumvotes_year(voting)
 
 bve_mg |> ggplot(aes(x = bve, y = yes)) +
@@ -113,12 +128,6 @@ bve_mg |> ggplot(aes(x = regime, y = yes)) +
   geom_boxplot() +
   ylim(0.65, 1)
 
-cleaned_voting <- voting
-cleaned_voting$meeting_topic <- tolower(cleaned_voting$meeting_topic) |>
-  removeWords(stopwords()) |>
-  stripWhitespace()
-cleaned_voting$meeting_topic <- gsub(" ", "", cleaned_voting$meeting_topic)
-cleaned_voting$meeting_topic <- gsub("situation", "", cleaned_voting$meeting_topic)
 
 byreg_votes <- cleaned_voting |> pivot_votes() |>
   merge(mgwreg, by.x = c("year", "country"), by.y = c("year", "country_text_id"),
@@ -148,10 +157,13 @@ bve_votes <- cleaned_voting |> pivot_votes() |>
   filter(!grepl("admission|election|appointment", meeting_topic)) |>
   arrange(desc(total))
 
-bve_votes |> pivot_wider(
+bve_test <- bve_votes |> pivot_wider(
   id_cols = meeting_topic,
   names_from = bve,
   values_from = yes) |>
-  arrange(backsliding)
+  relocate(democratic, .before = entrenched) |>
+  mutate(bve = backsliding / entrenched) |>
+  arrange(bve)
   
-
+bve_test |> print(n = 25)
+bve_test |> arrange(desc(bve)) |> print(n = 25)
