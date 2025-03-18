@@ -16,9 +16,7 @@ colnames(voting) <- ifelse(is.na(countrycode(colnames(voting), origin = 'country
                            colnames(voting),
                            countrycode(colnames(voting), origin = 'country.name', destination = 'iso3c'))
 # Removing empty cols
-rm <- apply(voting, 2, \(col) sum(!is.na(col)))
-rm <- rm == 0
-voting <- voting[,!rm]
+voting <- voting |> clean_nas()
 
 cleaned_voting <- voting
 cleaned_voting$meeting_topic <- tolower(cleaned_voting$meeting_topic) |>
@@ -170,29 +168,19 @@ bve_test <- bve_votes |> pivot_wider(
 #bve_test |> arrange(desc(bve)) |> print(n = 25)
 
 # Case studies
-case_study_select <- function(country1, country2, inityear, endyear){
-  cleaned_voting |>
-    select(meeting_record:link, country1, country2) |>
-    filter(between(cleaned_voting$year, inityear, endyear))
+case_clean <- function(term, lowyear = 1991, df = cleaned_voting) {
+  df |> filter(grepl(term, meeting_topic), year >= lowyear, (abstain != 0 | no != 0)) |>
+    clean_nas()
 }
 
-caseframe1 <- case_study_select("POL", "PER", 2018, 2019)
-caseframe1 |> sumvotes_year()
-caseframe1 |> 
-  filter((POL != 'Y') | (PER != 'Y')) |>
-  select(meeting_record, date, meeting_topic, abstain, no, yes, POL, PER)
+bve_test |> filter(grepl("cyprus|ukraine|georgia|africa", meeting_topic))
 
-caseframe2 <- case_study_select("TUR", "MEX", 2009, 2010)
-caseframe2 |> sumvotes_year()
-caseframe2 |>
-  filter((TUR != 'Y') | (MEX != 'Y')) |>
-  select(meeting_record, date, meeting_topic, abstain, no, yes, TUR, MEX)
+case_clean("cyprus", 2000)
+case_clean("sudan", 2023) |> select(date, total:yes, DZA, SLE, MOZ)
+case_clean("ukraine", 2014)
+case_clean("georgia", 2008)
+case_clean("taiwan")
+case_clean("venezuela")
+case_clean("korea") |> select(date, total:RUS)
 
-caseframe3 <- case_study_select("RUS", "CHN", 2000, 2024)
-caseframe3 |> sumvotes_year()
-caseframe3 |> filter((RUS != 'Y') | (CHN != 'Y'), (RUS != 'X') | (CHN != 'X')) |>
-  select(meeting_record, meeting_topic, abstain, no, yes, RUS, CHN) |>
-  group_by(meeting_topic, RUS, CHN) |>
-  summarize(count = n(), .groups = 'drop') |>
-  arrange(desc(count)) |>
-  print(n = 72)
+meetings |> filter(grepl("china", topic))

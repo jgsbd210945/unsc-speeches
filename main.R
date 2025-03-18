@@ -60,3 +60,8 @@ mgwreg <- mgdata |> mutate(
   )) |>
   filter(!is.na(regime))
 
+clean_nas <- function(df) {
+  rmna <- apply(df, 2, \(col) sum(!is.na(col)))
+  rmna <- rmna == 0
+  df[, !rmna]
+}
