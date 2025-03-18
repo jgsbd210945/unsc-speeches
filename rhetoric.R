@@ -13,14 +13,20 @@ gen_speech <- speeches |>
   merge(mgwreg, by.x = c("year", "state"), by.y = c("year", "country_text_id"), all.x = TRUE) |>
   as_tibble()
 
+gen_speech$topic <- tolower(gen_speech$topic) |>
+  removeWords(stopwords()) |>
+  stripWhitespace()
+
+gen_speech$topic <- gsub(" |-|—|situation", "", gen_speech$topic)
+
 # Rhetoric
-wf <- function(term, loweryear, upperyear) {
-  pullspeech(term, loweryear, upperyear) |>
+wf <- function(term, lowyear = 1991) {
+  pullspeech(term, lowyear) |>
     to_tdm()
 }
-pullspeech <- function(term, loweryear, upperyear) {
+pullspeech <- function(term, lowyear) {
   gen_speech |>
-    filter(grepl(term, state), between(year, loweryear, upperyear)) |>
+    filter(grepl(term, topic), year >= loweryear) |>
     pull(speech)
 }
 to_tdm <- function(col){
@@ -79,12 +85,13 @@ freqbyregime <- mergeVectors(erodefreq, illibfreq, revertfreq, autofreq, demfreq
   mutate(regime = c("dem_erosion", "entr_illib", "dem_revert", "entr_auto", "entr_dem"),
          .before = 1)
 rmfreq <- apply(freqbyregime, 2, \(col) sum(!is.na(col)))
+rmfreq <- rmfreq <= 1
 freqbyregime <- freqbyregime[,!rmfreq]
 freqbyregime <- freqbyregime %>% replace(is.na(.), 0) # Need the old pipe for this!
 
 specific_terms <- c("regime", "norm", "normat", "standard", "right", "liber", "neoliber", "forc", "peac")
 
-normnum <- cbind(freqbyregime[specific_terms], freqbyregime[grepl("interv|interfer|selfdet|sover|rights|humanright|humanitarian|peace", colnames(pctbyregime))])
+normnum <- cbind(freqbyregime[specific_terms], freqbyregime[grepl("interv|interfer|selfdet|sover|rights|humanright|humanitarian|peace", colnames(freqbyregime))])
 normnum <- normnum |>
   mutate(tot_norm = rowSums(select(normnum, matches("^norm")), na.rm = TRUE),
          tot_sovereign = rowSums(select(normnum, matches("^sovereign")), na.rm = TRUE),
@@ -124,42 +131,31 @@ normlang <- normlang |>
   
   
 # Case Studies
-pol_tdm <- wf("POL", 2019, 2019)
-polfreq <- freqTerms(pol_tdm)
-polpct <- (polfreq / sum(polfreq)) * 10000
+cyp_tdm <- wf("cyprus", 2000)
+cypfreq <- freqTerms(cyp_tdm)
+cyppct <- (cypfreq / sum(cypfreq)) * 10000
 
-indo_tdm <- wf("IDN", 2019, 2019)
-indofreq <- freqTerms(indo_tdm)
-indopct <- (indofreq / sum(indofreq)) * 10000
+sud_tdm <- wf("sudan", 2020)
+sudfreq <- freqTerms(sud_tdm)
+sudpct <- (sudfreq / sum(sudfreq)) * 10000
 
-mex_tdm <- wf("MEX", 2021, 2022)
-mexfreq <- freqTerms(mex_tdm)
-mexpct <- (mexfreq / sum(mexfreq)) * 10000
+rusuk_tdm <- wf("russia|ukraine", 2014)
+rusukfreq <- freqTerms(rusuk_tdm)
+rusukpct <- (rusukfreq / sum(rusukfreq)) * 10000
 
-ken_tdm <- wf("KEN", 2021, 2022)
-kenfreq <- freqTerms(ken_tdm)
-kenpct <- (kenfreq / sum(kenfreq)) * 10000
 
-rus_tdm <- wf("RUS", 2000, 2024)
-rusfreq <- freqTerms(rus_tdm)
-ruspct <- (rusfreq / sum(rusfreq)) * 10000
-
-chn_tdm <- wf("CHN", 2000, 2024)
-chnfreq <- freqTerms(chn_tdm)
-chnpct <- (chnfreq / sum(chnfreq)) * 10000
-
-casesfreq <- mergeVectors(polfreq, indofreq, mexfreq, kenfreq, rusfreq, chnfreq) |>
+casesfreq <- mergeVectors(cypfreq, sudfreq, rusukfreq) |>
   as_tibble() |>
-  mutate(state = c("Poland", "Indonesia", "Mexico", "Kenya", "Russia", "China"),
+  mutate(case = c("Cyprus", "Sudan", "Russia-Ukraine"),
          .before = 1)
 rmcsfreq <- apply(casesfreq, 2, \(col) sum(!is.na(col)))
 rmcsfreq <- rmcsfreq <= 1
 casesfreq <- casesfreq[,!rmcsfreq]
 casesfreq <- casesfreq %>% replace(is.na(.), 0)
 
-casespct <- mergeVectors(polpct, indopct, mexpct, kenpct, ruspct, chnpct) |>
+casespct <- mergeVectors(cyppct, sudpct, rusukpct) |>
   as_tibble() |>
-  mutate(state = c("Poland", "Indonesia", "Mexico", "Kenya", "Russia", "China"),
+  mutate(state = c("Cyprus", "Sudan", "Russia-Ukraine"),
          .before = 1)
 rmcspct <- apply(casespct, 2, \(col) sum(!is.na(col)))
 rmcspct <- rmcspct <= 1

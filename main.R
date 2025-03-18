@@ -65,3 +65,9 @@ clean_nas <- function(df) {
   rmna <- rmna == 0
   df[, !rmna]
 }
+
+
+sc_regime <- mgwreg |>
+  filter(is_SC) |>
+  select(year, country_name, regime)
+sc_regime |> filter(year == 2009)
