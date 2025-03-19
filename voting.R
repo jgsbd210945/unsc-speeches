@@ -25,10 +25,6 @@ cleaned_voting$meeting_topic <- tolower(cleaned_voting$meeting_topic) |>
 cleaned_voting$meeting_topic <- gsub(" |-|—", "", cleaned_voting$meeting_topic)
 cleaned_voting$meeting_topic <- gsub("situation", "", cleaned_voting$meeting_topic)
 
-mgwreg$bve <- ifelse(grepl("backslide_", mgwreg$regime), "backsliding",
-                     ifelse(grepl("dem", mgwreg$regime), "democratic",
-                            "entrenched"))
-
 # Finding highest/lowest scores in polyarchy to filter
 mgdata |> filter(country_text_id %in% c("FRA", "USA", "CHN", "RUS", "GBR")) |>
   group_by(year) |>
@@ -138,6 +134,13 @@ bve_mg |> ggplot(aes(diff_polyarchy, y = yes)) +
   ylim(0.65, 1) +
   xlim(-0.06, 0.01)
 
+bve_mg |> ggplot(aes(diff_polyarchy, y = yes)) +
+  facet_wrap(vars(bve)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  ylim(0.65, 1) +
+  xlim(-0.06, 0.01)
+
 
 byreg_votes <- cleaned_voting |> pivot_votes() |>
   merge(mgwreg, by.x = c("year", "country"), by.y = c("year", "country_text_id"),
@@ -184,13 +187,8 @@ case_clean <- function(term, lowyear = 1991, df = cleaned_voting) {
     clean_nas()
 }
 
-bve_test |> filter(grepl("cyprus|ukraine|russia|sudan|venezuela", meeting_topic))
+bve_test |> filter(grepl("cyprus|ukraine|russia|westernsahara", meeting_topic))
 
-case_clean("cyprus", 2000) # Done
-case_clean("sudan", 2023)
-case_clean("ukraine|russia", 2014) # Done
-case_clean("venezuela")
-case_clean("westernsahara")
-case_clean("korea") |> select(date, total:RUS)
-
-meetings |> filter(grepl("china", topic))
+#case_clean("cyprus", 2000) # Done
+#case_clean("ukraine|russia", 2014) # Done
+#case_clean("westernsahara")

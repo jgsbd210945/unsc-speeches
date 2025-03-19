@@ -26,7 +26,7 @@ wf <- function(term, lowyear = 1991) {
 }
 pullspeech <- function(term, lowyear) {
   gen_speech |>
-    filter(grepl(term, topic), year >= loweryear) |>
+    filter(grepl(term, topic), year >= lowyear) |>
     pull(speech)
 }
 to_tdm <- function(col){
@@ -98,7 +98,8 @@ normnum <- normnum |>
          tot_peacekeep = rowSums(select(normnum, matches("^peacekeep")), na.rm = TRUE),
          tot_peacebuild = rowSums(select(normnum, matches("^peacebuild")), na.rm = TRUE),
          tot_interv = rowSums(select(normnum, matches("^interv")), na.rm = TRUE),
-         tot_humanitarian = rowSums(select(normnum, matches("^humanitarian")), na.rm = TRUE)) |>
+         tot_humanitarian = rowSums(select(normnum, matches("^humanitarian")), na.rm = TRUE),
+         tot_peace = rowSums(select(normnum, matches("^peac")), na.rm = TRUE)) |>
   select(-matches("^norm|^sovereign|^peacekeep|^peacebuild|^interv|^humanitarian")) |>
   data.table::transpose(keep.names = "term", make.names = "regime") |>
   as_tibble()
@@ -121,7 +122,8 @@ normlang <- normlang |>
          tot_peacekeep = rowSums(select(normlang, matches("^peacekeep")), na.rm = TRUE),
          tot_peacebuild = rowSums(select(normlang, matches("^peacebuild")), na.rm = TRUE),
          tot_interv = rowSums(select(normlang, matches("^interv")), na.rm = TRUE),
-         tot_humanitarian = rowSums(select(normlang, matches("^humanitarian")), na.rm = TRUE)) |>
+         tot_humanitarian = rowSums(select(normlang, matches("^humanitarian")), na.rm = TRUE),
+         tot_peace = rowSums(select(normlang, matches("^peac")), na.rm = TRUE)) |>
   select(-matches("^norm|^sovereign|^peacekeep|^peacebuild|^interv|^humanitarian")) |>
   data.table::transpose(keep.names = "term", make.names = "regime") |>
   as_tibble() |>
@@ -129,33 +131,41 @@ normlang <- normlang |>
          bve_revert = dem_revert / entr_auto) |>
   arrange(desc(bve_erosion)) 
   
-  
+normpct <- cbind(pctbyregime[specific_terms], pctbyregime[grepl("interv|interfer|selfdet|sover|rights|humanright|humanitarian|peace", colnames(pctbyregime))])
+normpct <- normpct |>
+  data.table::transpose(keep.names = "term", make.names = "regime") |>
+  as_tibble() |>
+  mutate(bve_erosion = dem_erosion / entr_illib,
+         bve_revert = dem_revert / entr_auto) |>
+  arrange(desc(bve_erosion))
+
+
 # Case Studies
 cyp_tdm <- wf("cyprus", 2000)
 cypfreq <- freqTerms(cyp_tdm)
 cyppct <- (cypfreq / sum(cypfreq)) * 10000
 
-sud_tdm <- wf("sudan", 2020)
-sudfreq <- freqTerms(sud_tdm)
-sudpct <- (sudfreq / sum(sudfreq)) * 10000
+wsah_tdm <- wf("westernsahara", 2020)
+wsahfreq <- freqTerms(wsah_tdm)
+wsahpct <- (wsahfreq / sum(wsahfreq)) * 10000
 
 rusuk_tdm <- wf("russia|ukraine", 2014)
 rusukfreq <- freqTerms(rusuk_tdm)
 rusukpct <- (rusukfreq / sum(rusukfreq)) * 10000
 
 
-casesfreq <- mergeVectors(cypfreq, sudfreq, rusukfreq) |>
+casesfreq <- mergeVectors(cypfreq, wsahfreq, rusukfreq) |>
   as_tibble() |>
-  mutate(case = c("Cyprus", "Sudan", "Russia-Ukraine"),
+  mutate(case = c("Cyprus", "Western Sahara", "Russia-Ukraine"),
          .before = 1)
 rmcsfreq <- apply(casesfreq, 2, \(col) sum(!is.na(col)))
 rmcsfreq <- rmcsfreq <= 1
 casesfreq <- casesfreq[,!rmcsfreq]
 casesfreq <- casesfreq %>% replace(is.na(.), 0)
 
-casespct <- mergeVectors(cyppct, sudpct, rusukpct) |>
+casespct <- mergeVectors(cyppct, wsahpct, rusukpct) |>
   as_tibble() |>
-  mutate(state = c("Cyprus", "Sudan", "Russia-Ukraine"),
+  mutate(state = c("Cyprus", "Western Sahara", "Russia-Ukraine"),
          .before = 1)
 rmcspct <- apply(casespct, 2, \(col) sum(!is.na(col)))
 rmcspct <- rmcspct <= 1

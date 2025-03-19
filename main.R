@@ -18,8 +18,8 @@ wvdem <- tibble(vdem) |>
   mutate(diff_polyarchy = v2x_polyarchy - lag(v2x_polyarchy)) |>
   # Backsliding boolean variable. I'm quantitatively defining it as having decreased in electoral democracy score by more than .005 and having decreased by at least 0.03 in the last two years.
   # I also filtered so that the regime has to be at least some semblance of an electoral autocracy (at least) so that hard autocracies getting more autocratic aren't included.
-  mutate(backslided = (diff_polyarchy < -0.005) &
-           (v2x_regime_amb > 2) &
+  mutate(backslided = (v2x_regime_amb > 2) &
+           (diff_polyarchy < -0.005) &
            (lag(v2x_polyarchy, 2) - v2x_polyarchy > 0.03)) |>
   # Filling it out
   mutate(backslided = (diff_polyarchy < -0.001) &
@@ -27,9 +27,9 @@ wvdem <- tibble(vdem) |>
               ((lag(backslided) & lag(backslided, 2))|
               lead(backslided) & lag(backslided) |
               lead(backslided, 2) & lead(backslided)))) |>
-  #handling NAs - for 2023's data.
+  #handling NAs - for 2024's data.
   mutate(backslided = ifelse(is.na(backslided),
-                             ((diff_polyarchy < -0.001) & lag(backslided)),
+                             ((diff_polyarchy < -0.01) & lag(backslided)),
                              backslided)) |>
   ungroup() |>
   filter(year > 1990) |>
@@ -60,6 +60,10 @@ mgwreg <- mgdata |> mutate(
   )) |>
   filter(!is.na(regime))
 
+mgwreg$bve <- ifelse(grepl("backslide_", mgwreg$regime), "backsliding",
+                     ifelse(grepl("dem", mgwreg$regime), "democratic",
+                            "entrenched"))
+
 clean_nas <- function(df) {
   rmna <- apply(df, 2, \(col) sum(!is.na(col)))
   rmna <- rmna == 0
@@ -70,4 +74,4 @@ clean_nas <- function(df) {
 sc_regime <- mgwreg |>
   filter(is_SC) |>
   select(year, country_name, regime)
-sc_regime |> filter(year == 2009)
+sc_regime |> filter(year == 2024)
