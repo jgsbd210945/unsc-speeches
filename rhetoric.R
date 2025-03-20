@@ -102,8 +102,11 @@ normnum <- normnum |>
          tot_peace = rowSums(select(normnum, matches("^peac")), na.rm = TRUE)) |>
   select(-matches("^norm|^sovereign|^peacekeep|^peacebuild|^interv|^humanitarian")) |>
   data.table::transpose(keep.names = "term", make.names = "regime") |>
-  as_tibble()
-  
+  as_tibble() |>
+  mutate(bve_erosion = dem_erosion / entr_illib,
+         bve_revert = dem_revert / entr_auto) |>
+  arrange(desc(bve_erosion)) 
+
 
 pctbyregime <- mergeVectors(erodepct, illibpct, revertpct, autopct, dempct) |>
   as_tibble() |>
@@ -131,6 +134,15 @@ normlang <- normlang |>
          bve_revert = dem_revert / entr_auto) |>
   arrange(desc(bve_erosion)) 
   
+normlang |> rowwise() |> mutate(bvd = mean(c(dem_erosion, dem_revert), na.rm = TRUE) / entr_dem,
+                   evd = mean(c(entr_illib, entr_auto), na.rm = TRUE) / entr_dem,
+                   bnevd = mean(c(dem_erosion, dem_revert, entr_illib, entr_auto), na.rm = TRUE) / entr_dem) |>
+  select(term, bvd, evd, bnevd) |> arrange(desc(bnevd)) |> print(n = 33)
+
+filter(normlang, term != "tot_peace") |>
+  select(-term) |>
+  lapply(sum)
+
 normpct <- cbind(pctbyregime[specific_terms], pctbyregime[grepl("interv|interfer|selfdet|sover|rights|humanright|humanitarian|peace", colnames(pctbyregime))])
 normpct <- normpct |>
   data.table::transpose(keep.names = "term", make.names = "regime") |>
