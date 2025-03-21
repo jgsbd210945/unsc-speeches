@@ -8,16 +8,16 @@ speeches$state <- ifelse(is.na(countrycode(speeches$affiliation, origin = 'count
                          speeches$affiliation,
                          countrycode(speeches$affiliation, origin = 'country.name', destination = 'iso3c'))
 
+speeches$topic <- tolower(speeches$topic) |>
+  removeWords(stopwords()) |>
+  stripWhitespace()
+
+speeches$topic <- gsub(" |-|—|situation", "", speeches$topic)
+
 gen_speech <- speeches |>
   select(meeting_num, year, month, day, topic, affiliation, speech, state) |>
   merge(mgwreg, by.x = c("year", "state"), by.y = c("year", "country_text_id"), all.x = TRUE) |>
   as_tibble()
-
-gen_speech$topic <- tolower(gen_speech$topic) |>
-  removeWords(stopwords()) |>
-  stripWhitespace()
-
-gen_speech$topic <- gsub(" |-|—|situation", "", gen_speech$topic)
 
 # Rhetoric
 wf <- function(term, lowyear = 1991) {
@@ -183,3 +183,14 @@ rmcspct <- apply(casespct, 2, \(col) sum(!is.na(col)))
 rmcspct <- rmcspct <= 1
 casespct <- casespct[,!rmcspct]
 casespct <- casespct %>% replace(is.na(.), 0)
+
+ukrmeet <- gen_speech |> filter(grepl("ukraine", topic), year >= 2014)
+r_ukr_tdm <- ukrmeet |>
+  filter(grepl("Russia", affiliation)) |>
+  pull(speech) |>
+  to_tdm() |>
+  freqTerms() |>
+  mergeVectors() |>
+  as_tibble()
+r_ukr_tdm <- (r_ukr_tdm / sum(r_ukr_tdm)) * 10000
+normr_ukr <- cbind(r_ukr_tdm[c("norm", "standard", "right", "liber", "forc", "peac")], r_ukr_tdm[grepl("interv|interfer|selfdet|sover|rights|humanright|humanitarian|peace", colnames(r_ukr_tdm))])

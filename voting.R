@@ -63,17 +63,16 @@ sumvotes_year <- function(df, merger = mgwreg) {
 }
 
 graph_polyarchy <- function(df, ylower = 0.8){
-  ggplot(df, aes(v2x_polyarchy, y = yes, color = regime)) +
+  ggplot(df, aes(v2x_polyarchy, yes, color = regime)) +
     geom_point() +
-    geom_smooth() +
+    geom_smooth(method = 'lm', se = FALSE) +
     ylim(ylower, 1)
 }
 
-graph_diff_polyarchy <- function(df, xlower = -0.08, xupper = 0.01, ylower = 0.75) {
-  ggplot(df, aes(diff_polyarchy, y = yes, color = regime)) +
-    geom_point() +
-    facet_wrap(vars(regime)) +
-    geom_smooth(method = 'lm') +
+graph_diff_polyarchy <- function(df, xlower = -0.08, xupper = 0.01, ylower = 0.8) {
+  ggplot(df, aes(diff_polyarchy, yes)) +
+    geom_point(aes(color = regime)) +
+    geom_smooth(method = 'lm', se = FALSE) +
     xlim(xlower, xupper) +
     ylim(ylower, 1)
 }
@@ -81,8 +80,30 @@ graph_diff_polyarchy <- function(df, xlower = -0.08, xupper = 0.01, ylower = 0.7
 
 # Yes/No/etc.
 voterate <- sumvotes_year(voting)
-graph_polyarchy(voterate)
-graph_diff_polyarchy(voterate)
+graph_polyarchy(voterate) +
+  labs(color = "Regime") +
+  scale_color_hue(labels = c("Democratic Erosion",
+                             "Democratic Reversion",
+                             "Entrenched Autocracy",
+                             "Entrenched Democracy",
+                             "Entrenched Illiberal")) +
+  xlab("Electoral Democracy Score") +
+  ylab("Rate of Votes In Favor of Resolutions per Year")
+graph_diff_polyarchy(voterate) +
+  xlab("Difference in Electoral Democracy Score") +
+  ylab("Rate of Votes in Favor of Resolutions per Year")
+ggplot(voterate, aes(v2x_polyarchy, no, color = regime)) +
+  geom_point() +
+  geom_smooth(method = 'lm', se = FALSE) +
+  ylim(0, 0.075) +
+  labs(color = "Regime") +
+  scale_color_hue(labels = c("Democratic Erosion",
+                             "Democratic Reversion",
+                             "Entrenched Autocracy",
+                             "Entrenched Democracy",
+                             "Entrenched Illiberal")) +
+  xlab("Electoral Democracy Score") +
+  ylab("Rate of Votes Against of Resolutions per Year")
 
 
 # Match with France?
@@ -177,6 +198,36 @@ bve_test <- bve_votes |> pivot_wider(
   relocate(democratic, .before = entrenched) |>
   mutate(bve = backsliding / entrenched) |>
   arrange(bve)
+
+bve_year <- bve_mg |> group_by(year, regime) |>
+  summarize(yes = mean(yes, na.rm = TRUE),
+            no = mean(no, na.rm = TRUE),
+            abstain = mean(abstain, na.rm = TRUE),
+            missing = mean(missing, na.rm = TRUE)) |>
+  pivot_wider(id_cols = year,
+              names_from = regime,
+              values_from = c(no, abstain)) |>
+  rename(no_ea = no_entrenched_auto,
+         no_ed = no_entrenched_dem,
+         no_ei = no_entrenched_illib,
+         no_br = no_backslide_revert,
+         no_be = no_backslide_erode,
+         ab_ea = abstain_entrenched_auto,
+         ab_ed = abstain_entrenched_dem,
+         ab_ei = abstain_entrenched_illib,
+         ab_br = abstain_backslide_revert,
+         ab_be = abstain_backslide_erode)
+
+bve_sum <- bve_year |>
+  mutate(no_dem = no_ed,
+         no_entr = sum(no_ea, no_ei, na.rm = TRUE) / 2,
+         no_back = sum(no_br, no_be, na.rm = TRUE) / 2,
+         bve_no = no_back / no_entr,
+         ab_dem = ab_ed,
+         ab_entr = sum(ab_ea, ab_ei, na.rm = TRUE) / 2,
+         ab_back = sum(ab_br, ab_be, na.rm = TRUE) / 2,
+         bve_ab = ab_back / ab_entr) |>
+  select(year, no_dem:bve_ab)
   
 #bve_test |> print(n = 25)
 #bve_test |> arrange(desc(bve)) |> print(n = 25)
