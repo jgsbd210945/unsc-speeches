@@ -153,7 +153,7 @@ normpct <- normpct |>
 
 
 # Case Studies
-cyp_tdm <- wf("cyprus", 2000)
+cyp_tdm <- wf("cyprus")
 cypfreq <- freqTerms(cyp_tdm)
 cyppct <- (cypfreq / sum(cypfreq)) * 10000
 

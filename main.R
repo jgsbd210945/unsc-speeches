@@ -74,4 +74,12 @@ clean_nas <- function(df) {
 sc_regime <- mgwreg |>
   filter(is_SC) |>
   select(year, country_name, regime)
+
+findState <- function(abbv, low = 1991, high = 2024) {
+  mgwreg |>
+    filter(country_text_id == abbv, between(year, low, high)) |>
+    select(country_name, year, regime) |>
+    print(n = 50)
+}
+
 sc_regime |> filter(year == 2024)
