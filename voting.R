@@ -1,4 +1,5 @@
 source("main.R")
+library(viridis)
 
 voting <- read_tsv("Data/UNSC Voting.tsv")  |>
   # Multiple cols for Bolivia and Venezuela due to gov't changes/UN Naming conventions.
@@ -65,14 +66,14 @@ sumvotes_year <- function(df, merger = mgwreg) {
 graph_polyarchy <- function(df, ylower = 0.8){
   ggplot(df, aes(v2x_polyarchy, yes, color = regime)) +
     geom_point() +
-    geom_smooth(method = 'lm', se = FALSE) +
+    geom_smooth(method = 'lm') +
     ylim(ylower, 1)
 }
 
 graph_diff_polyarchy <- function(df, xlower = -0.08, xupper = 0.01, ylower = 0.8) {
   ggplot(df, aes(diff_polyarchy, yes)) +
     geom_point(aes(color = regime)) +
-    geom_smooth(method = 'lm', se = FALSE) +
+    geom_smooth(method = 'lm') +
     xlim(xlower, xupper) +
     ylim(ylower, 1)
 }
@@ -87,14 +88,16 @@ graph_polyarchy(voterate) +
                              "Entrenched Autocracy",
                              "Entrenched Democracy",
                              "Entrenched Illiberal")) +
+  scale_color_manual(values = c("#CC79A7", "#D55E00", "#0072B2", "#56B4E9", "#009E73"))+
   xlab("Electoral Democracy Score") +
   ylab("Rate of Votes In Favor of Resolutions per Year")
 graph_diff_polyarchy(voterate) +
+  scale_color_manual(values = c("#CC79A7", "#D55E00", "#0072B2", "#56B4E9", "#009E73"))+
   xlab("Difference in Electoral Democracy Score") +
   ylab("Rate of Votes in Favor of Resolutions per Year")
 ggplot(voterate, aes(v2x_polyarchy, no, color = regime)) +
   geom_point() +
-  geom_smooth(method = 'lm', se = FALSE) +
+  geom_smooth(method = 'lm') +
   ylim(0, 0.075) +
   labs(color = "Regime") +
   scale_color_hue(labels = c("Democratic Erosion",
@@ -102,6 +105,7 @@ ggplot(voterate, aes(v2x_polyarchy, no, color = regime)) +
                              "Entrenched Autocracy",
                              "Entrenched Democracy",
                              "Entrenched Illiberal")) +
+  scale_color_manual(values = c("#CC79A7", "#D55E00", "#0072B2", "#56B4E9", "#009E73"))+
   xlab("Electoral Democracy Score") +
   ylab("Rate of Votes Against of Resolutions per Year")
 
