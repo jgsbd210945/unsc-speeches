@@ -81,5 +81,3 @@ findState <- function(abbv, low = 1991, high = 2024) {
     select(country_name, year, regime) |>
     print(n = 50)
 }
-
-sc_regime |> filter(year == 2024)

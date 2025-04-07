@@ -66,7 +66,7 @@ sumvotes_year <- function(df, merger = mgwreg) {
 graph_polyarchy <- function(df, ylower = 0.8){
   ggplot(df, aes(v2x_polyarchy, yes, color = regime)) +
     geom_point() +
-    geom_smooth(method = 'lm') +
+    geom_smooth(method = 'lm', se = FALSE) +
     ylim(ylower, 1)
 }
 
@@ -83,29 +83,34 @@ graph_diff_polyarchy <- function(df, xlower = -0.08, xupper = 0.01, ylower = 0.8
 voterate <- sumvotes_year(voting)
 graph_polyarchy(voterate) +
   labs(color = "Regime") +
-  scale_color_hue(labels = c("Democratic Erosion",
-                             "Democratic Reversion",
-                             "Entrenched Autocracy",
-                             "Entrenched Democracy",
-                             "Entrenched Illiberal")) +
-  scale_color_manual(values = c("#CC79A7", "#D55E00", "#0072B2", "#56B4E9", "#009E73"))+
+  scale_color_manual(values = c("#CC79A7", "#D55E00", "#0072B2", "#56B4E9", "#009E73"),
+                     labels = c("Democratic Erosion",
+                                "Democratic Reversion",
+                                "Entrenched Autocracy",
+                                "Entrenched Democracy",
+                                "Entrenched Illiberal"))+
   xlab("Electoral Democracy Score") +
   ylab("Rate of Votes In Favor of Resolutions per Year")
 graph_diff_polyarchy(voterate) +
-  scale_color_manual(values = c("#CC79A7", "#D55E00", "#0072B2", "#56B4E9", "#009E73"))+
+  scale_color_manual(values = c("#CC79A7", "#D55E00", "#0072B2", "#56B4E9", "#009E73"),
+                     labels = c("Democratic Erosion",
+                                "Democratic Reversion",
+                                "Entrenched Autocracy",
+                                "Entrenched Democracy",
+                                "Entrenched Illiberal"))+
   xlab("Difference in Electoral Democracy Score") +
   ylab("Rate of Votes in Favor of Resolutions per Year")
 ggplot(voterate, aes(v2x_polyarchy, no, color = regime)) +
   geom_point() +
-  geom_smooth(method = 'lm') +
+  geom_smooth(method = 'lm', se = FALSE) +
   ylim(0, 0.075) +
   labs(color = "Regime") +
-  scale_color_hue(labels = c("Democratic Erosion",
-                             "Democratic Reversion",
-                             "Entrenched Autocracy",
-                             "Entrenched Democracy",
-                             "Entrenched Illiberal")) +
-  scale_color_manual(values = c("#CC79A7", "#D55E00", "#0072B2", "#56B4E9", "#009E73"))+
+  scale_color_manual(values = c("#CC79A7", "#D55E00", "#0072B2", "#56B4E9", "#009E73"),
+                     labels = c("Democratic Erosion",
+                                "Democratic Reversion",
+                                "Entrenched Autocracy",
+                                "Entrenched Democracy",
+                                "Entrenched Illiberal"))+
   xlab("Electoral Democracy Score") +
   ylab("Rate of Votes Against of Resolutions per Year")
 

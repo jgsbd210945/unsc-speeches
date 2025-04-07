@@ -1,4 +1,4 @@
-source("main.R")
+#source("main.R")
 
 
 speeches <- read_tsv("Data/speeches.tsv") |> filter(year > 1990, state == 1)
@@ -151,46 +151,15 @@ normpct <- normpct |>
          bve_revert = dem_revert / entr_auto) |>
   arrange(desc(bve_erosion))
 
-
-# Case Studies
-cyp_tdm <- wf("cyprus")
-cypfreq <- freqTerms(cyp_tdm)
-cyppct <- (cypfreq / sum(cypfreq)) * 10000
-
-wsah_tdm <- wf("westernsahara", 2020)
-wsahfreq <- freqTerms(wsah_tdm)
-wsahpct <- (wsahfreq / sum(wsahfreq)) * 10000
-
-rusuk_tdm <- wf("russia|ukraine", 2014)
-rusukfreq <- freqTerms(rusuk_tdm)
-rusukpct <- (rusukfreq / sum(rusukfreq)) * 10000
-
-
-casesfreq <- mergeVectors(cypfreq, wsahfreq, rusukfreq) |>
-  as_tibble() |>
-  mutate(case = c("Cyprus", "Western Sahara", "Russia-Ukraine"),
-         .before = 1)
-rmcsfreq <- apply(casesfreq, 2, \(col) sum(!is.na(col)))
-rmcsfreq <- rmcsfreq <= 1
-casesfreq <- casesfreq[,!rmcsfreq]
-casesfreq <- casesfreq %>% replace(is.na(.), 0)
-
-casespct <- mergeVectors(cyppct, wsahpct, rusukpct) |>
-  as_tibble() |>
-  mutate(state = c("Cyprus", "Western Sahara", "Russia-Ukraine"),
-         .before = 1)
-rmcspct <- apply(casespct, 2, \(col) sum(!is.na(col)))
-rmcspct <- rmcspct <= 1
-casespct <- casespct[,!rmcspct]
-casespct <- casespct %>% replace(is.na(.), 0)
-
-ukrmeet <- gen_speech |> filter(grepl("ukraine", topic), year >= 2014)
-r_ukr_tdm <- ukrmeet |>
-  filter(grepl("Russia", affiliation)) |>
-  pull(speech) |>
-  to_tdm() |>
-  freqTerms() |>
-  mergeVectors() |>
+normbyreg <- normpct |>
+  data.table::transpose(keep.names = "regime", make.names = "term") |>
   as_tibble()
-r_ukr_tdm <- (r_ukr_tdm / sum(r_ukr_tdm)) * 10000
-normr_ukr <- cbind(r_ukr_tdm[c("norm", "standard", "right", "liber", "forc", "peac")], r_ukr_tdm[grepl("interv|interfer|selfdet|sover|rights|humanright|humanitarian|peace", colnames(r_ukr_tdm))])
+
+
+#bargraph_norm <- function(term, df = normbyreg){
+#  df |>
+#    ggplot(aes(x = regime)) +
+#    geom_bar(aes(y = term))
+#}
+
+
