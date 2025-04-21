@@ -75,7 +75,13 @@ merger <- function(to_merge, begin, end) {
 wf <- function(begin, end){
   hclustering(cut, begin, end) |>
     merger(begin, end)
-}  
+}
+
+plotting <- function(df) {
+  ggplot(df, aes(x = diff_polyarchy, y = v2x_polyarchy, color = factor(cluster))) +
+  geom_point(size = 2) +
+  scale_color_manual(values = c("#56B4E9", "#D55E00", "#0072B2", "#009E73"))
+}
 
 cut <- cleaned_voting |> dplyr::select(-c(meeting_record:date, title:link, chil_es, SOM))
 
@@ -87,16 +93,12 @@ hc5 <- wf(2010, 2014)
 hc6 <- wf(2015, 2019)
 hc7 <- wf(2020, 2024)
 
-ggplot(hc7, aes(x = regime, y = v2x_polyarchy, color = factor(cluster))) +
-  geom_point()
-
-
-plot(hc)
-dhc <- as.dendrogram(hc)
-ggdendro::ggdendrogram(dhc, rotate = TRUE)
-
-clusters <- cutree(hc, k = 8)
-cluster_df <- data.frame(country = names(clusters), cluster = clusters) |>
-  arrange(cluster)
+hc1 |> plotting()
+hc2 |> plotting()
+hc3 |> plotting()
+hc4 |> plotting()
+hc5 |> plotting()
+hc6 |> plotting()
+hc7 |> plotting()
 
 
