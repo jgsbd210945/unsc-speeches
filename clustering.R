@@ -41,9 +41,7 @@ vote_dist <- function(c1, c2, min_overlap = 10) {
   1 - mean(c1[mask] == c2[mask])
 }
 
-hclustering <- function(df, begin, end){
-  cvt <- df |> filter(between(year, begin, end)) |>
-    dplyr::select(-year)
+hclustering <- function(cvt){
   c_vt <- t(cvt) |>
     as.data.frame() |>
     mutate(across(everything(), ~ factor(.)))
@@ -73,7 +71,9 @@ merger <- function(to_merge, begin, end) {
 }
 
 wf <- function(begin, end){
-  hclustering(cut, begin, end) |>
+  cvt <- cut |> filter(between(year, begin, end)) |>
+    dplyr::select(-year)
+  hclustering(cvt) |>
     merger(begin, end)
 }
 
@@ -101,4 +101,57 @@ hc5 |> plotting()
 hc6 |> plotting()
 hc7 |> plotting()
 
+#### GA ####
+gavote <- read_csv("Data/2025_03_31_ga_voting_corr1.csv") |>
+  mutate(year = year(date)) |>
+  filter(between(year, 1991, 2024)) |>
+  dplyr::select(resolution, ms_code, ms_name, ms_vote, year)
+
+
+ga_91 <- gavote |> filter(year == 1991) |>
+  select(resolution, ms_code, ms_vote) |>
+  pivot_wider(id_cols = resolution, names_from = ms_code, values_from = ms_vote) |>
+  select(-resolution)
+
+test <- t(ga_91) |>
+  as.data.frame() |>
+  mutate(across(everything(), ~ factor(.)))
+rownames(test) <- colnames(ga_91)
+dist_mat <- proxy::dist(x = test,
+                        method = function(c1, c2) vote_dist(c1, c2, min_overlap = 10))
+no_na <- which(rowSums(!is.na(as.matrix(dist_mat))) > 1)
+dist_mat2 <- as.dist(as.matrix(dist_mat)[no_na, no_na])
+hc <- hclust(dist_mat2, method = "ward.D2")
+clusters <- cutree(hc, k = 8)
+ga91_df <- data.frame(country = names(clusters), cluster = clusters) |> arrange(cluster)
+
+library(scales)
+asinh_trans <- function() trans_new("asinh", 
+                                    transform = asinh, 
+                                    inverse = sinh)
+
+
+mgclst <- mgwreg |> filter(year == 1991) |>
+  group_by(country_text_id) |>
+  summarize(v2x_polyarchy = mean(v2x_polyarchy, na.rm = TRUE),
+            v2x_regime_amb = round(mean(v2x_regime_amb, na.rm = TRUE)),
+            diff_polyarchy = mean(diff_polyarchy, na.rm = TRUE),
+            backslided = any(backslided, na.rm = TRUE),
+            regime = names(which.max(table(regime))),
+            bve = ifelse(any(bve == "backslided"), "backslided", bve)) |>
+  merge(ga91_df, by.x = "country_text_id", by.y = "country")
+
+mgclst |>
+  ggplot(aes(x = asinh(diff_polyarchy * 100), y = v2x_polyarchy, color = factor(cluster))) +
+  geom_point() +
+  scale_color_manual(values = c(
+    "#0072B2",  # Blue
+    "#009E73",  # Green
+    "#CC79A7",  # Pink
+    "#F0E442",   # Yellow
+    "#999999",  # Grey
+    "#000000",  # Black
+    "#800080",  # Purple
+    "#D55E00"  # orange
+  ))
 
