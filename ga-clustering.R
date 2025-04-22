@@ -1,7 +1,7 @@
 ####################### GA CLUSTERING #######################
 ## THESE ALGORITHMS TAKE A LONG TIME. PROCEED ACCORDINGLY. ##
 ## The times to run each date range are posted in comments ##
-####### next to their call. FULL RUN TIME: xx minutes #######
+####### next to their call. FULL RUN TIME: 53 minutes #######
 #############################################################
 
 source("clustering.R")
@@ -36,7 +36,7 @@ gavote <- read_csv("Data/2025_03_31_ga_voting_corr1.csv") |>
 
 ga1 <- wf_ga(1990, 1994) # 6 minutes to run
 ga2 <- wf_ga(1995, 1999) # 7 minutes to run
-ga3 <- wf_ga(2000, 2004) ###
+ga3 <- wf_ga(2000, 2004) # 5 minutes to run
 ga4 <- wf_ga(2005, 2009) # 9 minutes to run
 ga5 <- wf_ga(2010, 2014) # 8 minutes to run
 ga6 <- wf_ga(2015, 2019) # 10 minutes to run
