@@ -40,7 +40,7 @@ vote_dist <- function(c1, c2, min_overlap = 10) {
   1 - mean(c1[mask] == c2[mask])
 }
 
-hclustering <- function(cvt, groups){
+get_dist_mat <- function(cvt){
   c_vt <- t(cvt) |>
     as.data.frame() |>
     mutate(across(everything(), ~ factor(.)))
@@ -50,8 +50,12 @@ hclustering <- function(cvt, groups){
   d_mt <- proxy::dist(x = c_vt,
                       method = function(c1, c2) vote_dist(c1, c2, min_overlap = 10))
   n_na <- which(rowSums(!is.na(as.matrix(d_mt))) > 1) 
-  d_mt2 <- as.dist(as.matrix(d_mt)[n_na, n_na])
-  hcst <- hclust(d_mt2, method = "ward.D2")
+  as.dist(as.matrix(d_mt)[n_na, n_na])
+}
+
+hclustering <- function(dist_mat, groups){
+  
+  hcst <- hclust(dist_mat, method = "ward.D2")
   csts <- cutree(hcst, k = groups)
   data.frame(country = names(csts), cluster = csts) |> arrange(cluster)
 }
@@ -72,6 +76,7 @@ merger <- function(to_merge, begin, end) {
 wf <- function(begin, end){
   cut |> filter(between(year, begin, end)) |>
     dplyr::select(-year)|>
+    get_dist_mat() |>
     hclustering(groups = 4) |>
     merger(begin, end)
 }
@@ -99,3 +104,13 @@ hc4 |> plotting()
 hc5 |> plotting()
 hc6 |> plotting()
 hc7 |> plotting()
+
+
+#ga1 |> plotting()
+#ga2 |> plotting()
+#ga3 |> plotting()
+#ga4 |> plotting()
+#ga5 |> plotting()
+#ga6 |> plotting()
+#ga7 |> plotting()
+

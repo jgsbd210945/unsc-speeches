@@ -4,16 +4,29 @@
 ####### next to their call. FULL RUN TIME: 53 minutes #######
 #############################################################
 
-source("clustering.R")
+# source("clustering.R")
 
-wf_ga <- function(begin, end){
+### Clustering on rhetoric!!
+
+pull_dm <- function(begin, end){
   gavote |> filter(between(year, begin, end)) |>
     select(resolution, ms_code, ms_vote) |>
     pivot_wider(id_cols = resolution, names_from = ms_code, values_from = ms_vote) |>
     select(-resolution) |>
+    get_dist_mat()
+}
+
+wf_ga <- function(begin, end){
+  pull_dm(begin, end) |>
     hclustering(groups = 8) |>
     merger_ga(begin, end)
 }
+
+wf_w_dm <- function(dist_mat, begin, end){
+  hclustering(dist_mat, groups = 8) |>
+    merger_ga(begin, end)
+}
+
 merger_ga <- function(to_merge, begin, end) {
   mgwreg |>
     filter(between(year, begin, end)) |>
@@ -34,18 +47,26 @@ gavote <- read_csv("Data/2025_03_31_ga_voting_corr1.csv") |>
   filter(between(year, 1991, 2024)) |>
   dplyr::select(resolution, ms_code, ms_name, ms_vote, year)
 
-ga1 <- wf_ga(1990, 1994) # 6 minutes to run
-ga2 <- wf_ga(1995, 1999) # 7 minutes to run
-ga3 <- wf_ga(2000, 2004) # 5 minutes to run
-ga4 <- wf_ga(2005, 2009) # 9 minutes to run
-ga5 <- wf_ga(2010, 2014) # 8 minutes to run
-ga6 <- wf_ga(2015, 2019) # 10 minutes to run
-ga7 <- wf_ga(2020, 2024) # 8 minutes to run
+g1_dm <- pull_dm(1990, 1994)
+g2_dm <- pull_dm(1995, 1999)
+g3_dm <- pull_dm(2000, 2004)
+g4_dm <- pull_dm(2005, 2009)
+g5_dm <- pull_dm(2010, 2014)
+g6_dm <- pull_dm(2015, 2019)
+g7_dm <- pull_dm(2020, 2024)
 
-ga1 |> plotting()
-ga2 |> plotting()
-ga3 |> plotting()
-ga4 |> plotting()
-ga5 |> plotting()
-ga6 |> plotting()
-ga7 |> plotting()
+ga1 <- wf_w_dm(1990, 1994) # 6 minutes to run
+ga2 <- wf_w_dm(1995, 1999) # 7 minutes to run
+ga3 <- wf_w_dm(2000, 2004) # 5 minutes to run
+ga4 <- wf_w_dm(2005, 2009) # 9 minutes to run
+ga5 <- wf_w_dm(2010, 2014) # 8 minutes to run
+ga6 <- wf_w_dm(2015, 2019) # 10 minutes to run
+ga7 <- wf_w_dm(2020, 2024) # 8 minutes to run
+
+g1_dm |> write_csv("GA_distmat/ga1.csv")
+g2_dm |> write_csv("GA_distmat/ga2.csv")
+g3_dm |> write_csv("GA_distmat/ga3.csv")
+g4_dm |> write_csv("GA_distmat/ga4.csv")
+g5_dm |> write_csv("GA_distmat/ga5.csv")
+g6_dm |> write_csv("GA_distmat/ga6.csv")
+g7_dm |> write_csv("GA_distmat/ga7.csv")
