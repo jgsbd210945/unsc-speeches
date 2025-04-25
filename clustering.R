@@ -54,7 +54,6 @@ get_dist_mat <- function(cvt){
 }
 
 hclustering <- function(dist_mat, groups){
-  
   hcst <- hclust(dist_mat, method = "ward.D2")
   csts <- cutree(hcst, k = groups)
   data.frame(country = names(csts), cluster = csts) |> arrange(cluster)
@@ -105,12 +104,38 @@ hc5 |> plotting()
 hc6 |> plotting()
 hc7 |> plotting()
 
+### GA Area ###
+wf_w_dm <- function(dist_mat, begin, end){
+  hclustering(dist_mat, groups = 8) |>
+    merger_ga(begin, end)
+}
+merger_ga <- function(to_merge, begin, end) {
+  mgwreg |>
+    filter(between(year, begin, end)) |>
+    group_by(country_text_id) |>
+    summarize(v2x_polyarchy = mean(v2x_polyarchy, na.rm = TRUE),
+              v2x_regime_amb = round(mean(v2x_regime_amb, na.rm = TRUE)),
+              diff_polyarchy = mean(diff_polyarchy, na.rm = TRUE),
+              backslided = any(backslided, na.rm = TRUE),
+              regime = names(which.max(table(regime))),
+              bve = ifelse(any(bve == "backslided"), "backslided", bve)) |>
+    merge(to_merge, by.x = "country_text_id", by.y = "country") |>
+    mutate(diff_polyarchy = asinh(diff_polyarchy * 100)) # scaling
+}
 
-#ga1 |> plotting()
-#ga2 |> plotting()
-#ga3 |> plotting()
-#ga4 |> plotting()
-#ga5 |> plotting()
-#ga6 |> plotting()
-#ga7 |> plotting()
+ga1 <- read_csv("GA_distmat/ga1.csv") |> as.dist() |> wf_w_dm(1990, 1994)
+ga2 <- read_csv("GA_distmat/ga2.csv") |> as.dist() |> wf_w_dm(1995, 1999)
+ga3 <- read_csv("GA_distmat/ga3.csv") |> as.dist() |> wf_w_dm(2000, 2004)
+ga4 <- read_csv("GA_distmat/ga4.csv") |> as.dist() |> wf_w_dm(2005, 2009)
+ga5 <- read_csv("GA_distmat/ga5.csv") |> as.dist() |> wf_w_dm(2010, 2014)
+ga6 <- read_csv("GA_distmat/ga6.csv") |> as.dist() |> wf_w_dm(2015, 2019)
+ga7 <- read_csv("GA_distmat/ga7.csv") |> as.dist() |> wf_w_dm(2020, 2024)
+
+ga1 |> plotting()
+ga2 |> plotting()
+ga3 |> plotting()
+ga4 |> plotting()
+ga5 |> plotting()
+ga6 |> plotting()
+ga7 |> plotting()
 

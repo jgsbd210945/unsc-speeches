@@ -55,18 +55,35 @@ g5_dm <- pull_dm(2010, 2014)
 g6_dm <- pull_dm(2015, 2019)
 g7_dm <- pull_dm(2020, 2024)
 
-ga1 <- wf_w_dm(1990, 1994) # 6 minutes to run
-ga2 <- wf_w_dm(1995, 1999) # 7 minutes to run
-ga3 <- wf_w_dm(2000, 2004) # 5 minutes to run
-ga4 <- wf_w_dm(2005, 2009) # 9 minutes to run
-ga5 <- wf_w_dm(2010, 2014) # 8 minutes to run
-ga6 <- wf_w_dm(2015, 2019) # 10 minutes to run
-ga7 <- wf_w_dm(2020, 2024) # 8 minutes to run
+# Getting them into CSVable format
 
-g1_dm |> write_csv("GA_distmat/ga1.csv")
-g2_dm |> write_csv("GA_distmat/ga2.csv")
-g3_dm |> write_csv("GA_distmat/ga3.csv")
-g4_dm |> write_csv("GA_distmat/ga4.csv")
-g5_dm |> write_csv("GA_distmat/ga5.csv")
-g6_dm |> write_csv("GA_distmat/ga6.csv")
-g7_dm |> write_csv("GA_distmat/ga7.csv")
+g1_dm <- g1_dm |> as.matrix()
+g1_dm[upper.tri(g1_dm, diag = FALSE)] <- FALSE
+
+g2_dm <- g2_dm |> as.matrix()
+g2_dm[upper.tri(g2_dm, diag = FALSE)] <- FALSE
+
+g3_dm <- g3_dm |> as.matrix()
+g3_dm[upper.tri(g3_dm, diag = FALSE)] <- FALSE
+
+g4_dm <- g4_dm |> as.matrix()
+g4_dm[upper.tri(g4_dm, diag = FALSE)] <- FALSE
+
+g5_dm <- g5_dm |> as.matrix()
+g5_dm[upper.tri(g5_dm, diag = FALSE)] <- FALSE
+
+g6_dm <- g6_dm |> as.matrix()
+g7_dm[upper.tri(g6_dm, diag = FALSE)] <- FALSE
+
+g7_dm <- g7_dm |> as.matrix()
+g7_dm[upper.tri(g7_dm, diag = FALSE)] <- FALSE
+
+g1_dm |> as.data.frame() |> write_csv("GA_distmat/ga1.csv")
+g2_dm |> as.data.frame() |> write_csv("GA_distmat/ga2.csv")
+g3_dm |> as.data.frame() |> write_csv("GA_distmat/ga3.csv")
+g4_dm |> as.data.frame() |> write_csv("GA_distmat/ga4.csv")
+g5_dm |> as.data.frame() |> write_csv("GA_distmat/ga5.csv")
+g6_dm |> as.data.frame() |> write_csv("GA_distmat/ga6.csv")
+g7_dm |> as.data.frame() |> write_csv("GA_distmat/ga7.csv")
+
+
