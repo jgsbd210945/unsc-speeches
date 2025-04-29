@@ -25,3 +25,8 @@ library(tidyverse)
 #speeches |> write_csv("GA_Speech/gaspeeches.csv")
 
 speeches <- read_csv("GA_Speech/gaspeeches.csv")
+
+
+
+
+

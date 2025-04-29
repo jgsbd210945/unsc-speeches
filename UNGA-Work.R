@@ -1,6 +1,5 @@
 source("main.R")
-library(unvotes)
 
-gaspeech <- load("Data/UNGA Speech Corpus Data/unga_speech_corpus.RData")
+txtstatesyears <- load("Data/UNGA Speech Corpus Data/unga_speech_corpus.RData")
 
-gaword <- unga_word_vectors |> transpose() |> as_tibble()
+txtstatesyears <- txtstatesyears |> select(stateabb, year, text) |> as_tibble()
