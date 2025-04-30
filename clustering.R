@@ -40,7 +40,7 @@ vote_dist <- function(c1, c2, min_overlap = 10) {
   1 - mean(c1[mask] == c2[mask])
 }
 
-get_dist_mat <- function(cvt){
+get_dist_mat <- function(cvt){ # Getting dist. matricies. Takes a bit for larger datasets but idk a more efficient fn than proxy::dist
   c_vt <- t(cvt) |>
     as.data.frame() |>
     mutate(across(everything(), ~ factor(.)))
@@ -53,13 +53,13 @@ get_dist_mat <- function(cvt){
   as.dist(as.matrix(d_mt)[n_na, n_na])
 }
 
-hclustering <- function(dist_mat, groups){
+hclustering <- function(dist_mat, groups){ # Separate from above so I can export the GA dist. matricies (and it won't take an hour to run)
   hcst <- hclust(dist_mat, method = "ward.D2")
   csts <- cutree(hcst, k = groups)
   data.frame(country = names(csts), cluster = csts) |> arrange(cluster)
 }
 
-merger <- function(to_merge, begin, end) {
+merger <- function(to_merge, begin, end) { # Merges w/ mgwreg
   mgwreg |> filter(between(year, begin, end)) |>
     group_by(country_text_id) |>
     summarize(v2x_polyarchy = mean(v2x_polyarchy, na.rm = TRUE),
@@ -109,7 +109,7 @@ wf_w_dm <- function(dist_mat, begin, end){
   hclustering(dist_mat, groups = 8) |>
     merger_ga(begin, end)
 }
-merger_ga <- function(to_merge, begin, end) {
+merger_ga <- function(to_merge, begin, end) { # Merges w/ mgwreg; changes diff_polyarchy to be more sparse
   mgwreg |>
     filter(between(year, begin, end)) |>
     group_by(country_text_id) |>
@@ -139,3 +139,10 @@ ga5 |> plotting()
 ga6 |> plotting()
 ga7 |> plotting()
 
+plot_new <- function(df) { # regime type?
+  df |> ggplot(aes(x = v2x_polyarchy, y = v2x_regime_amb, color = factor(cluster))) +
+    geom_point(size = 2) +
+    scale_color_manual(values = c("#56B4E9", "#000000", "#CC7987", "#009E73", "#0072B2", "#F0E442", "#999999", "#D55E00", "#800080"))
+}
+
+ga1 |> plot_new()
