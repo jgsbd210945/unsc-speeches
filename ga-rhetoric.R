@@ -1,4 +1,4 @@
-source("main.R")
+source("main.R") # Technically don't need the gen_speech df here, so just main.
 
 ######################### ONE-TIME SETUP #########################
 ## Since there are a lot of files, the following one-time setup ##

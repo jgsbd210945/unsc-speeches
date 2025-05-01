@@ -1,30 +1,8 @@
-source("main.R")
-library(viridis)
+## Mainly for finding general counting statistics with the voting data.
+## There's a good chance I don't need most of this, but this should plot the general
+## Yes/No/Abstain.
 
-voting <- read_tsv("Data/UNSC Voting.tsv")  |>
-  # Multiple cols for Bolivia and Venezuela due to gov't changes/UN Naming conventions.
-  mutate(Bolivia = coalesce(Bolivia...134, Bolivia...142),
-         Venezuela = coalesce(Venezuela...25, Venezuela...145)) |>
-  select(-c(Bolivia...134, Bolivia...142, Venezuela...25, Venezuela...145)) |>
-  clean_names() |>
-  mutate(meeting_date = as.Date(meeting_date, format = "%m/%d/%Y"),
-         year = year(date)) |>
-  relocate(year, .after = date) |>
-  rename(KOR = "south_korea")
-
-# Converting to country codes for easier matching
-colnames(voting) <- ifelse(is.na(countrycode(colnames(voting), origin = 'country.name', destination = 'iso3c')),
-                           colnames(voting),
-                           countrycode(colnames(voting), origin = 'country.name', destination = 'iso3c'))
-# Removing empty cols
-voting <- voting |> clean_nas()
-
-cleaned_voting <- voting
-cleaned_voting$meeting_topic <- tolower(cleaned_voting$meeting_topic) |>
-  removeWords(stopwords()) |>
-  stripWhitespace()
-cleaned_voting$meeting_topic <- gsub(" |-|—", "", cleaned_voting$meeting_topic)
-cleaned_voting$meeting_topic <- gsub("situation", "", cleaned_voting$meeting_topic)
+source("voting-setup.R")
 
 # Finding highest/lowest scores in polyarchy to filter
 mgdata |> filter(country_text_id %in% c("FRA", "USA", "CHN", "RUS", "GBR")) |>
@@ -83,7 +61,7 @@ graph_diff_polyarchy <- function(df, xlower = -0.08, xupper = 0.01, ylower = 0.8
 voterate <- sumvotes_year(voting)
 graph_polyarchy(voterate) +
   labs(color = "Regime") +
-  scale_color_manual(values = c("#CC79A7", "#D55E00", "#0072B2", "#56B4E9", "#009E73"),
+  scale_color_manual(values = color_scheme,
                      labels = c("Democratic Erosion",
                                 "Democratic Reversion",
                                 "Entrenched Autocracy",
@@ -92,7 +70,7 @@ graph_polyarchy(voterate) +
   xlab("Electoral Democracy Score") +
   ylab("Rate of Votes In Favor of Resolutions per Year")
 graph_diff_polyarchy(voterate) +
-  scale_color_manual(values = c("#CC79A7", "#D55E00", "#0072B2", "#56B4E9", "#009E73"),
+  scale_color_manual(values = color_scheme,
                      labels = c("Democratic Erosion",
                                 "Democratic Reversion",
                                 "Entrenched Autocracy",
@@ -105,7 +83,7 @@ ggplot(voterate, aes(v2x_polyarchy, no, color = regime)) +
   geom_smooth(method = 'lm', se = FALSE) +
   ylim(0, 0.075) +
   labs(color = "Regime") +
-  scale_color_manual(values = c("#CC79A7", "#D55E00", "#0072B2", "#56B4E9", "#009E73"),
+  scale_color_manual(values = color_scheme,
                      labels = c("Democratic Erosion",
                                 "Democratic Reversion",
                                 "Entrenched Autocracy",
@@ -237,18 +215,3 @@ bve_sum <- bve_year |>
          ab_back = sum(ab_br, ab_be, na.rm = TRUE) / 2,
          bve_ab = ab_back / ab_entr) |>
   select(year, no_dem:bve_ab)
-  
-#bve_test |> print(n = 25)
-#bve_test |> arrange(desc(bve)) |> print(n = 25)
-
-# Case studies
-case_clean <- function(term, lowyear = 1991, df = cleaned_voting) {
-  df |> filter(grepl(term, meeting_topic), year >= lowyear, (abstain != 0 | no != 0)) |>
-    clean_nas()
-}
-
-bve_test |> filter(grepl("cyprus|ukraine|russia|westernsahara", meeting_topic))
-
-#case_clean("cyprus", 2000) # Done
-#case_clean("ukraine|russia", 2014) # Done
-#case_clean("westernsahara")

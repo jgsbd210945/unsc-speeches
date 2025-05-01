@@ -1,34 +1,13 @@
-#source("main.R")
+## Rhetoric TermDocumentMatricies/counting
 
+source("rhetoric-setup.R")
 
-speeches <- read_tsv("Data/speeches.tsv") |> filter(year > 1990, state == 1)
-
-
-speeches$state <- ifelse(is.na(countrycode(speeches$affiliation, origin = 'country.name', destination = 'iso3c')),
-                         speeches$affiliation,
-                         countrycode(speeches$affiliation, origin = 'country.name', destination = 'iso3c'))
-
-speeches$topic <- tolower(speeches$topic) |>
-  removeWords(stopwords()) |>
-  stripWhitespace()
-
-speeches$topic <- gsub(" |-|—|situation", "", speeches$topic)
-
-gen_speech <- speeches |>
-  select(meeting_num, year, month, day, topic, affiliation, speech, state) |>
-  merge(mgwreg, by.x = c("year", "state"), by.y = c("year", "country_text_id"), all.x = TRUE) |>
-  as_tibble()
-
-# Rhetoric
-wf <- function(term, lowyear = 1991) {
-  pullspeech(term, lowyear) |>
-    to_tdm()
-}
 pullspeech <- function(term, lowyear) {
   gen_speech |>
     filter(grepl(term, topic), year >= lowyear) |>
     pull(speech)
 }
+
 to_tdm <- function(col){
   Corpus(VectorSource(col)) |>
     tm_map(removePunctuation, ucp = TRUE) |>
@@ -40,6 +19,7 @@ to_tdm <- function(col){
       bounds = list(global = c(3, Inf))
     ))
 }
+
 freqTerms <- function(tdm, cutoff = Inf){
   as.matrix(tdm) |>
     apply(1, sum) |>

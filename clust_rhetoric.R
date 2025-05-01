@@ -1,32 +1,7 @@
-source("main.R")
+source("rhetoric-setup.R")
+source("cluster-setup.R")
 library(tidytext)
 library(SnowballC)
-library(proxy)
-
-speeches <- read_tsv("Data/speeches.tsv") |> filter(year > 1990, state == 1)
-
-
-speeches$state <- ifelse(is.na(countrycode(speeches$affiliation, origin = 'country.name', destination = 'iso3c')),
-                         speeches$affiliation,
-                         countrycode(speeches$affiliation, origin = 'country.name', destination = 'iso3c'))
-
-speeches$topic <- tolower(speeches$topic) |>
-  removeWords(stopwords()) |>
-  stripWhitespace()
-
-speeches$topic <- gsub(" |-|—|situation", "", speeches$topic)
-
-gen_speech <- speeches |>
-  select(meeting_num, year, month, day, topic, affiliation, speech, state) |>
-  merge(mgwreg, by.x = c("year", "state"), by.y = c("year", "country_text_id"), all.x = TRUE) |>
-  as_tibble()
-
-## Same as clustering.R's method
-plotting <- function(df) {
-  ggplot(df, aes(x = diff_polyarchy, y = v2x_polyarchy, color = factor(cluster))) +
-    geom_point(size = 2) +
-    scale_color_manual(values = c("#56B4E9", "#000000", "#CC7987", "#009E73", "#0072B2", "#F0E442", "#999999", "#D55E00", "#800080"))
-}
 
 ## Functions
 make_dmx <- function(df, begin, end){

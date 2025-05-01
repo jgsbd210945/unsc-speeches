@@ -4,7 +4,9 @@
 ####### next to their call. FULL RUN TIME: 53 minutes #######
 #############################################################
 
-# source("clustering.R")
+## For the most part this is a one-time run so I can just use the .csv files in vote-clustering.
+
+source("cluster-setup.R")
 
 ### Clustering on rhetoric!!
 
@@ -26,21 +28,6 @@ wf_w_dm <- function(dist_mat, begin, end){
   hclustering(dist_mat, groups = 8) |>
     merger_ga(begin, end)
 }
-
-merger_ga <- function(to_merge, begin, end) {
-  mgwreg |>
-    filter(between(year, begin, end)) |>
-    group_by(country_text_id) |>
-    summarize(v2x_polyarchy = mean(v2x_polyarchy, na.rm = TRUE),
-              v2x_regime_amb = round(mean(v2x_regime_amb, na.rm = TRUE)),
-              diff_polyarchy = mean(diff_polyarchy, na.rm = TRUE),
-              backslided = any(backslided, na.rm = TRUE),
-              regime = names(which.max(table(regime))),
-              bve = ifelse(any(bve == "backslided"), "backslided", bve)) |>
-    merge(to_merge, by.x = "country_text_id", by.y = "country") |>
-    mutate(diff_polyarchy = asinh(diff_polyarchy * 100)) # scaling
-}
-
 
 gavote <- read_csv("Data/2025_03_31_ga_voting_corr1.csv") |>
   mutate(year = year(date)) |>

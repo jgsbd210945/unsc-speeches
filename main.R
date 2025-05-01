@@ -1,3 +1,6 @@
+### This is the main document I should be running every time for setup.
+### It makes mgwreg, which is the vdem data merged with sc makeup data and can be used for further analysis.
+
 library(tidyverse)
 library(vdemdata)
 library(janitor)
@@ -81,3 +84,6 @@ findState <- function(abbv, low = 1991, high = 2024) {
     select(country_name, year, regime) |>
     print(n = 50)
 }
+
+# Using a standardized colorblind-friendly color scheme.
+color_scheme <- c("#56B4E9", "#000000", "#CC7987", "#009E73", "#0072B2", "#F0E442", "#999999", "#D55E00", "#800080")
