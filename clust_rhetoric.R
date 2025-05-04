@@ -4,18 +4,8 @@ library(tidytext)
 library(SnowballC)
 
 ## Functions
-make_dmx <- function(df, begin, end){
-  freqs <- df |>
-    filter(between(year, begin, end)) |>
-    unnest_tokens(word, speech) |>
-    anti_join(stop_words, by = "word") |>
-    mutate(stemmed = wordStem(word)) |>
-    count(country_text_id, stemmed, sort = TRUE) |>
-    group_by(country_text_id) |>
-    mutate(freq = n / sum(n)) |>
-    select(-n) |>
-    ungroup() |> 
-    mutate(freq = freq * 1000000) |>
+filter_norms <- function(df, begin, end){
+  df |>
     filter(grepl("interv|interfer|selfdet|sover|rights|humanright|humanitarian|peac|^(regime|norm|normat|standard|right|liber|neoliber|forc)$", stemmed)) |>
     mutate(stemmed = case_when(
       str_detect(stemmed, "^norm") ~ "norm",
@@ -28,7 +18,24 @@ make_dmx <- function(df, begin, end){
          !str_starts(stemmed, "peacebuild") &
          !str_starts(stemmed, "peacekeep")) ~ "peac",
       TRUE ~ stemmed
-    )) |>
+    ))
+}
+
+make_dmx <- function(df, begin, end, normonly){
+  freqs <- df |>
+    filter(between(year, begin, end)) |>
+    unnest_tokens(word, speech) |>
+    anti_join(stop_words, by = "word") |>
+    mutate(stemmed = wordStem(word)) |>
+    count(country_text_id, stemmed, sort = TRUE) |>
+    group_by(country_text_id) |>
+    mutate(freq = n / sum(n)) |>
+    select(-n) |>
+    ungroup() |> 
+    mutate(freq = freq * 1000000) |>
+    
+    (\(df) if(normonly) filter_norms(df) else df)() |>
+    
     group_by(country_text_id, stemmed) |>
     summarize(freq = sum(freq), .groups = "drop") |> 
     pivot_wider(names_from = stemmed, values_from = freq, values_fill = 0)
@@ -60,19 +67,22 @@ merger <- function(to_merge, begin, end) {
     as_tibble()
 }
 
-wf_rhet <- function(df, ngroups, begin, end){
-  make_dmx(df, begin, end) |>
+wf_rhet <- function(df, ngroups, begin, end, normonly = TRUE){
+  make_dmx(df, begin, end, normonly) |>
     hc_rhet(groups = ngroups) |>
     merger(begin, end)
 }
 
-rhet1 <- wf_rhet(speeches, 4, 1990, 1994)
-rhet2 <- wf_rhet(speeches, 4, 1995, 1999)
-rhet3 <- wf_rhet(speeches, 4, 2000, 2004)
-rhet4 <- wf_rhet(speeches, 4, 2005, 2009)
-rhet5 <- wf_rhet(speeches, 4, 2010, 2014)
-rhet6 <- wf_rhet(speeches, 4, 2015, 2019)
-rhet7 <- wf_rhet(speeches, 4, 2020, 2024)
+sc_speeches <- speeches |>
+  rename(country_text_id = state)
+
+rhet1 <- wf_rhet(sc_speeches, 4, 1990, 1994)
+rhet2 <- wf_rhet(sc_speeches, 4, 1995, 1999)
+rhet3 <- wf_rhet(sc_speeches, 4, 2000, 2004)
+rhet4 <- wf_rhet(sc_speeches, 4, 2005, 2009)
+rhet5 <- wf_rhet(sc_speeches, 4, 2010, 2014)
+rhet6 <- wf_rhet(sc_speeches, 4, 2015, 2019)
+rhet7 <- wf_rhet(sc_speeches, 4, 2020, 2024)
 
 
 rhet1 |> plotting()
@@ -87,15 +97,50 @@ rhet7 |> plotting()
 
 # GA Rhetoric
 
+ga_speeches <- read_csv("GA_Speech/gaspeeches.csv")
+
+garh1 <- wf_rhet(ga_speeches, 8, 1990, 1994, normonly = FALSE)
+garh2 <- wf_rhet(ga_speeches, 8, 1995, 1999)
+garh3 <- wf_rhet(ga_speeches, 8, 2000, 2004)
+garh4 <- wf_rhet(ga_speeches, 8, 2005, 2009)
+garh5 <- wf_rhet(ga_speeches, 8, 2010, 2014)
+garh6 <- wf_rhet(ga_speeches, 8, 2015, 2019)
+garh7 <- wf_rhet(ga_speeches, 8, 2020, 2024)
+
+garh1 |> plotting()
+garh2 |> plotting()
+garh3 |> plotting()
+garh4 |> plotting()
+garh5 |> plotting()
+garh6 |> plotting()
+garh7 |> plotting()
 
 
 
+## Correlation Checking
+cortest <- function(rhet, vot){
+  merge(rhet, vot, by.x = "country_text_id", by.y = "country") |>
+    select(cluster.x, cluster.y) |> cor()
+}
 
+gvot1 <- read_csv("GA_distmat/ga1.csv") |> as.dist() |> hclustering(groups = 8)
+gvot2 <- read_csv("GA_distmat/ga2.csv") |> as.dist() |> hclustering(groups = 8)
+gvot3 <- read_csv("GA_distmat/ga3.csv") |> as.dist() |> hclustering(groups = 8)
+gvot4 <- read_csv("GA_distmat/ga4.csv") |> as.dist() |> hclustering(groups = 8)
+gvot5 <- read_csv("GA_distmat/ga5.csv") |> as.dist() |> hclustering(groups = 8)
+gvot6 <- read_csv("GA_distmat/ga6.csv") |> as.dist() |> hclustering(groups = 8)
+gvot7 <- read_csv("GA_distmat/ga7.csv") |> as.dist() |> hclustering(groups = 8)
 
+cortest(garh1, gvot1)
+cortest(garh2, gvot2)
+cortest(garh3, gvot3)
+cortest(garh4, gvot4)
+cortest(garh5, gvot5)
+cortest(garh6, gvot6)
+cortest(garh7, gvot7)
 
+## That's strange, it's almost impressive how *not* correlated they are.
 
-
-
-
+## ...& Even if I do it by ALL WORDS, it's still by no means correlated.
 
 
