@@ -28,7 +28,7 @@ sumvotes_year <- function(df, merger = mgwreg) { # Makes a year-by-year percenta
 graph_polyarchy <- function(df, ylower = 0.8){ # Graphs based on v2x_polyarchy
   ggplot(df, aes(v2x_polyarchy, yes, color = regime)) +
     geom_point() +
-    geom_smooth(method = 'lm', se = FALSE) +
+    geom_smooth(method = 'lm') +
     ylim(ylower, 1) +
     labs(color = "Regime") +
     scale_color_manual(values = color_scheme,
@@ -36,7 +36,7 @@ graph_polyarchy <- function(df, ylower = 0.8){ # Graphs based on v2x_polyarchy
                                   "Democratic Reversion",
                                   "Entrenched Autocracy",
                                   "Entrenched Democracy",
-                                  "Entrenched Illiberal")) +
+                                  "Grey Area Regime")) +
     xlab("Electoral Democracy Score") +
     ylab("Rate of Votes In Favor of Resolutions per Year")
 }
@@ -53,7 +53,7 @@ graph_diff_polyarchy <- function(df, xlower = -0.08, xupper = 0.01, ylower = 0.8
                                   "Democratic Reversion",
                                   "Entrenched Autocracy",
                                   "Entrenched Democracy",
-                                  "Entrenched Illiberal"))+
+                                  "Grey Area Regime"))+
     xlab("Difference in Electoral Democracy Score") +
     ylab("Rate of Votes in Favor of Resolutions per Year")
 }
@@ -69,7 +69,7 @@ graph_diff_polyarchy(voterate)
 ## Votes against resolutions based on overall v2x_polyarchy score
 ggplot(voterate, aes(v2x_polyarchy, no, color = regime)) +
   geom_point() +
-  geom_smooth(method = 'lm', se = FALSE) +
+  geom_smooth(method = 'lm') +
   ylim(0, 0.075) +
   labs(color = "Regime") +
   scale_color_manual(values = color_scheme,
