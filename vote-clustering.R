@@ -50,12 +50,35 @@ ga5 |> plotting()
 ga6 |> plotting()
 ga7 |> plotting()
 
-read_csv("GA_distmat/ga4.csv") |>
-  as.dist() |>
-  hclustering(groups = 7) |> # Only after doing 8 clusters is there actually a split between the bottom (autocratic) and the massive group in the middle!
-  merger_ga(2005, 2009) |>   # This is 6 clusters for ga5 from 2010 to 2014.
-  plotting()
+### Building Clusters - 2020-24 ###
+make_plot <- function(dist, k, beginyear, endyear){
+  dist |>
+    hclustering(groups = k) |>
+    merger_ga(beginyear, endyear) |>
+    plotting()
+}
 
+dist7 <- read_csv("GA_distmat/ga7.csv") |>
+  as.dist()
+
+make_plot(dist7, 2, 2020, 2024)
+make_plot(dist7, 3, 2020, 2024)
+make_plot(dist7, 4, 2020, 2024)
+make_plot(dist7, 5, 2020, 2024)
+make_plot(dist7, 6, 2020, 2024)
+make_plot(dist7, 7, 2020, 2024)
+make_plot(dist7, 8, 2020, 2024)
+
+dist6 <- read_csv("GA_distmat/ga6.csv") |>
+  as.dist()
+
+make_plot(dist6, 2, 2015, 2019)
+make_plot(dist6, 3, 2015, 2019)
+make_plot(dist6, 4, 2015, 2019)
+make_plot(dist6, 5, 2015, 2019)
+make_plot(dist6, 6, 2015, 2019)
+make_plot(dist6, 7, 2015, 2019)
+make_plot(dist6, 8, 2015, 2019)
 
 ### Country Clustering? ###
 make_clust_df <- function(df, countrycode, yrstring){
