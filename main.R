@@ -86,4 +86,18 @@ findState <- function(abbv, low = 1991, high = 2024) {
 }
 
 # Using a standardized colorblind-friendly color scheme.
-color_scheme <- c("#56B4E9", "#000000", "#CC7987", "#009E73", "#0072B2", "#F0E442", "#999999", "#D55E00", "#800080")
+color_scheme <- c("#CC7987", "#800080", "#D55E00", "#0072B2", "#999999", "#009E73", "#56B4E9", "#000000", "#F0E442")
+
+## Full classification by state
+mgwreg |> ggplot(aes(x = diff_polyarchy, y = v2x_polyarchy, color = regime)) +
+  geom_point(alpha = 0.75) +
+  labs(color = "Regime") +
+  scale_color_manual(values = color_scheme,
+                     labels = c("Democratic Erosion", 
+                                "Democratic Reversion",
+                                "Entrenched Autocracy",
+                                "Entrenched Democracy",
+                                "Grey Area Regime")) +
+  ylab("Electoral Democracy Score") +
+  xlab("Difference in Electoral Democracy Score")
+
