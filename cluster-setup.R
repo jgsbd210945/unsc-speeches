@@ -60,8 +60,18 @@ merger_ga <- function(to_merge, begin, end) { # Merges w/ mgwreg; changes diff_p
     mutate(diff_polyarchy = asinh(diff_polyarchy * 100)) # scaling
 }
 
+color_scheme_graph <- c("#999999", "#0072B2", "#D55E00", "#56B4E9", "#009E73", "#000000", "#CC7987", "#800080", "#F0E442")
+
 plotting <- function(df) {
   ggplot(df, aes(x = diff_polyarchy, y = v2x_polyarchy, color = factor(cluster))) +
     geom_point(size = 2) +
-    scale_color_manual(values = color_scheme)
+    labs(color = "Cluster") +
+    scale_color_manual(values = color_scheme_graph) +
+    stat_ellipse(geom='polygon',
+                 aes(fill=cluster),
+                 alpha = 0.06,
+                 show.legend = FALSE,
+                 level = 0.8) +
+    xlab("Average Difference in Electoral Democracy Score") +
+    ylab("Average Electoral Democracy Score")
 }

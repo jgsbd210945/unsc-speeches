@@ -12,13 +12,13 @@ wf_scvote <- function(begin, end, ngrp){
 
 cut <- cleaned_voting |> dplyr::select(-c(meeting_record:date, title:link, chil_es, SOM))
 
-hc1 <- wf_scvote(1990, 1994, 4)
-hc2 <- wf_scvote(1995, 1999, 4)
-hc3 <- wf_scvote(2000, 2004, 4)
-hc4 <- wf_scvote(2005, 2009, 4)
-hc5 <- wf_scvote(2010, 2014, 4)
-hc6 <- wf_scvote(2015, 2019, 4)
-hc7 <- wf_scvote(2020, 2024, 4)
+hc1 <- wf_scvote(1990, 1994, 3)
+hc2 <- wf_scvote(1995, 1999, 3)
+hc3 <- wf_scvote(2000, 2004, 3)
+hc4 <- wf_scvote(2005, 2009, 3)
+hc5 <- wf_scvote(2010, 2014, 3)
+hc6 <- wf_scvote(2015, 2019, 3)
+hc7 <- wf_scvote(2020, 2024, 3)
 
 hc1 |> plotting()
 hc2 |> plotting()
@@ -30,7 +30,7 @@ hc7 |> plotting()
 
 ### GA Area ###
 wf_w_dm <- function(dist_mat, begin, end){
-  hclustering(dist_mat, groups = 8) |>
+  hclustering(dist_mat, groups = 6) |>
     merger_ga(begin, end)
 }
 
@@ -42,13 +42,30 @@ ga5 <- read_csv("GA_distmat/ga5.csv") |> as.dist() |> wf_w_dm(2010, 2014)
 ga6 <- read_csv("GA_distmat/ga6.csv") |> as.dist() |> wf_w_dm(2015, 2019)
 ga7 <- read_csv("GA_distmat/ga7.csv") |> as.dist() |> wf_w_dm(2020, 2024)
 
-ga1 |> plotting()
-ga2 |> plotting()
-ga3 |> plotting()
-ga4 |> plotting()
-ga5 |> plotting()
-ga6 |> plotting()
-ga7 |> plotting()
+## I think the issue mostly is just that the clusters aren't standardised insofar as they can swap around.
+## Curious if I can lock in something.
+
+ga1 |> plotting() +
+  labs(title = "UNGA Vote Clustering, 1991-1994")
+  
+ga2 |> plotting() +
+  labs(title = "UNGA Vote Clustering, 1995-1999")
+
+ga3 |> plotting() +
+  labs(title = "UNGA Vote Clustering, 2000-2004")
+
+ga4 |> plotting() +
+  labs(title = "UNGA Vote Clustering, 2005-2009")
+
+ga5 |> plotting() +
+  labs(title = "UNGA Vote Clustering, 2010-2014")
+
+ga6 |> plotting() +
+  labs(title = "UNGA Vote Clustering, 2015-2019")
+
+ga7 |> plotting() +
+  labs(title = "UNGA Vote Clustering, 2020-2024")
+
 
 ### Building Clusters - 2020-24 ###
 make_plot <- function(dist, k, beginyear, endyear){
@@ -58,16 +75,16 @@ make_plot <- function(dist, k, beginyear, endyear){
     plotting()
 }
 
-dist7 <- read_csv("GA_distmat/ga7.csv") |>
+dist5 <- read_csv("GA_distmat/ga5.csv") |>
   as.dist()
 
-make_plot(dist7, 2, 2020, 2024)
-make_plot(dist7, 3, 2020, 2024)
-make_plot(dist7, 4, 2020, 2024)
-make_plot(dist7, 5, 2020, 2024)
-make_plot(dist7, 6, 2020, 2024)
-make_plot(dist7, 7, 2020, 2024)
-make_plot(dist7, 8, 2020, 2024)
+make_plot(dist5, 2, 2010, 2014)
+make_plot(dist5, 3, 2010, 2014)
+make_plot(dist5, 4, 2010, 2014)
+make_plot(dist5, 5, 2010, 2014)
+make_plot(dist5, 6, 2010, 2014)
+make_plot(dist5, 7, 2010, 2014)
+make_plot(dist5, 8, 2010, 2014)
 
 dist6 <- read_csv("GA_distmat/ga6.csv") |>
   as.dist()
@@ -122,9 +139,4 @@ clstCHN |> ggplot(aes(x = diff_polyarchy, y = v2x_polyarchy)) +
 
 clstRUS <- checkstate("RUS") |> as_tibble() |> relocate(yr, .before = 1)
 clstRUS |> ggplot(aes(x = diff_polyarchy, y = v2x_polyarchy)) +
-  geom_point(size = 2)
-
-### General Distribution
-mgwreg |> mutate(diff_polyarchy = asinh(diff_polyarchy * 100)) |>
-  ggplot(aes(x = diff_polyarchy, y = v2x_polyarchy)) +
   geom_point(size = 2)
