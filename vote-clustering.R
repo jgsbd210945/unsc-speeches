@@ -1,6 +1,10 @@
 source("voting-setup.R")
 source("cluster-setup.R")
 
+### Focus on *what* states are voting on per period
+## Disaggregate by topic!
+## Look at which members stopped voting together
+
 # Clustering
 wf_scvote <- function(begin, end, ngrp){
   cut |> filter(between(year, begin, end)) |>
