@@ -101,3 +101,27 @@ mgwreg |> ggplot(aes(x = diff_polyarchy, y = v2x_polyarchy, color = regime)) +
   ylab("Electoral Democracy Score") +
   xlab("Difference in Electoral Democracy Score")
 
+mgwreg |> ggplot(aes(x = year, y = v2x_polyarchy)) +
+  geom_smooth(color = "black") +
+  ylab("Average Electoral Democracy Score") +
+  xlab("Year")
+
+mgwreg |> ggplot(aes(x = year, fill = factor(v2x_regime_amb))) +
+  geom_bar(position = 'fill') +
+  scale_fill_manual(values = c("#A80000", "#BC0F0F", "#BF4242", "#C16880", "#999999", "#748993", "#78A6BF", "#0072B2", "#0059A8", "#004593"),
+                    labels = c("Closed Autocracy",
+                               "Closed Autocracy Upper Bound",
+                               "Electoral Autocracy Lower Bound",
+                               "Electoral Autocracy",
+                               "Electoral Autocracy Upper Bound",
+                               "Electoral Democracy Lower Bound",
+                               "Electoral Democracy",
+                               "Electoral Democracy Upper Bound",
+                               "Liberal Democracy Lower Bound",
+                               "Liberal Democracy")) +
+  labs(fill = "Regime") +
+  xlab("Year") +
+  ylab("Proportion of All States")
+
+mgwreg |> ggplot(aes(x = year, fill = regime)) +
+  geom_bar(position = 'fill')

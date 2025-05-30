@@ -72,6 +72,6 @@ plotting <- function(df) {
                  alpha = 0.06,
                  show.legend = FALSE,
                  level = 0.8) +
-    xlab("Average Difference in Electoral Democracy Score") +
+    xlab("Arcsin(100 * Average Difference in Electoral Democracy Score)") +
     ylab("Average Electoral Democracy Score")
 }

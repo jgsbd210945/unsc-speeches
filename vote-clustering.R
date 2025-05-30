@@ -127,20 +127,35 @@ checkstate <- function(countrycode){
 
 clstFRA <- checkstate("FRA") |> as_tibble() |> relocate(yr, .before = 1)
 clstFRA |> ggplot(aes(x = diff_polyarchy, y = v2x_polyarchy)) +
-  geom_point(size = 2)
+  geom_point(size = 2) +
+  xlab("Arcsin(100 * Difference in Electoral Democracy Score)") +
+  ylab("Electoral Democracy Score") +
+  labs(title = "States in the Same Cluster as France")
 
 clstGBR <- checkstate("GBR") |> as_tibble() |> relocate(yr, .before = 1)
 clstGBR |> ggplot(aes(x = diff_polyarchy, y = v2x_polyarchy)) +
-  geom_point(size = 2)
+  geom_point(size = 2) +
+  xlab("Arcsin(100 * Difference in Electoral Democracy Score)") +
+  ylab("Electoral Democracy Score") +
+  labs(title = "States in the Same Cluster as the United Kingdom")
 
 clstUSA <- checkstate("USA") |> as_tibble() |> relocate(yr, .before = 1)
 clstUSA |> ggplot(aes(x = diff_polyarchy, y = v2x_polyarchy)) +
-  geom_point(size = 2)
+  geom_point(size = 2) +
+  xlab("Arcsin(100 * Difference in Electoral Democracy Score)") +
+  ylab("Electoral Democracy Score") +
+  labs(title = "States in the Same Cluster as the United States")
 
 clstCHN <- checkstate("CHN") |> as_tibble() |> relocate(yr, .before = 1)
 clstCHN |> ggplot(aes(x = diff_polyarchy, y = v2x_polyarchy)) +
-  geom_point(size = 2)
+  geom_point(size = 2) +
+  xlab("Arcsin(100 * Difference in Electoral Democracy Score)") +
+  ylab("Electoral Democracy Score") +
+  labs(title = "States in the Same Cluster as China")
 
 clstRUS <- checkstate("RUS") |> as_tibble() |> relocate(yr, .before = 1)
 clstRUS |> ggplot(aes(x = diff_polyarchy, y = v2x_polyarchy)) +
-  geom_point(size = 2)
+  geom_point(size = 2) +
+  xlab("Arcsin(100 * Difference in Electoral Democracy Score)") +
+  ylab("Electoral Democracy Score") +
+  labs(title = "States in the Same Cluster as Russia")
