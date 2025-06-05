@@ -27,6 +27,16 @@ freqTerms <- function(tdm, cutoff = Inf){
     head(cutoff)
 }
 
+ga_speeches <- ga_speeches |>
+  merge(mgwreg) |>
+  as_tibble() |>
+  rename(state = country_text_id) |>
+  select(year, state, speech, regime, bve)
+
+gen_speech <- gen_speech |>
+  select(year, state, speech, regime, bve) |>
+  rbind(ga_speeches)
+
 erode_tdm <- gen_speech |> filter(regime == "backslide_erode") |>
   pull(speech) |>
   to_tdm()
@@ -69,7 +79,8 @@ rmfreq <- rmfreq <= 1
 freqbyregime <- freqbyregime[,!rmfreq]
 freqbyregime <- freqbyregime %>% replace(is.na(.), 0) # Need the old pipe for this!
 
-specific_terms <- c("regime", "norm", "normat", "standard", "right", "liber", "neoliber", "forc", "peac")
+specific_terms <- c("regime", "norm", "normat", "standard", "right", "liber", "neoliber", "forc", "peac",
+                    "protect", "civilianprotect", "childprotect", "protection", "protectionof", "protectionofcivilian", "protector") # Since some "protect" stems aren't dealing with stuff like R2P.
 
 normnum <- cbind(freqbyregime[specific_terms], freqbyregime[grepl("interv|interfer|selfdet|sover|rights|humanright|humanitarian|peace", colnames(freqbyregime))])
 normnum <- normnum |>
@@ -79,8 +90,9 @@ normnum <- normnum |>
          tot_peacebuild = rowSums(select(normnum, matches("^peacebuild")), na.rm = TRUE),
          tot_interv = rowSums(select(normnum, matches("^interv")), na.rm = TRUE),
          tot_humanitarian = rowSums(select(normnum, matches("^humanitarian")), na.rm = TRUE),
-         tot_peace = rowSums(select(normnum, matches("^peac")), na.rm = TRUE)) |>
-  select(-matches("^norm|^sovereign|^peacekeep|^peacebuild|^interv|^humanitarian")) |>
+         tot_peace = rowSums(select(normnum, matches("^peac")), na.rm = TRUE),
+         tot_prot = rowSums(select(normnum, matches("protect")), na.rm = TRUE)) |>
+  select(-matches("^norm|^sovereign|^peacekeep|^peacebuild|^interv|^humanitarian|protect")) |>
   data.table::transpose(keep.names = "term", make.names = "regime") |>
   as_tibble() |>
   mutate(bve_erosion = dem_erosion / entr_illib,
@@ -106,8 +118,9 @@ normlang <- normlang |>
          tot_peacebuild = rowSums(select(normlang, matches("^peacebuild")), na.rm = TRUE),
          tot_interv = rowSums(select(normlang, matches("^interv")), na.rm = TRUE),
          tot_humanitarian = rowSums(select(normlang, matches("^humanitarian")), na.rm = TRUE),
-         tot_peace = rowSums(select(normlang, matches("^peac")), na.rm = TRUE)) |>
-  select(-matches("^norm|^sovereign|^peacekeep|^peacebuild|^interv|^humanitarian")) |>
+         tot_peace = rowSums(select(normlang, matches("^peac")), na.rm = TRUE),
+         tot_prot = rowSums(select(normlang, matches("protect")), na.rm = TRUE)) |>
+  select(-matches("^norm|^sovereign|^peacekeep|^peacebuild|^interv|^humanitarian|protect")) |>
   data.table::transpose(keep.names = "term", make.names = "regime") |>
   as_tibble() |>
   mutate(bve_erosion = dem_erosion / entr_illib,
@@ -135,11 +148,45 @@ normbyreg <- normpct |>
   data.table::transpose(keep.names = "regime", make.names = "term") |>
   as_tibble()
 
+rhet_cases <- normlang |>
+  select(-matches("^bve")) |>
+  data.table::transpose(keep.names = "regime", make.names = "term") |>
+  as_tibble() |>
+  mutate(Regime = c("Democratic Erosion", "Entrenched Grey Area Regime", "Democratic Reversion", "Entrenched Autocracy", "Entrenched Democracy"))
 
-#bargraph_norm <- function(term, df = normbyreg){
-#  df |>
-#    ggplot(aes(x = regime)) +
-#    geom_bar(aes(y = term))
-#}
+rhet_cases |>
+  ggplot(aes(x = tot_prot, y = reorder(Regime, -tot_prot))) +
+  geom_col() +
+  ylab("Regime Type") +
+  xlab("Uses of Words Related to R2P per 10,000 Words") +
+  labs(title = paste("Usage of Words related to R2P by Regime"))
 
+rhet_cases |>
+  ggplot(aes(x = tot_sovereign, y = reorder(Regime, -tot_sovereign))) +
+  geom_col() +
+  ylab("Regime Type") +
+  xlab("Uses of Sovereignty per 10,000 Words") +
+  labs(title = paste("Usage of Sovereignty by Regime"))
 
+rhet_cases |>
+  ggplot(aes(x = selfdetermin, y = reorder(Regime, -selfdetermin))) +
+  geom_col() +
+  ylab("Regime Type") +
+  xlab("Uses of Self-Determination per 10,000 Words") +
+  labs(title = paste("Usage of Self-Determination by Regime"))
+
+rhet_cases |>
+  mutate(interv = nonintervent + tot_interv) |>
+  ggplot(aes(x = interv, y = reorder(Regime, -interv))) +
+  geom_col() +
+  ylab("Regime Type") +
+  xlab("Uses of Intervention/Non-Intervention per 10,000 Words") +
+  labs(title = paste("Usage of Intervention/Non-Intervention by Regime"))
+
+rhet_cases |>
+  mutate(interfer = noninterfer + interfer) |>
+  ggplot(aes(x = interfer, y = reorder(Regime, -interfer))) +
+  geom_col() +
+  ylab("Regime Type") +
+  xlab("Uses of Interference/Non-Interference per 10,000 Words") +
+  labs(title = paste("Usage of Interference/Non-Interference by Regime"))

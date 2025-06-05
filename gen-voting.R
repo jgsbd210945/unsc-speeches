@@ -80,3 +80,73 @@ ggplot(voterate, aes(v2x_polyarchy, no, color = regime)) +
                                 "Entrenched Illiberal"))+
   xlab("Electoral Democracy Score") +
   ylab("Rate of Votes Against of Resolutions per Year")
+
+## GA Stuff
+gavote <- read_csv("Data/2025_03_31_ga_voting_corr1.csv") |>
+  mutate(year = year(date)) |>
+  filter(between(year, 1991, 2024)) |>
+  select(resolution, year, ms_code:ms_vote, title, total_yes:total_ms)
+
+group_years <- function(df, begin, end){
+  df |>
+    group_by(resolution, title) |>
+    summarize(year = median(year),
+              yes = median(total_yes),
+              no = median(total_no),
+              abst = median(total_abstentions),
+              nonvoting = median(total_non_voting),
+              ms = median(total_ms)) |>
+    ungroup() |>
+    filter(between(year, begin, end))
+}
+
+to_tdm <- function(col){
+  Corpus(VectorSource(col)) |>
+    tm_map(removePunctuation, ucp = TRUE) |>
+    TermDocumentMatrix(control = list(
+      stopwords = TRUE,
+      tolower = TRUE,
+      stemming = TRUE,
+      removeNumbers = TRUE,
+      bounds = list(global = c(3, Inf))
+    ))
+}
+
+freqTerms <- function(tdm, cutoff = Inf){
+  as.matrix(tdm) |>
+    apply(1, sum) |>
+    sort(decreasing = TRUE) |>
+    head(cutoff)
+}
+
+wf_gavotes <- function(begin, end, df = gavote){
+  res <- df |>
+    group_years(begin, end) |>
+    pull(title) |>
+    to_tdm() |>
+    freqTerms()
+  res <- res[res < 300] # "General", "Assembly", "Adopt", etc.
+}
+
+gatopic1 <- wf_gavotes(1990, 1994)
+gatopic2 <- wf_gavotes(1995, 1999)
+gatopic3 <- wf_gavotes(2000, 2004)
+gatopic4 <- wf_gavotes(2005, 2009)
+gatopic5 <- wf_gavotes(2010, 2014)
+gatopic6 <- wf_gavotes(2015, 2019)
+gatopic7 <- wf_gavotes(2020, 2024)
+
+gatopicfreq <- mergeVectors(gatopic1, gatopic2, gatopic3, gatopic4, gatopic5, gatopic6, gatopic7) |>
+  as_tibble() |>
+  mutate(years = c("1990-94", "1995-99", "2000-04", "2005-09", "2010-14", "2015-19", "2020-24"),
+         .before = 1)
+rmfreq <- apply(gatopicfreq, 2, \(col) sum(!is.na(col)))
+rmfreq <- rmfreq <= 1
+gatopicfreq <- gatopicfreq[,!rmfreq]
+gatopicfreq <- gatopicfreq %>% replace(is.na(.), 0) |>
+  data.table::transpose(keep.names = "term", make.names = "years") |>
+  as_tibble()
+
+gatopicfreq |> arrange(desc(`2020-24`)) |>
+  head(100) |>
+  print(n = 100)

@@ -19,3 +19,5 @@ gen_speech <- speeches |>
   select(meeting_num, year, month, day, topic, affiliation, speech, state) |>
   merge(mgwreg, by.x = c("year", "state"), by.y = c("year", "country_text_id"), all.x = TRUE) |>
   as_tibble()
+
+ga_speeches <- read_csv("GA_Speech/gaspeeches.csv")

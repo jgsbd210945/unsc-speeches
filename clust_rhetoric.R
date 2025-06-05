@@ -99,21 +99,42 @@ rhet7 |> plotting()
 
 ga_speeches <- read_csv("GA_Speech/gaspeeches.csv")
 
-garh1 <- wf_rhet(ga_speeches, 8, 1990, 1994, normonly = FALSE)
-garh2 <- wf_rhet(ga_speeches, 8, 1995, 1999)
-garh3 <- wf_rhet(ga_speeches, 8, 2000, 2004)
-garh4 <- wf_rhet(ga_speeches, 8, 2005, 2009)
-garh5 <- wf_rhet(ga_speeches, 8, 2010, 2014)
-garh6 <- wf_rhet(ga_speeches, 8, 2015, 2019)
-garh7 <- wf_rhet(ga_speeches, 8, 2020, 2024)
+garh1 <- wf_rhet(ga_speeches, 6, 1990, 1994)
+garh2 <- wf_rhet(ga_speeches, 6, 1995, 1999)
+garh3 <- wf_rhet(ga_speeches, 6, 2000, 2004)
+garh4 <- wf_rhet(ga_speeches, 6, 2005, 2009)
+garh5 <- wf_rhet(ga_speeches, 6, 2010, 2014)
+garh6 <- wf_rhet(ga_speeches, 6, 2015, 2019)
+garh7 <- wf_rhet(ga_speeches, 6, 2020, 2024)
 
-garh1 |> plotting()
-garh2 |> plotting()
-garh3 |> plotting()
-garh4 |> plotting()
-garh5 |> plotting()
-garh6 |> plotting()
-garh7 |> plotting()
+garh1 |>
+  mutate(diff_polyarchy = asinh(diff_polyarchy * 100)) |> 
+  plotting() +
+  labs(title = "UNGA Rhetoric Clustering, 1991-1994")
+garh2 |>
+  mutate(diff_polyarchy = asinh(diff_polyarchy * 100)) |> 
+  plotting() +
+  labs(title = "UNGA Rhetoric Clustering, 1995-1999")
+garh3 |>
+  mutate(diff_polyarchy = asinh(diff_polyarchy * 100)) |> 
+  plotting() +
+  labs(title = "UNGA Rhetoric Clustering, 2000-2004")
+garh4 |>
+  mutate(diff_polyarchy = asinh(diff_polyarchy * 100)) |> 
+  plotting() +
+  labs(title = "UNGA Rhetoric Clustering, 2005-2009")
+garh5 |>
+  mutate(diff_polyarchy = asinh(diff_polyarchy * 100)) |> 
+  plotting() +
+  labs(title = "UNGA Rhetoric Clustering, 2010-2014")
+garh6 |>
+  mutate(diff_polyarchy = asinh(diff_polyarchy * 100)) |> 
+  plotting() +
+  labs(title = "UNGA Rhetoric Clustering, 2015-2019")
+garh7 |>
+  mutate(diff_polyarchy = asinh(diff_polyarchy * 100)) |> 
+  plotting() +
+  labs(title = "UNGA Rhetoric Clustering, 2020-2024")
 
 
 
@@ -123,13 +144,13 @@ cortest <- function(rhet, vot){
     select(cluster.x, cluster.y) |> cor()
 }
 
-gvot1 <- read_csv("GA_distmat/ga1.csv") |> as.dist() |> hclustering(groups = 8)
-gvot2 <- read_csv("GA_distmat/ga2.csv") |> as.dist() |> hclustering(groups = 8)
-gvot3 <- read_csv("GA_distmat/ga3.csv") |> as.dist() |> hclustering(groups = 8)
-gvot4 <- read_csv("GA_distmat/ga4.csv") |> as.dist() |> hclustering(groups = 8)
-gvot5 <- read_csv("GA_distmat/ga5.csv") |> as.dist() |> hclustering(groups = 8)
-gvot6 <- read_csv("GA_distmat/ga6.csv") |> as.dist() |> hclustering(groups = 8)
-gvot7 <- read_csv("GA_distmat/ga7.csv") |> as.dist() |> hclustering(groups = 8)
+gvot1 <- read_csv("GA_distmat/ga1.csv") |> as.dist() |> hclustering(groups = 6)
+gvot2 <- read_csv("GA_distmat/ga2.csv") |> as.dist() |> hclustering(groups = 6)
+gvot3 <- read_csv("GA_distmat/ga3.csv") |> as.dist() |> hclustering(groups = 6)
+gvot4 <- read_csv("GA_distmat/ga4.csv") |> as.dist() |> hclustering(groups = 6)
+gvot5 <- read_csv("GA_distmat/ga5.csv") |> as.dist() |> hclustering(groups = 6)
+gvot6 <- read_csv("GA_distmat/ga6.csv") |> as.dist() |> hclustering(groups = 6)
+gvot7 <- read_csv("GA_distmat/ga7.csv") |> as.dist() |> hclustering(groups = 6)
 
 cortest(garh1, gvot1)
 cortest(garh2, gvot2)
