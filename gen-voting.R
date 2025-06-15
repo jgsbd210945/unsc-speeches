@@ -114,25 +114,6 @@ group_years <- function(df, begin, end){
     filter(between(year, begin, end))
 }
 
-to_tdm <- function(col){
-  Corpus(VectorSource(col)) |>
-    tm_map(removePunctuation, ucp = TRUE) |>
-    TermDocumentMatrix(control = list(
-      stopwords = TRUE,
-      tolower = TRUE,
-      stemming = TRUE,
-      removeNumbers = TRUE,
-      bounds = list(global = c(3, Inf))
-    ))
-}
-
-freqTerms <- function(tdm, cutoff = Inf){
-  as.matrix(tdm) |>
-    apply(1, sum) |>
-    sort(decreasing = TRUE) |>
-    head(cutoff)
-}
-
 wf_gavotes <- function(begin, end, df = gavote){
   res <- df |>
     group_years(begin, end) |>

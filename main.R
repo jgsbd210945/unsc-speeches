@@ -85,6 +85,26 @@ findState <- function(abbv, low = 1991, high = 2024) {
     print(n = 50)
 }
 
+freqTerms <- function(tdm, cutoff = Inf){
+  as.matrix(tdm) |>
+    apply(1, sum) |>
+    sort(decreasing = TRUE) |>
+    head(cutoff)
+}
+
+to_tdm <- function(col){
+  Corpus(VectorSource(col)) |>
+    tm_map(removePunctuation, ucp = TRUE) |>
+    TermDocumentMatrix(control = list(
+      stopwords = TRUE,
+      tolower = TRUE,
+      stemming = TRUE,
+      removeNumbers = TRUE,
+      bounds = list(global = c(3, Inf))
+    ))
+}
+
+
 # Using a standardized colorblind-friendly color scheme.
 color_scheme <- c("#CC7987", "#800080", "#D55E00", "#0072B2", "#999999", "#009E73", "#56B4E9", "#000000", "#F0E442")
 

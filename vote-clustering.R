@@ -127,35 +127,94 @@ checkstate <- function(countrycode){
 
 clstFRA <- checkstate("FRA") |> as_tibble() |> relocate(yr, .before = 1)
 clstFRA |> ggplot(aes(x = diff_polyarchy, y = v2x_polyarchy)) +
-  geom_point(size = 2) +
+  geom_point(size = 2, alpha = 0.6) +
   xlab("Arcsin(100 * Difference in Electoral Democracy Score)") +
   ylab("Electoral Democracy Score") +
   labs(title = "States in the Same Cluster as France")
 
 clstGBR <- checkstate("GBR") |> as_tibble() |> relocate(yr, .before = 1)
 clstGBR |> ggplot(aes(x = diff_polyarchy, y = v2x_polyarchy)) +
-  geom_point(size = 2) +
+  geom_point(size = 2, alpha = 0.6) +
   xlab("Arcsin(100 * Difference in Electoral Democracy Score)") +
   ylab("Electoral Democracy Score") +
   labs(title = "States in the Same Cluster as the United Kingdom")
 
 clstUSA <- checkstate("USA") |> as_tibble() |> relocate(yr, .before = 1)
 clstUSA |> ggplot(aes(x = diff_polyarchy, y = v2x_polyarchy)) +
-  geom_point(size = 2) +
+  geom_point(size = 2, alpha = 0.6) +
   xlab("Arcsin(100 * Difference in Electoral Democracy Score)") +
   ylab("Electoral Democracy Score") +
   labs(title = "States in the Same Cluster as the United States")
 
 clstCHN <- checkstate("CHN") |> as_tibble() |> relocate(yr, .before = 1)
 clstCHN |> ggplot(aes(x = diff_polyarchy, y = v2x_polyarchy)) +
-  geom_point(size = 2) +
+  geom_point(size = 2, alpha = 0.6) +
   xlab("Arcsin(100 * Difference in Electoral Democracy Score)") +
   ylab("Electoral Democracy Score") +
   labs(title = "States in the Same Cluster as China")
 
 clstRUS <- checkstate("RUS") |> as_tibble() |> relocate(yr, .before = 1)
 clstRUS |> ggplot(aes(x = diff_polyarchy, y = v2x_polyarchy)) +
-  geom_point(size = 2) +
+  geom_point(size = 2, alpha = 0.6) +
   xlab("Arcsin(100 * Difference in Electoral Democracy Score)") +
   ylab("Electoral Democracy Score") +
   labs(title = "States in the Same Cluster as Russia")
+
+
+## -- DEM Coalition Analysis -- ##
+
+gavote <- read_csv("Data/2025_03_31_ga_voting_corr1.csv") |>
+  mutate(year = year(date)) |>
+  filter(between(year, 1991, 2024)) |>
+  dplyr::select(resolution, title, ms_code, ms_name, ms_vote, year)
+
+splits <- gavote |>
+  filter(between(year, 2020, 2024), ms_code %in% c("ISL", "GBR", "FRA", "KOR")) |>
+  select(-ms_name) |>
+  pivot_wider(names_from = ms_code, values_from = ms_vote) |>
+  filter(!(FRA == ISL & ISL == KOR & KOR == GBR))
+
+wf_gares <- function(begin, end, df = gavote){
+  res <- df |>
+    filter(between(year, begin, end)) |>
+    pull(title) |>
+    unique() |>
+    to_tdm() |>
+    freqTerms(cutoff = 200)
+  res[res < 50]
+}
+
+gares1 <- wf_gares(1991, 1994)
+gares2 <- wf_gares(1995, 1999)
+gares3 <- wf_gares(2000, 2004)
+gares4 <- wf_gares(2005, 2009)
+gares5 <- wf_gares(2010, 2024)
+gares6 <- wf_gares(2015, 2019)
+gares7 <- wf_gares(2020, 2024)
+
+garesfreq <- staple_vecs7(gares1, gares2, gares3, gares4, gares5, gares6, gares7)
+
+garesfreq |> arrange(desc(`2020-24`)) |>
+  head(100) |>
+  print(n = 50)
+
+demsplits <- function(begin, end, df = gavote){
+  df |>
+    filter(between(year, begin, end), ms_code %in% c("ISL", "GBR", "FRA", "KOR")) |>
+    select(-ms_name) |>
+    pivot_wider(names_from = ms_code, values_from = ms_vote) |>
+    filter(!(FRA == ISL & ISL == KOR & KOR == GBR))
+}
+
+splits1 <- wf_gares(1991, 1994, demsplits(1991, 1994))
+splits2 <- wf_gares(1995, 1999, demsplits(1995, 1999))
+splits3 <- wf_gares(2000, 2004, demsplits(2000, 2004))
+splits4 <- wf_gares(2005, 2009, demsplits(2005, 2009))
+splits5 <- wf_gares(2010, 2014, demsplits(2010, 2014))
+splits6 <- wf_gares(2015, 2019, demsplits(2015, 2019))
+splits7 <- wf_gares(2020, 2024, demsplits(2020, 2024))
+
+splitsfreq <- staple_vecs7(splits1, splits2, splits3, splits4, splits5, splits6, splits7)
+splitsfreq |> arrange(desc(`2020-24`)) |>
+  head(100) |>
+  print(n = 30)
