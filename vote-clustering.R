@@ -163,6 +163,39 @@ clstRUS |> ggplot(aes(x = diff_polyarchy, y = v2x_polyarchy)) +
 
 ## -- DEM Coalition Analysis -- ##
 
+clstdem <- function(df, clst, yrstring){
+  df |>
+    filter(cluster == clst) |>
+    mutate(yr = yrstring)
+}
+  
+pullclst <- function(){
+  ## Pulls the democratic clusters from 1991-1994
+  ## Then, we'll see which clusters these are in now.
+  
+  dc1 <- clstdem(ga1, 4, "1991-1994")
+  dc2 <- clstdem(ga2, 2, "1995-1999")
+  dc3 <- clstdem(ga3, 2, "2000-2004")
+  dc4 <- clstdem(ga4, 2, "2005-2019")
+  dc5 <- clstdem(ga5, 2, "2010-2014")
+  dc6 <- clstdem(ga6, 2, "2015-2019")
+  demdf <- rbind(dc1, dc2, dc3, dc4, dc5, dc6) |> as_tibble()
+  
+  demcoal <- demdf |>
+    group_by(country_text_id) |>
+    summarize(count = n()) |>
+    filter(count == 6) |>
+    pull(country_text_id) # Vector of states..
+  
+  ## That we can now use to filter the 2020-24 df.
+  ga7 |>
+    filter(country_text_id %in% demcoal) |>
+    as_tibble() |>
+    select(country_text_id, backslided, regime, cluster) |>
+    print(n = 50)
+}
+
+
 gavote <- read_csv("Data/2025_03_31_ga_voting_corr1.csv") |>
   mutate(year = year(date)) |>
   filter(between(year, 1991, 2024)) |>
@@ -181,7 +214,7 @@ wf_gares <- function(begin, end, df = gavote){
     unique() |>
     to_tdm() |>
     freqTerms(cutoff = 200)
-  res[res < 50]
+  res[!(names(res) %in% c("general", "assembl", "resolut", "adopt"))]
 }
 
 gares1 <- wf_gares(1991, 1994)
@@ -200,10 +233,10 @@ garesfreq |> arrange(desc(`2020-24`)) |>
 
 demsplits <- function(begin, end, df = gavote){
   df |>
-    filter(between(year, begin, end), ms_code %in% c("ISL", "GBR", "FRA", "KOR")) |>
+    filter(between(year, begin, end), ms_code %in% c("DEU", "FRA", "BEL", "NLD", "GBR")) |>
     select(-ms_name) |>
     pivot_wider(names_from = ms_code, values_from = ms_vote) |>
-    filter(!(FRA == ISL & ISL == KOR & KOR == GBR))
+    filter(!(DEU == FRA & FRA == BEL & BEL == NLD & NLD == GBR))
 }
 
 splits1 <- wf_gares(1991, 1994, demsplits(1991, 1994))

@@ -104,6 +104,32 @@ to_tdm <- function(col){
     ))
 }
 
+to_dtm <- function(col){
+  Corpus(VectorSource(col)) |>
+    tm_map(removePunctuation, ucp = TRUE) |>
+    DocumentTermMatrix(control = list(
+      stopwords = TRUE,
+      tolower = TRUE,
+      stemming = TRUE,
+      removeNumbers = TRUE,
+      bounds = list(global = c(3, Inf))
+    ))
+}
+
+staple_vecs7 <- function(v1, v2, v3, v4, v5, v6, v7){
+  df <- mergeVectors(v1, v2, v3, v4, v5, v6, v7) |>
+    as_tibble() |>
+    mutate(years = c("1990-94", "1995-99", "2000-04", "2005-09", "2010-14", "2015-19", "2020-24"),
+           .before = 1)
+  
+  rmfreq <- apply(df, 2, \(col) sum(!is.na(col)))
+  rmfreq <- rmfreq <= 1
+  df <- df[,!rmfreq]
+  df %>% replace(is.na(.), 0) |>
+    data.table::transpose(keep.names = "term", make.names = "years") |>
+    as_tibble()
+}
+
 
 # Using a standardized colorblind-friendly color scheme.
 color_scheme <- c("#CC7987", "#800080", "#D55E00", "#0072B2", "#999999", "#009E73", "#56B4E9", "#000000", "#F0E442")
