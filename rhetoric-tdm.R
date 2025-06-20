@@ -154,6 +154,26 @@ rhet_cases <- normlang |>
   as_tibble() |>
   mutate(Regime = c("Democratic Erosion", "Entrenched Grey Area Regime", "Democratic Reversion", "Entrenched Autocracy", "Entrenched Democracy"))
 
+## Gen. Bar Chart
+normlang |>
+  select(-matches("^bve")) |>
+  filter(grepl("^tot|^nonint|^self|^int|^forc$", normlang$term)) |>
+  mutate(across(dem_erosion:entr_dem, \(x) x / entr_dem),
+         term = c("nonintervent", "humanitarian", "interfer", "sovereign", "prot", "norm", "interv", "forc", "peacekeep", "peacebuild", "peace", "noninterfer", "selfdetermin")) |>
+  pivot_longer(!term, names_to = "regime", values_to = "pct") |>
+  mutate(
+    term = factor(term),
+    regime = factor(regime, levels = c("entr_dem", "dem_erosion", "entr_illib", "dem_revert", "entr_auto"))) |>
+  ggplot(aes(x = factor(term), y = log(pct), fill = factor(regime))) +
+    geom_col(position = "dodge2") +
+  scale_fill_manual(labels = c("Entrenched Democracy", "Democratic Erosion", "Grey Area Regime", "Democratic Reversion", "Entrenched Autocracy"),
+                    values = c("#0072B2", "#CC7987", "#999999", "#800080", "#D55E00"),
+                    name = "Regime Type") +
+  labs(x = "Term",
+       y = "log(Proportion to Entrenched Democracy)") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1, vjust = 1))
+
+
 rhet_cases |>
   ggplot(aes(x = tot_prot, y = reorder(Regime, -tot_prot))) +
   geom_col() +

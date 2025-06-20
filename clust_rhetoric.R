@@ -137,6 +137,47 @@ garh7 |>
   labs(title = "UNGA Rhetoric Clustering, 2020-2024")
 
 
+scga_speeches <- sc_speeches |>
+  select(year, country_text_id, speech) |>
+  rbind(ga_speeches)
+
+scgarh1 <- wf_rhet(scga_speeches, 6, 1990, 1994)
+scgarh2 <- wf_rhet(scga_speeches, 6, 1995, 1999)
+scgarh3 <- wf_rhet(scga_speeches, 6, 2000, 2004)
+scgarh4 <- wf_rhet(scga_speeches, 6, 2005, 2009)
+scgarh5 <- wf_rhet(scga_speeches, 6, 2010, 2014)
+scgarh6 <- wf_rhet(scga_speeches, 6, 2015, 2019)
+scgarh7 <- wf_rhet(scga_speeches, 6, 2020, 2024)
+
+scgarh1 |>
+  mutate(diff_polyarchy = asinh(diff_polyarchy * 100)) |> 
+  plotting() +
+  labs(title = "UNSC/GA Rhetoric Clustering, 1991-1994")
+scgarh2 |>
+  mutate(diff_polyarchy = asinh(diff_polyarchy * 100)) |> 
+  plotting() +
+  labs(title = "UNSC/GA Rhetoric Clustering, 1995-1999")
+scgarh3 |>
+  mutate(diff_polyarchy = asinh(diff_polyarchy * 100)) |> 
+  plotting() +
+  labs(title = "UNSC/GA Rhetoric Clustering, 2000-2004")
+scgarh4 |>
+  mutate(diff_polyarchy = asinh(diff_polyarchy * 100)) |> 
+  plotting() +
+  labs(title = "UNSC/GA Rhetoric Clustering, 2005-2009")
+scgarh5 |>
+  mutate(diff_polyarchy = asinh(diff_polyarchy * 100)) |> 
+  plotting() +
+  labs(title = "UNSC/GA Rhetoric Clustering, 2010-2014")
+scgarh6 |>
+  mutate(diff_polyarchy = asinh(diff_polyarchy * 100)) |> 
+  plotting() +
+  labs(title = "UNSC/GA Rhetoric Clustering, 2015-2019")
+scgarh7 |>
+  mutate(diff_polyarchy = asinh(diff_polyarchy * 100)) |> 
+  plotting() +
+  labs(title = "UNSC/GA Rhetoric Clustering, 2020-2024")
+
 
 ## Correlation Checking
 cortest <- function(rhet, vot){
@@ -152,13 +193,13 @@ gvot5 <- read_csv("GA_distmat/ga5.csv") |> as.dist() |> hclustering(groups = 6)
 gvot6 <- read_csv("GA_distmat/ga6.csv") |> as.dist() |> hclustering(groups = 6)
 gvot7 <- read_csv("GA_distmat/ga7.csv") |> as.dist() |> hclustering(groups = 6)
 
-cortest(garh1, gvot1)
-cortest(garh2, gvot2)
-cortest(garh3, gvot3)
-cortest(garh4, gvot4)
-cortest(garh5, gvot5)
-cortest(garh6, gvot6)
-cortest(garh7, gvot7)
+cortest(scgarh1, gvot1)
+cortest(scgarh2, gvot2)
+cortest(scgarh3, gvot3)
+cortest(scgarh4, gvot4)
+cortest(scgarh5, gvot5)
+cortest(scgarh6, gvot6)
+cortest(scgarh7, gvot7)
 
 ## That's strange, it's almost impressive how *not* correlated they are.
 
