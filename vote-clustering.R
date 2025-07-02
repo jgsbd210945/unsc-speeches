@@ -82,24 +82,24 @@ make_plot <- function(dist, k, beginyear, endyear){
 dist5 <- read_csv("GA_distmat/ga5.csv") |>
   as.dist()
 
-make_plot(dist5, 2, 2010, 2014)
-make_plot(dist5, 3, 2010, 2014)
-make_plot(dist5, 4, 2010, 2014)
-make_plot(dist5, 5, 2010, 2014)
-make_plot(dist5, 6, 2010, 2014)
-make_plot(dist5, 7, 2010, 2014)
-make_plot(dist5, 8, 2010, 2014)
+make_plot(dist5, 2, 2010, 2014) + labs(title = "2010-2014 UNGA Vote Clustering, 2 Clusters")
+make_plot(dist5, 3, 2010, 2014) + labs(title = "2010-2014 UNGA Vote Clustering, 3 Clusters")
+make_plot(dist5, 4, 2010, 2014) + labs(title = "2010-2014 UNGA Vote Clustering, 4 Clusters")
+make_plot(dist5, 5, 2010, 2014) + labs(title = "2010-2014 UNGA Vote Clustering, 5 Clusters")
+make_plot(dist5, 6, 2010, 2014) + labs(title = "2010-2014 UNGA Vote Clustering, 6 Clusters")
+make_plot(dist5, 7, 2010, 2014) + labs(title = "2010-2014 UNGA Vote Clustering, 7 Clusters")
+make_plot(dist5, 8, 2010, 2014) + labs(title = "2010-2014 UNGA Vote Clustering, 8 Clusters")
 
 dist6 <- read_csv("GA_distmat/ga6.csv") |>
   as.dist()
 
-make_plot(dist6, 2, 2015, 2019)
-make_plot(dist6, 3, 2015, 2019)
-make_plot(dist6, 4, 2015, 2019)
-make_plot(dist6, 5, 2015, 2019)
-make_plot(dist6, 6, 2015, 2019)
-make_plot(dist6, 7, 2015, 2019)
-make_plot(dist6, 8, 2015, 2019)
+make_plot(dist6, 2, 2015, 2019) + labs(title = "2015-2019 UNGA Vote Clustering, 2 Clusters")
+make_plot(dist6, 3, 2015, 2019) + labs(title = "2015-2019 UNGA Vote Clustering, 3 Clusters")
+make_plot(dist6, 4, 2015, 2019) + labs(title = "2015-2019 UNGA Vote Clustering, 4 Clusters")
+make_plot(dist6, 5, 2015, 2019) + labs(title = "2015-2019 UNGA Vote Clustering, 5 Clusters")
+make_plot(dist6, 6, 2015, 2019) + labs(title = "2015-2019 UNGA Vote Clustering, 6 Clusters")
+make_plot(dist6, 7, 2015, 2019) + labs(title = "2015-2019 UNGA Vote Clustering, 7 Clusters")
+make_plot(dist6, 8, 2015, 2019) + labs(title = "2015-2019 UNGA Vote Clustering, 8 Clusters")
 
 ### Country Clustering? ###
 make_clust_df <- function(df, countrycode, yrstring){
