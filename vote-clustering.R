@@ -4,6 +4,7 @@ source("cluster-setup.R")
 ### Focus on *what* states are voting on per period
 ## Disaggregate by topic!
 ## Look at which members stopped voting together
+## There's a bit that's on the democratic coalition that takes ~an hour to run. Don't source this file unless you want to wait.
 
 # Clustering
 wf_scvote <- function(begin, end, ngrp){
@@ -251,6 +252,33 @@ splitsfreq <- staple_vecs7(splits1, splits2, splits3, splits4, splits5, splits6,
 splitsfreq |> arrange(desc(`2020-24`)) |>
   head(100) |>
   print(n = 30)
+
+## Takes a while to run. Run at your own risk.
+noIPdm <- function(begin, end, df = gavote){
+  df |>
+    filter(!grepl("palestin|israel|jerusalem", gavote$title, ignore.case = TRUE)) |>
+    filter(between(year, begin, end)) |>
+    dplyr::select(resolution, ms_code, ms_name, ms_vote, year) |>
+    select(resolution, ms_code, ms_vote) |>
+    pivot_wider(id_cols = resolution, names_from = ms_code, values_from = ms_vote) |>
+    select(-resolution) |>
+    get_dist_mat()
+}
+
+noIPdm(1991, 1994) |> wf_w_dm(1991, 1994) |>
+  plotting() + labs(title = "Clustering without Israel-Palestine, 1991-1994")
+noIPdm(1995, 1999) |> wf_w_dm(1995, 1999) |>
+  plotting() + labs(title = "Clustering without Israel-Palestine, 1995-1999")
+noIPdm(2000, 2004) |> wf_w_dm(2000, 2004) |>
+  plotting() + labs(title = "Clustering without Israel-Palestine, 2000-2004")
+noIPdm(2005, 2009) |> wf_w_dm(2005, 2009) |>
+  plotting() + labs(title = "Clustering without Israel-Palestine, 2005-2009")
+noIPdm(2010, 2014) |> wf_w_dm(2010, 2014) |>
+  plotting() + labs(title = "Clustering without Israel-Palestine, 2010-2014")
+noIPdm(2015, 2019) |> wf_w_dm(2015, 2019) |>
+  plotting() + labs(title = "Clustering without Israel-Palestine, 2015-2019")
+noIPdm(2020, 2024) |> wf_w_dm(2020, 2024) |>
+  plotting() + labs(title = "Clustering without Israel-Palestine, 2020-2024")
 
 demnoIP <- gavote |>
   filter(!grepl("palestin|israel|jerusalem", gavote$title, ignore.case = TRUE)) |>

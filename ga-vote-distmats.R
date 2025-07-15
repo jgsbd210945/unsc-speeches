@@ -18,17 +18,6 @@ pull_dm <- function(begin, end){
     get_dist_mat()
 }
 
-wf_ga <- function(begin, end){
-  pull_dm(begin, end) |>
-    hclustering(groups = 8) |>
-    merger_ga(begin, end)
-}
-
-wf_w_dm <- function(dist_mat, begin, end){
-  hclustering(dist_mat, groups = 8) |>
-    merger_ga(begin, end)
-}
-
 gavote <- read_csv("Data/2025_03_31_ga_voting_corr1.csv") |>
   mutate(year = year(date)) |>
   filter(between(year, 1991, 2024)) |>
