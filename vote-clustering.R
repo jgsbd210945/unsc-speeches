@@ -251,3 +251,15 @@ splitsfreq <- staple_vecs7(splits1, splits2, splits3, splits4, splits5, splits6,
 splitsfreq |> arrange(desc(`2020-24`)) |>
   head(100) |>
   print(n = 30)
+
+demnoIP <- gavote |>
+  filter(!grepl("palestin|israel|jerusalem", gavote$title, ignore.case = TRUE)) |>
+  filter(between(year, 2020, 2024)) |>
+  dplyr::select(resolution, ms_code, ms_name, ms_vote, year) |>
+  select(resolution, ms_code, ms_vote) |>
+  pivot_wider(id_cols = resolution, names_from = ms_code, values_from = ms_vote) |>
+  select(-resolution) |>
+  get_dist_mat()
+
+demnoIPclst <- demnoIP |> wf_w_dm(2020, 2024)
+demnoIPclst |> plotting()
