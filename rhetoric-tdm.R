@@ -164,13 +164,14 @@ normlang |>
   mutate(
     term = factor(term),
     regime = factor(regime, levels = c("entr_dem", "dem_erosion", "entr_illib", "dem_revert", "entr_auto"))) |>
-  ggplot(aes(x = factor(term), y = log(pct), fill = factor(regime))) +
+  ggplot(aes(x = factor(term), y = pct, fill = factor(regime))) +
     geom_col(position = "dodge2") +
   scale_fill_manual(labels = c("Entrenched Democracy", "Democratic Erosion", "Grey Area Regime", "Democratic Reversion", "Entrenched Autocracy"),
                     values = c("#0072B2", "#CC7987", "#999999", "#800080", "#D55E00"),
                     name = "Regime Type") +
+  scale_y_log10() +
   labs(x = "Term",
-       y = "log(Proportion to Entrenched Democracy)") +
+       y = "Proportion to Entrenched Democracy") +
   theme(axis.text.x = element_text(angle = 60, hjust = 1, vjust = 1))
 
 

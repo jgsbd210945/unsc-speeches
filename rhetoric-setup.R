@@ -1,6 +1,6 @@
 ## Setting up rhetoric methods
 
-source("main.R")
+#source("main.R")
 
 speeches <- read_tsv("Data/speeches.tsv") |> filter(year > 1990, state == 1)
 
