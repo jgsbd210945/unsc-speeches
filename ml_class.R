@@ -2,8 +2,43 @@ source("main.R")
 library(tidymodels)
 
 model_data <- mgwreg |>
+  mutate(
+    # 1. Keep your qualitative "Gold Standard"
+    backslided = case_when(
+      backslided == TRUE ~ TRUE, 
+      
+      # 2. Define "Hard Negatives" (Stability/Improvement)
+      # We look for countries that are stable or improving over a 2-year window
+      (v2x_polyarchy >= lag(v2x_polyarchy, 1)) & 
+        (v2x_polyarchy >= lag(v2x_polyarchy, 2)) &
+        (v2x_regime_amb >= 7) ~ FALSE, # Stable democracies
+      
+      (v2x_polyarchy >= lag(v2x_polyarchy, 1)) & 
+        (v2x_regime_amb <= 2) ~ FALSE, # Stable autocracies (not backsliding further)
+      
+      # 3. Everything else (small declines, grey areas) stays NA
+      TRUE ~ NA
+    )
+  ) # CHECK GEMINI
+
+
+model_data <- mgwreg |>
   select(-backslided) |>
-  left_join(init_vals, by = c("year", "country_name"))
+  left_join(init_vals, by = c("year", "country_name")) |>
+  mutate(
+    # 1. Keep your qualitative "Gold Standard"
+    backslided = case_when(
+      backslided == TRUE ~ TRUE, 
+      
+      # 2. Define "Hard Negatives" (Stability/Improvement)
+      # We look for countries that are stable or improving over a 2-year window
+      (v2x_polyarchy >= lag(v2x_polyarchy, 1)) & 
+        (v2x_polyarchy >= lag(v2x_polyarchy, 2)) &
+        (v2x_regime_amb >= 7) ~ FALSE, # Stable democracies
+      
+      TRUE ~ NA
+    )
+  )
 
 labeled_df <- model_data |>
   filter(!is.na(backslided)) |>

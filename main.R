@@ -14,8 +14,7 @@ library(tidytext)
 meetings <- read_tsv("Data/meetings.tsv") |> filter(year > 1990)
 scmakeup <- read_tsv("Data/SC Makeup.tsv") |> mutate(is_SC = TRUE)
 init_vals <- read_csv("Data/Backsliding Vals.csv") |>
-  pivot_longer(!year, names_to = "country_name", values_to = "backslided") |>
-  mutate(backslided = replace_na(backslided, FALSE)) # Replacing all NA (empty) vals with false.
+  pivot_longer(!year, names_to = "country_name", values_to = "backslided")
 
 wvdem <- tibble(vdem) |>
   filter(year > 1975) |> # So I can do the lags correctly. This will be standardized later.
