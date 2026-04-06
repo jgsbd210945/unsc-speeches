@@ -1,40 +1,32 @@
 source("main.R")
 library(tidymodels)
 
-model_data <- mgwreg |>
-  mutate(
-    # 1. Keep your qualitative "Gold Standard"
-    backslided = case_when(
-      backslided == TRUE ~ TRUE, 
-      
-      # 2. Define "Hard Negatives" (Stability/Improvement)
-      # We look for countries that are stable or improving over a 2-year window
-      (v2x_polyarchy >= lag(v2x_polyarchy, 1)) & 
-        (v2x_polyarchy >= lag(v2x_polyarchy, 2)) &
-        (v2x_regime_amb >= 7) ~ FALSE, # Stable democracies
-      
-      (v2x_polyarchy >= lag(v2x_polyarchy, 1)) & 
-        (v2x_regime_amb <= 2) ~ FALSE, # Stable autocracies (not backsliding further)
-      
-      # 3. Everything else (small declines, grey areas) stays NA
-      TRUE ~ NA
-    )
-  ) # CHECK GEMINI
+vdem_work <- tibble(vdem) |>
+  filter(year > 1975) |> # So I can do the lags correctly. This will be standardized later.
+  group_by(country_text_id) |>
+  arrange(year) |> # Should already be the case, but just in case it's not
+  mutate(diff_polyarchy = v2x_polyarchy - lag(v2x_polyarchy)) |>
+  ungroup() |>
+  mutate(diff_polyarchy = replace_na(diff_polyarchy, 0)) |>
+  filter(year > 1990) |>
+  select(!c(country_id, historical_date:COWcode, # Tracking info we don't need
+            ends_with(c("codelow", "codehigh", "sd", "osp", "mean", "nr", "ord"))) # non-measure stats
+         ) |>
+  select(country_name:year, where(is.numeric))
+vdem_work <- vdem_work[ , colSums(is.na(vdem_work))==0]
 
 
-model_data <- mgwreg |>
-  select(-backslided) |>
+model_data <- vdem_work |>
   left_join(init_vals, by = c("year", "country_name")) |>
   mutate(
-    # 1. Keep your qualitative "Gold Standard"
     backslided = case_when(
       backslided == TRUE ~ TRUE, 
       
-      # 2. Define "Hard Negatives" (Stability/Improvement)
-      # We look for countries that are stable or improving over a 2-year window
       (v2x_polyarchy >= lag(v2x_polyarchy, 1)) & 
         (v2x_polyarchy >= lag(v2x_polyarchy, 2)) &
-        (v2x_regime_amb >= 7) ~ FALSE, # Stable democracies
+        (v2x_regime_amb >= 8) ~ FALSE, # Stable democracies,
+      
+      (v2x_regime_amb <= 1) ~ FALSE, #Stable autocracies
       
       TRUE ~ NA
     )
@@ -76,7 +68,7 @@ results <- test_data |>
 
 results |> metrics(truth = backslided, estimate = .pred_class)
 results |> roc_auc(truth = backslided, .pred_TRUE)
-# accuracy = .914; roc_auc = .966
+# accuracy = .993; roc_auc = 1
 
 # onto unlabeled data
 
@@ -122,6 +114,9 @@ final_db |>
   ylab("Electoral Democracy Score") +
   xlab("Difference in Electoral Democracy Score")
 
-mgwreg <- final_db
+mgwreg <- final_db |>
+  select(country_name, country_text_id, year, v2x_polyarchy, v2x_regime_amb, diff_polyarchy, backslided, regime)
 
-
+mgwreg$bve <- ifelse(grepl("backslide_", mgwreg$regime), "backsliding",
+                     ifelse(grepl("dem", mgwreg$regime), "democratic",
+                            "entrenched"))

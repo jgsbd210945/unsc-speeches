@@ -28,3 +28,4 @@ cleaned_voting$meeting_topic <- tolower(cleaned_voting$meeting_topic) |>
   stripWhitespace()
 cleaned_voting$meeting_topic <- gsub(" |-|—", "", cleaned_voting$meeting_topic)
 cleaned_voting$meeting_topic <- gsub("situation", "", cleaned_voting$meeting_topic)
+

@@ -159,7 +159,7 @@ normlang |>
   select(-matches("^bve")) |>
   filter(grepl("^tot|^nonint|^self|^int|^forc$", normlang$term)) |>
   mutate(across(dem_erosion:entr_dem, \(x) x / entr_dem),
-         term = c("nonintervent", "humanitarian", "interfer", "sovereign", "prot", "norm", "interv", "forc", "peacekeep", "peacebuild", "peace", "noninterfer", "selfdetermin")) |>
+         term = c("nonintervent", "interfer", "humanitarian", "norm", "prot", "sovereign", "forc", "peace", "interv", "noninterfer", "peacekeep", "peacebuild", "selfdetermin")) |>
   pivot_longer(!term, names_to = "regime", values_to = "pct") |>
   mutate(
     term = factor(term),
