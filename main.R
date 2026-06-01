@@ -80,10 +80,10 @@ sc_regime <- mgwreg |>
   filter(is_SC) |>
   select(year, country_name, regime)
 
-findState <- function(abbv, low = 1991, high = 2024) {
+findState <- function(abbv, low = 1991, high = 2025) {
   mgwreg |>
     filter(country_text_id == abbv, between(year, low, high)) |>
-    select(country_name, year, regime) |>
+    select(country_name, year, regime, v2x_polyarchy, diff_polyarchy) |>
     print(n = 50)
 }
 
@@ -173,3 +173,19 @@ mgwreg |> ggplot(aes(x = year, fill = factor(v2x_regime_amb))) +
 
 mgwreg |> ggplot(aes(x = year, fill = regime)) +
   geom_bar(position = 'fill')
+
+
+## Stable Cases
+mgwreg |>
+  filter(between(diff_polyarchy, -0.01, 0.01)) |>
+  group_by(country_text_id) |>
+  summarize(count = n()) |>
+  arrange(desc(count))
+
+testStable <- function(id){
+  mgwreg |>
+    filter(country_text_id == id) |>
+    select(year, country_name, diff_polyarchy) |>
+    print(n = 35)
+}
+

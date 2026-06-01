@@ -4,14 +4,8 @@ model_data <- vdem_work |>
   left_join(init_vals, by = c("year", "country_name")) |>
   mutate(
     backslided = case_when(
-      backslided == TRUE ~ TRUE, 
-      
-      (v2x_polyarchy >= lag(v2x_polyarchy, 1)) & 
-        (v2x_polyarchy >= lag(v2x_polyarchy, 2)) &
-        (v2x_regime_amb >= 8) ~ FALSE, # Stable democracies,
-      
-      (v2x_regime_amb <= 1) ~ FALSE, #Stable autocracies
-      
+      backslided == TRUE ~ TRUE,
+      backslided == FALSE ~ FALSE,
       TRUE ~ NA
     )
   )
@@ -99,7 +93,8 @@ final_db |>
   xlab("Difference in Electoral Democracy Score")
 
 mgwreg <- final_db |>
-  select(country_name, country_text_id, year, v2x_polyarchy, v2x_regime_amb, diff_polyarchy, backslided, regime)
+  select(country_name, country_text_id, year, v2x_polyarchy, v2x_regime_amb, diff_polyarchy, final_backslided, regime) |>
+  rename(backslided = final_backslided)
 
 mgwreg$bve <- ifelse(grepl("backslide_", mgwreg$regime), "backsliding",
                      ifelse(grepl("dem", mgwreg$regime), "democratic",

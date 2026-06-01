@@ -1,4 +1,4 @@
-source("voting-setup.R")
+#source("voting-setup.R")
 source("cluster-setup.R")
 
 ### Focus on *what* states are voting on per period
