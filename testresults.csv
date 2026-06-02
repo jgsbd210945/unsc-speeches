@@ -1,658 +1,528 @@
-country_name,year,label_source,.pred_TRUE,final_backslided
-Albania,1997,algorithmic_rf,0.5110099206349206,TRUE
-Albania,1998,algorithmic_rf,0.5254920634920635,TRUE
-Albania,1999,algorithmic_rf,0.5452285714285713,TRUE
-Albania,2010,algorithmic_rf,0.5003011904761904,TRUE
-Albania,2013,algorithmic_rf,0.6283484126984129,TRUE
-Albania,2014,algorithmic_rf,0.5439666666666666,TRUE
-Albania,2015,algorithmic_rf,0.5533166666666666,TRUE
-Albania,2016,algorithmic_rf,0.5377416666666666,TRUE
-Albania,2017,algorithmic_rf,0.5298055555555555,TRUE
-Albania,2018,algorithmic_rf,0.6661007936507937,TRUE
-Albania,2019,algorithmic_rf,0.6855134920634922,TRUE
-Albania,2020,algorithmic_rf,0.6029432539682539,TRUE
-Albania,2021,algorithmic_rf,0.570102380952381,TRUE
-Albania,2022,algorithmic_rf,0.6141579365079365,TRUE
-Albania,2023,algorithmic_rf,0.6749797619047618,TRUE
-Albania,2024,algorithmic_rf,0.5760892857142855,TRUE
-Albania,2025,algorithmic_rf,0.6635623015873016,TRUE
-Algeria,2005,algorithmic_rf,0.5097460317460317,TRUE
-Algeria,2006,algorithmic_rf,0.5092460317460318,TRUE
-Algeria,2007,algorithmic_rf,0.509079365079365,TRUE
-Algeria,2008,algorithmic_rf,0.5139174603174603,TRUE
-Algeria,2009,algorithmic_rf,0.5127936507936508,TRUE
-Argentina,2024,algorithmic_rf,0.6177539682539682,TRUE
-Argentina,2025,algorithmic_rf,0.7070313492063495,TRUE
-Armenia,1995,algorithmic_rf,0.5119460317460319,TRUE
-Armenia,1996,algorithmic_rf,0.5332511904761905,TRUE
-Armenia,1997,algorithmic_rf,0.5279365079365079,TRUE
-Armenia,2003,algorithmic_rf,0.5266460317460319,TRUE
-Armenia,2008,algorithmic_rf,0.5730765873015872,TRUE
-Armenia,2014,algorithmic_rf,0.5219880952380952,TRUE
-Armenia,2016,algorithmic_rf,0.5316023809523811,TRUE
-Armenia,2017,algorithmic_rf,0.5182829365079364,TRUE
-Armenia,2020,algorithmic_rf,0.5038202380952382,TRUE
-Armenia,2023,algorithmic_rf,0.5219400793650795,TRUE
-Armenia,2025,algorithmic_rf,0.5538511904761906,TRUE
-Belarus,1995,algorithmic_rf,0.6002615079365079,TRUE
-Belarus,1996,algorithmic_rf,0.687015873015873,TRUE
-Bolivia,2005,algorithmic_rf,0.5237138888888887,TRUE
-Bolivia,2006,algorithmic_rf,0.9624932539682537,TRUE
-Bolivia,2007,qualitative_manual,NA,TRUE
-Bolivia,2008,qualitative_manual,NA,TRUE
-Bolivia,2009,qualitative_manual,NA,TRUE
-Bolivia,2010,qualitative_manual,NA,TRUE
-Bolivia,2011,qualitative_manual,NA,TRUE
-Bolivia,2012,qualitative_manual,NA,TRUE
-Bolivia,2013,qualitative_manual,NA,TRUE
-Bolivia,2014,qualitative_manual,NA,TRUE
-Bolivia,2015,qualitative_manual,NA,TRUE
-Bolivia,2016,qualitative_manual,NA,TRUE
-Bolivia,2017,qualitative_manual,NA,TRUE
-Bolivia,2018,qualitative_manual,NA,TRUE
-Bolivia,2019,qualitative_manual,NA,TRUE
-Bolivia,2020,algorithmic_rf,0.8849595238095238,TRUE
-Bolivia,2021,algorithmic_rf,0.6802277777777775,TRUE
-Bolivia,2022,algorithmic_rf,0.7985083333333334,TRUE
-Bolivia,2023,algorithmic_rf,0.7526876984126984,TRUE
-Bolivia,2024,algorithmic_rf,0.7879349206349207,TRUE
-Bolivia,2025,algorithmic_rf,0.7099488095238095,TRUE
-Bosnia and Herzegovina,2015,algorithmic_rf,0.5014440476190477,TRUE
-Bosnia and Herzegovina,2018,algorithmic_rf,0.5015039682539683,TRUE
-Bosnia and Herzegovina,2021,algorithmic_rf,0.5120313492063492,TRUE
-Bosnia and Herzegovina,2023,algorithmic_rf,0.5326555555555553,TRUE
-Bosnia and Herzegovina,2025,algorithmic_rf,0.5183003968253967,TRUE
-Brazil,2016,qualitative_manual,NA,TRUE
-Brazil,2017,qualitative_manual,NA,TRUE
-Brazil,2018,qualitative_manual,NA,TRUE
-Brazil,2019,qualitative_manual,NA,TRUE
-Brazil,2020,qualitative_manual,NA,TRUE
-Brazil,2021,qualitative_manual,NA,TRUE
-Brazil,2022,qualitative_manual,NA,TRUE
-Bulgaria,2016,algorithmic_rf,0.6458813492063491,TRUE
-Bulgaria,2017,algorithmic_rf,0.7219253968253969,TRUE
-Bulgaria,2018,algorithmic_rf,0.7361234126984127,TRUE
-Bulgaria,2019,algorithmic_rf,0.7518238095238093,TRUE
-Bulgaria,2020,algorithmic_rf,0.7767432539682538,TRUE
-Bulgaria,2021,algorithmic_rf,0.6512099206349208,TRUE
-Bulgaria,2022,algorithmic_rf,0.6583357142857144,TRUE
-Bulgaria,2023,algorithmic_rf,0.6683591269841274,TRUE
-Bulgaria,2024,algorithmic_rf,0.6162769841269843,TRUE
-Bulgaria,2025,algorithmic_rf,0.726772619047619,TRUE
-Central African Republic,2023,algorithmic_rf,0.5015170634920633,TRUE
-Colombia,2020,algorithmic_rf,0.5051146825396825,TRUE
-Croatia,2013,algorithmic_rf,0.5225817460317461,TRUE
-Croatia,2014,algorithmic_rf,0.5210301587301588,TRUE
-Croatia,2015,algorithmic_rf,0.5343448412698414,TRUE
-Croatia,2016,algorithmic_rf,0.6632321428571432,TRUE
-Croatia,2017,algorithmic_rf,0.6640579365079365,TRUE
-Croatia,2018,algorithmic_rf,0.6797599206349209,TRUE
-Croatia,2019,algorithmic_rf,0.6550158730158733,TRUE
-Croatia,2020,algorithmic_rf,0.5762436507936509,TRUE
-Croatia,2021,algorithmic_rf,0.5644567460317461,TRUE
-Croatia,2022,algorithmic_rf,0.5816952380952383,TRUE
-Croatia,2023,algorithmic_rf,0.5723257936507937,TRUE
-Croatia,2024,algorithmic_rf,0.6133734126984128,TRUE
-Croatia,2025,algorithmic_rf,0.6234523809523811,TRUE
-Dominican Republic,2013,algorithmic_rf,0.5688714285714288,TRUE
-Dominican Republic,2015,algorithmic_rf,0.5816670634920635,TRUE
-Dominican Republic,2016,algorithmic_rf,0.5963515873015874,TRUE
-Dominican Republic,2017,algorithmic_rf,0.594343650793651,TRUE
-Dominican Republic,2019,algorithmic_rf,0.5367789682539682,TRUE
-Ecuador,1991,algorithmic_rf,0.5211305555555554,TRUE
-Ecuador,1992,algorithmic_rf,0.5641166666666665,TRUE
-Ecuador,1993,algorithmic_rf,0.5809976190476188,TRUE
-Ecuador,1994,algorithmic_rf,0.6238492063492063,TRUE
-Ecuador,1995,algorithmic_rf,0.570518253968254,TRUE
-Ecuador,1996,algorithmic_rf,0.6045904761904761,TRUE
-Ecuador,1997,algorithmic_rf,0.6333039682539682,TRUE
-Ecuador,1998,algorithmic_rf,0.7651825396825397,TRUE
-Ecuador,1999,algorithmic_rf,0.8076761904761904,TRUE
-Ecuador,2000,algorithmic_rf,0.8080365079365078,TRUE
-Ecuador,2001,algorithmic_rf,0.7848686507936508,TRUE
-Ecuador,2002,algorithmic_rf,0.7921642857142859,TRUE
-Ecuador,2003,algorithmic_rf,0.7831170634920633,TRUE
-Ecuador,2004,algorithmic_rf,0.7982797619047618,TRUE
-Ecuador,2005,algorithmic_rf,0.7176,TRUE
-Ecuador,2006,algorithmic_rf,0.7390452380952383,TRUE
-Ecuador,2007,algorithmic_rf,0.7623718253968256,TRUE
-Ecuador,2008,algorithmic_rf,0.9363972222222221,TRUE
-Ecuador,2009,qualitative_manual,NA,TRUE
-Ecuador,2010,qualitative_manual,NA,TRUE
-Ecuador,2011,qualitative_manual,NA,TRUE
-Ecuador,2012,qualitative_manual,NA,TRUE
-Ecuador,2013,qualitative_manual,NA,TRUE
-Ecuador,2014,qualitative_manual,NA,TRUE
-Ecuador,2015,qualitative_manual,NA,TRUE
-Ecuador,2016,qualitative_manual,NA,TRUE
-Ecuador,2017,qualitative_manual,NA,TRUE
-Ecuador,2018,algorithmic_rf,0.747784523809524,TRUE
-Ecuador,2019,algorithmic_rf,0.9112107142857143,TRUE
-Ecuador,2020,algorithmic_rf,0.8058603174603175,TRUE
-Ecuador,2021,algorithmic_rf,0.8375813492063493,TRUE
-Ecuador,2022,algorithmic_rf,0.8049805555555555,TRUE
-Ecuador,2023,qualitative_manual,NA,TRUE
-Ecuador,2024,qualitative_manual,NA,TRUE
-Ecuador,2025,qualitative_manual,NA,TRUE
-Egypt,2012,algorithmic_rf,0.5220805555555557,TRUE
-Egypt,2013,algorithmic_rf,0.506911111111111,TRUE
-El Salvador,1993,algorithmic_rf,0.5463900793650794,TRUE
-El Salvador,1994,algorithmic_rf,0.5382333333333333,TRUE
-El Salvador,1995,algorithmic_rf,0.5882880952380952,TRUE
-El Salvador,1996,algorithmic_rf,0.5765119047619048,TRUE
-El Salvador,1997,algorithmic_rf,0.609526984126984,TRUE
-El Salvador,1998,algorithmic_rf,0.660475,TRUE
-El Salvador,1999,algorithmic_rf,0.636779365079365,TRUE
-El Salvador,2000,algorithmic_rf,0.6226126984126985,TRUE
-El Salvador,2001,algorithmic_rf,0.6480833333333333,TRUE
-El Salvador,2002,algorithmic_rf,0.6813880952380952,TRUE
-El Salvador,2003,algorithmic_rf,0.6899095238095239,TRUE
-El Salvador,2004,algorithmic_rf,0.6685087301587301,TRUE
-El Salvador,2005,algorithmic_rf,0.791345634920635,TRUE
-El Salvador,2006,algorithmic_rf,0.7990595238095239,TRUE
-El Salvador,2007,algorithmic_rf,0.7981194444444444,TRUE
-El Salvador,2008,algorithmic_rf,0.8003138888888889,TRUE
-El Salvador,2009,qualitative_manual,NA,TRUE
-El Salvador,2010,qualitative_manual,NA,TRUE
-El Salvador,2011,qualitative_manual,NA,TRUE
-El Salvador,2012,qualitative_manual,NA,TRUE
-El Salvador,2013,qualitative_manual,NA,TRUE
-El Salvador,2014,qualitative_manual,NA,TRUE
-El Salvador,2015,qualitative_manual,NA,TRUE
-El Salvador,2016,qualitative_manual,NA,TRUE
-El Salvador,2017,qualitative_manual,NA,TRUE
-El Salvador,2018,algorithmic_rf,0.8614051587301591,TRUE
-El Salvador,2019,algorithmic_rf,0.8138261904761908,TRUE
-El Salvador,2020,algorithmic_rf,0.7678222222222224,TRUE
-El Salvador,2021,algorithmic_rf,0.8376333333333335,TRUE
-El Salvador,2022,algorithmic_rf,0.869604365079365,TRUE
-El Salvador,2023,qualitative_manual,NA,TRUE
-El Salvador,2024,qualitative_manual,NA,TRUE
-El Salvador,2025,qualitative_manual,NA,TRUE
-Georgia,2003,algorithmic_rf,0.5206500000000002,TRUE
-Georgia,2004,algorithmic_rf,0.5672103174603175,TRUE
-Georgia,2005,algorithmic_rf,0.6092896825396824,TRUE
-Georgia,2006,algorithmic_rf,0.6046396825396825,TRUE
-Georgia,2007,algorithmic_rf,0.679995634920635,TRUE
-Georgia,2008,algorithmic_rf,0.7432674603174602,TRUE
-Georgia,2009,algorithmic_rf,0.7063051587301586,TRUE
-Georgia,2010,algorithmic_rf,0.7364567460317459,TRUE
-Georgia,2011,algorithmic_rf,0.7491833333333333,TRUE
-Georgia,2012,algorithmic_rf,0.7235123015873016,TRUE
-Georgia,2013,algorithmic_rf,0.5869257936507938,TRUE
-Georgia,2017,algorithmic_rf,0.5493777777777776,TRUE
-Georgia,2018,algorithmic_rf,0.5454424603174604,TRUE
-Georgia,2019,algorithmic_rf,0.5735218253968255,TRUE
-Georgia,2020,algorithmic_rf,0.5368773809523809,TRUE
-Georgia,2021,algorithmic_rf,0.5264285714285716,TRUE
-Georgia,2024,algorithmic_rf,0.6207059523809524,TRUE
-Georgia,2025,algorithmic_rf,0.6414337301587302,TRUE
-Greece,2015,algorithmic_rf,0.5076496031746032,TRUE
-Greece,2018,algorithmic_rf,0.5515801587301588,TRUE
-Greece,2019,qualitative_manual,NA,TRUE
-Greece,2020,qualitative_manual,NA,TRUE
-Greece,2021,qualitative_manual,NA,TRUE
-Greece,2022,qualitative_manual,NA,TRUE
-Greece,2023,qualitative_manual,NA,TRUE
-Greece,2024,qualitative_manual,NA,TRUE
-Greece,2025,qualitative_manual,NA,TRUE
-Guatemala,2000,algorithmic_rf,0.5005821428571428,TRUE
-Guatemala,2001,algorithmic_rf,0.5156107142857143,TRUE
-Guatemala,2002,algorithmic_rf,0.5166107142857143,TRUE
-Guatemala,2003,algorithmic_rf,0.5251662698412698,TRUE
-Guatemala,2004,algorithmic_rf,0.5233376984126983,TRUE
-Guatemala,2005,algorithmic_rf,0.5333551587301588,TRUE
-Guatemala,2006,algorithmic_rf,0.5340873015873016,TRUE
-Guatemala,2007,algorithmic_rf,0.5417420634920634,TRUE
-Guatemala,2008,algorithmic_rf,0.5220888888888888,TRUE
-Guatemala,2009,algorithmic_rf,0.5291130952380951,TRUE
-Guatemala,2010,algorithmic_rf,0.537125,TRUE
-Guatemala,2011,algorithmic_rf,0.5417416666666667,TRUE
-Guatemala,2012,algorithmic_rf,0.5627416666666666,TRUE
-Guatemala,2013,algorithmic_rf,0.5697182539682538,TRUE
-Guatemala,2014,algorithmic_rf,0.5707420634920634,TRUE
-Guatemala,2015,algorithmic_rf,0.5423773809523811,TRUE
-Guatemala,2016,algorithmic_rf,0.5367968253968254,TRUE
-Guatemala,2017,algorithmic_rf,0.5777182539682537,TRUE
-Guatemala,2018,algorithmic_rf,0.6908944444444444,TRUE
-Guatemala,2019,algorithmic_rf,0.6437301587301587,TRUE
-Guatemala,2020,algorithmic_rf,0.630857142857143,TRUE
-Guatemala,2021,algorithmic_rf,0.6895027777777777,TRUE
-Guatemala,2022,algorithmic_rf,0.701771031746032,TRUE
-Guatemala,2023,algorithmic_rf,0.6204642857142859,TRUE
-Guatemala,2024,algorithmic_rf,0.5052781746031744,TRUE
-Honduras,2006,algorithmic_rf,0.5018265873015876,TRUE
-Honduras,2009,algorithmic_rf,0.7457293650793652,TRUE
-Honduras,2010,algorithmic_rf,0.6683337301587304,TRUE
-Honduras,2011,algorithmic_rf,0.5891408730158731,TRUE
-Honduras,2012,algorithmic_rf,0.6449984126984128,TRUE
-Honduras,2013,algorithmic_rf,0.6713686507936509,TRUE
-Honduras,2014,algorithmic_rf,0.609993650793651,TRUE
-Honduras,2015,algorithmic_rf,0.673747619047619,TRUE
-Honduras,2016,algorithmic_rf,0.6482222222222224,TRUE
-Honduras,2017,algorithmic_rf,0.68614126984127,TRUE
-Honduras,2018,algorithmic_rf,0.6688246031746033,TRUE
-Honduras,2019,algorithmic_rf,0.6065829365079367,TRUE
-Honduras,2020,algorithmic_rf,0.6246357142857145,TRUE
-Honduras,2021,algorithmic_rf,0.6334357142857143,TRUE
-Honduras,2023,algorithmic_rf,0.5227722222222221,TRUE
-Honduras,2025,algorithmic_rf,0.620204761904762,TRUE
-Hungary,1997,algorithmic_rf,0.5177876984126983,TRUE
-Hungary,1998,algorithmic_rf,0.5237460317460317,TRUE
-Hungary,1999,algorithmic_rf,0.5402376984126984,TRUE
-Hungary,2000,algorithmic_rf,0.5415234126984128,TRUE
-Hungary,2001,algorithmic_rf,0.5391234126984126,TRUE
-Hungary,2002,algorithmic_rf,0.5315043650793652,TRUE
-Hungary,2003,algorithmic_rf,0.550565873015873,TRUE
-Hungary,2004,algorithmic_rf,0.5655658730158732,TRUE
-Hungary,2005,algorithmic_rf,0.6053015873015876,TRUE
-Hungary,2006,algorithmic_rf,0.6469146825396827,TRUE
-Hungary,2007,algorithmic_rf,0.6168968253968256,TRUE
-Hungary,2008,algorithmic_rf,0.6161690476190478,TRUE
-Hungary,2009,algorithmic_rf,0.6180261904761907,TRUE
-Hungary,2010,qualitative_manual,NA,TRUE
-Hungary,2011,qualitative_manual,NA,TRUE
-Hungary,2012,qualitative_manual,NA,TRUE
-Hungary,2013,qualitative_manual,NA,TRUE
-Hungary,2014,qualitative_manual,NA,TRUE
-Hungary,2015,qualitative_manual,NA,TRUE
-Hungary,2016,qualitative_manual,NA,TRUE
-Hungary,2017,qualitative_manual,NA,TRUE
-Hungary,2018,qualitative_manual,NA,TRUE
-Hungary,2019,qualitative_manual,NA,TRUE
-Hungary,2020,qualitative_manual,NA,TRUE
-Hungary,2021,qualitative_manual,NA,TRUE
-Hungary,2022,qualitative_manual,NA,TRUE
-Hungary,2023,qualitative_manual,NA,TRUE
-Hungary,2024,qualitative_manual,NA,TRUE
-Hungary,2025,qualitative_manual,NA,TRUE
-Italy,2024,algorithmic_rf,0.5249261904761904,TRUE
-Italy,2025,algorithmic_rf,0.552970634920635,TRUE
-Kosovo,2024,algorithmic_rf,0.5313452380952379,TRUE
-Kosovo,2025,algorithmic_rf,0.5181734126984127,TRUE
-Kyrgyzstan,2007,algorithmic_rf,0.5474253968253967,TRUE
-Kyrgyzstan,2008,algorithmic_rf,0.5044996031746031,TRUE
-Kyrgyzstan,2009,algorithmic_rf,0.5047551587301586,TRUE
-Kyrgyzstan,2019,algorithmic_rf,0.5342440476190476,TRUE
-Kyrgyzstan,2020,algorithmic_rf,0.541663888888889,TRUE
-Kyrgyzstan,2021,algorithmic_rf,0.600395634920635,TRUE
-Kyrgyzstan,2022,algorithmic_rf,0.5878904761904761,TRUE
-Kyrgyzstan,2023,algorithmic_rf,0.5969825396825397,TRUE
-Kyrgyzstan,2024,algorithmic_rf,0.5725797619047618,TRUE
-Kyrgyzstan,2025,algorithmic_rf,0.52240873015873,TRUE
-Latvia,2007,algorithmic_rf,0.5393095238095238,TRUE
-Latvia,2008,algorithmic_rf,0.529711111111111,TRUE
-Lithuania,1992,algorithmic_rf,0.5484488095238095,TRUE
-Lithuania,1993,algorithmic_rf,0.5387091269841271,TRUE
-Lithuania,1994,algorithmic_rf,0.5322309523809524,TRUE
-Lithuania,1995,algorithmic_rf,0.5325865079365081,TRUE
-Lithuania,1996,algorithmic_rf,0.540590873015873,TRUE
-Lithuania,1997,algorithmic_rf,0.5083126984126984,TRUE
-Lithuania,2017,algorithmic_rf,0.5060123015873016,TRUE
-Lithuania,2018,algorithmic_rf,0.5217626984126986,TRUE
-Lithuania,2019,algorithmic_rf,0.5128555555555556,TRUE
-Lithuania,2022,algorithmic_rf,0.502959126984127,TRUE
-Malta,2017,algorithmic_rf,0.5050436507936507,TRUE
-Mexico,2017,algorithmic_rf,0.5277249999999999,TRUE
-Mexico,2018,algorithmic_rf,0.5020289682539683,TRUE
-Mexico,2019,algorithmic_rf,0.6109869047619046,TRUE
-Mexico,2020,algorithmic_rf,0.7557492063492061,TRUE
-Mexico,2021,algorithmic_rf,0.7733781746031744,TRUE
-Mexico,2022,algorithmic_rf,0.8501908730158727,TRUE
-Mexico,2023,algorithmic_rf,0.8862361111111109,TRUE
-Mexico,2024,algorithmic_rf,0.9131694444444445,TRUE
-Mexico,2025,algorithmic_rf,0.8944210317460318,TRUE
-Moldova,2001,algorithmic_rf,0.5717706349206348,TRUE
-Moldova,2002,algorithmic_rf,0.5049063492063491,TRUE
-Moldova,2005,algorithmic_rf,0.5620119047619045,TRUE
-Moldova,2006,algorithmic_rf,0.5470297619047618,TRUE
-Moldova,2015,algorithmic_rf,0.5773154761904762,TRUE
-Moldova,2016,algorithmic_rf,0.6112380952380952,TRUE
-Moldova,2017,algorithmic_rf,0.6205198412698413,TRUE
-Moldova,2024,algorithmic_rf,0.6659281746031747,TRUE
-Moldova,2025,algorithmic_rf,0.6770511904761906,TRUE
-Mongolia,2021,algorithmic_rf,0.5034781746031746,TRUE
-Nicaragua,2000,algorithmic_rf,0.6853761904761906,TRUE
-Nicaragua,2001,algorithmic_rf,0.5893242063492063,TRUE
-Nicaragua,2002,algorithmic_rf,0.506645634920635,TRUE
-Nicaragua,2003,algorithmic_rf,0.5561170634920634,TRUE
-Nicaragua,2004,algorithmic_rf,0.575042857142857,TRUE
-Nicaragua,2005,algorithmic_rf,0.6412984126984127,TRUE
-Nicaragua,2006,algorithmic_rf,0.8154761904761901,TRUE
-Nicaragua,2007,algorithmic_rf,0.955879365079365,TRUE
-Nicaragua,2008,qualitative_manual,NA,TRUE
-Nicaragua,2009,qualitative_manual,NA,TRUE
-Nicaragua,2010,qualitative_manual,NA,TRUE
-Nicaragua,2011,qualitative_manual,NA,TRUE
-Nicaragua,2012,qualitative_manual,NA,TRUE
-Nicaragua,2013,qualitative_manual,NA,TRUE
-Nicaragua,2014,qualitative_manual,NA,TRUE
-Nicaragua,2015,qualitative_manual,NA,TRUE
-Nicaragua,2016,qualitative_manual,NA,TRUE
-Nicaragua,2017,qualitative_manual,NA,TRUE
-Nicaragua,2018,qualitative_manual,NA,TRUE
-Nicaragua,2019,qualitative_manual,NA,TRUE
-Nicaragua,2020,qualitative_manual,NA,TRUE
-Nicaragua,2021,qualitative_manual,NA,TRUE
-Nicaragua,2022,qualitative_manual,NA,TRUE
-Nicaragua,2023,qualitative_manual,NA,TRUE
-Nicaragua,2024,qualitative_manual,NA,TRUE
-Nicaragua,2025,qualitative_manual,NA,TRUE
-Niger,2009,algorithmic_rf,0.5565174603174604,TRUE
-Niger,2010,algorithmic_rf,0.5053920634920633,TRUE
-North Macedonia,2004,algorithmic_rf,0.6063869047619048,TRUE
-North Macedonia,2005,algorithmic_rf,0.6985015873015872,TRUE
-North Macedonia,2006,algorithmic_rf,0.7003761904761902,TRUE
-North Macedonia,2007,algorithmic_rf,0.7535785714285712,TRUE
-North Macedonia,2008,algorithmic_rf,0.7747142857142857,TRUE
-North Macedonia,2009,algorithmic_rf,0.867307142857143,TRUE
-North Macedonia,2010,algorithmic_rf,0.8624055555555556,TRUE
-North Macedonia,2011,qualitative_manual,NA,TRUE
-North Macedonia,2012,qualitative_manual,NA,TRUE
-North Macedonia,2013,qualitative_manual,NA,TRUE
-North Macedonia,2014,qualitative_manual,NA,TRUE
-North Macedonia,2015,qualitative_manual,NA,TRUE
-North Macedonia,2016,qualitative_manual,NA,TRUE
-North Macedonia,2017,algorithmic_rf,0.5901535714285714,TRUE
-North Macedonia,2018,algorithmic_rf,0.6895035714285713,TRUE
-North Macedonia,2019,algorithmic_rf,0.7301119047619047,TRUE
-North Macedonia,2020,algorithmic_rf,0.7436162698412699,TRUE
-North Macedonia,2021,algorithmic_rf,0.7126579365079365,TRUE
-North Macedonia,2022,algorithmic_rf,0.7663920634920636,TRUE
-North Macedonia,2023,algorithmic_rf,0.688551984126984,TRUE
-North Macedonia,2024,algorithmic_rf,0.7745123015873016,TRUE
-North Macedonia,2025,algorithmic_rf,0.7168980158730158,TRUE
-Paraguay,1992,algorithmic_rf,0.5077658730158731,TRUE
-Paraguay,1993,algorithmic_rf,0.5126654761904763,TRUE
-Paraguay,1994,algorithmic_rf,0.5243559523809525,TRUE
-Paraguay,1995,algorithmic_rf,0.5253559523809525,TRUE
-Paraguay,1996,algorithmic_rf,0.5233559523809524,TRUE
-Paraguay,1997,algorithmic_rf,0.5233559523809524,TRUE
-Paraguay,1998,algorithmic_rf,0.5248976190476191,TRUE
-Paraguay,1999,algorithmic_rf,0.5196861111111112,TRUE
-Paraguay,2000,algorithmic_rf,0.5250293650793652,TRUE
-Paraguay,2001,algorithmic_rf,0.5179365079365079,TRUE
-Paraguay,2002,algorithmic_rf,0.520061507936508,TRUE
-Paraguay,2003,algorithmic_rf,0.5087765873015873,TRUE
-Paraguay,2011,algorithmic_rf,0.5187984126984126,TRUE
-Paraguay,2012,algorithmic_rf,0.5632357142857144,TRUE
-Paraguay,2013,algorithmic_rf,0.6285964285714286,TRUE
-Paraguay,2014,algorithmic_rf,0.5370468253968254,TRUE
-Paraguay,2015,algorithmic_rf,0.540152380952381,TRUE
-Paraguay,2016,algorithmic_rf,0.5371468253968256,TRUE
-Paraguay,2017,algorithmic_rf,0.5141349206349205,TRUE
-Paraguay,2018,algorithmic_rf,0.6073337301587302,TRUE
-Paraguay,2019,algorithmic_rf,0.5020142857142857,TRUE
-Paraguay,2020,algorithmic_rf,0.5451650793650793,TRUE
-Paraguay,2021,algorithmic_rf,0.5016051587301587,TRUE
-Paraguay,2023,algorithmic_rf,0.5078936507936508,TRUE
-Paraguay,2024,algorithmic_rf,0.5060777777777777,TRUE
-Paraguay,2025,algorithmic_rf,0.5200535714285713,TRUE
-Peru,1995,algorithmic_rf,0.5338063492063494,TRUE
-Peru,1996,algorithmic_rf,0.5510246031746033,TRUE
-Peru,1997,algorithmic_rf,0.5640373015873018,TRUE
-Peru,1998,algorithmic_rf,0.6220821428571428,TRUE
-Peru,1999,algorithmic_rf,0.5662904761904762,TRUE
-Peru,2015,algorithmic_rf,0.5125928571428572,TRUE
-Peru,2019,algorithmic_rf,0.5383837301587302,TRUE
-Peru,2021,algorithmic_rf,0.6145369047619049,TRUE
-Peru,2022,algorithmic_rf,0.6682111111111113,TRUE
-Peru,2023,algorithmic_rf,0.6615666666666669,TRUE
-Peru,2024,algorithmic_rf,0.6989194444444446,TRUE
-Peru,2025,algorithmic_rf,0.6111444444444447,TRUE
-Philippines,2016,algorithmic_rf,0.5116361111111113,TRUE
-Philippines,2017,algorithmic_rf,0.51,TRUE
-Philippines,2018,algorithmic_rf,0.5433539682539684,TRUE
-Philippines,2019,algorithmic_rf,0.5793698412698416,TRUE
-Philippines,2020,algorithmic_rf,0.5966670634920637,TRUE
-Philippines,2021,algorithmic_rf,0.5018535714285716,TRUE
-Philippines,2022,algorithmic_rf,0.5705448412698415,TRUE
-Philippines,2023,algorithmic_rf,0.5672476190476193,TRUE
-Philippines,2024,algorithmic_rf,0.5892079365079367,TRUE
-Philippines,2025,algorithmic_rf,0.6326226190476192,TRUE
-Poland,2015,algorithmic_rf,0.5008654761904762,TRUE
-Poland,2016,qualitative_manual,NA,TRUE
-Poland,2017,qualitative_manual,NA,TRUE
-Poland,2018,qualitative_manual,NA,TRUE
-Poland,2019,qualitative_manual,NA,TRUE
-Poland,2020,qualitative_manual,NA,TRUE
-Poland,2021,qualitative_manual,NA,TRUE
-Poland,2022,qualitative_manual,NA,TRUE
-Poland,2023,algorithmic_rf,0.8428980158730156,TRUE
-Romania,1992,algorithmic_rf,0.5129480158730158,TRUE
-Romania,2000,algorithmic_rf,0.501890873015873,TRUE
-Romania,2001,algorithmic_rf,0.6345968253968252,TRUE
-Romania,2002,algorithmic_rf,0.5101253968253967,TRUE
-Romania,2003,algorithmic_rf,0.7345452380952381,TRUE
-Romania,2004,algorithmic_rf,0.77015873015873,TRUE
-Romania,2007,algorithmic_rf,0.6495964285714286,TRUE
-Romania,2008,algorithmic_rf,0.6095988095238095,TRUE
-Romania,2009,algorithmic_rf,0.6075289682539683,TRUE
-Romania,2010,algorithmic_rf,0.6238178571428572,TRUE
-Romania,2011,algorithmic_rf,0.6265345238095238,TRUE
-Romania,2012,algorithmic_rf,0.7150365079365079,TRUE
-Romania,2013,algorithmic_rf,0.6687718253968257,TRUE
-Romania,2014,algorithmic_rf,0.6680730158730159,TRUE
-Romania,2015,algorithmic_rf,0.6364507936507938,TRUE
-Romania,2017,algorithmic_rf,0.7683599206349209,TRUE
-Romania,2018,algorithmic_rf,0.85889126984127,TRUE
-Romania,2019,algorithmic_rf,0.7956876984126986,TRUE
-Romania,2020,algorithmic_rf,0.6718250000000001,TRUE
-Romania,2021,algorithmic_rf,0.6678801587301589,TRUE
-Romania,2022,algorithmic_rf,0.8416067460317458,TRUE
-Romania,2023,algorithmic_rf,0.8484686507936506,TRUE
-Romania,2024,algorithmic_rf,0.8591813492063493,TRUE
-Romania,2025,algorithmic_rf,0.8408734126984125,TRUE
-Russia,1993,algorithmic_rf,0.6932281746031747,TRUE
-Russia,1994,algorithmic_rf,0.5763630952380951,TRUE
-Russia,1995,algorithmic_rf,0.5788984126984128,TRUE
-Russia,1996,algorithmic_rf,0.6704785714285715,TRUE
-Russia,1997,algorithmic_rf,0.6325896825396826,TRUE
-Russia,1998,algorithmic_rf,0.6013162698412698,TRUE
-Russia,1999,algorithmic_rf,0.6080527777777778,TRUE
-Russia,2000,qualitative_manual,NA,TRUE
-Russia,2001,qualitative_manual,NA,TRUE
-Russia,2002,qualitative_manual,NA,TRUE
-Russia,2003,qualitative_manual,NA,TRUE
-Russia,2004,qualitative_manual,NA,TRUE
-Russia,2005,qualitative_manual,NA,TRUE
-Russia,2006,qualitative_manual,NA,TRUE
-Russia,2007,qualitative_manual,NA,TRUE
-Russia,2008,qualitative_manual,NA,TRUE
-Russia,2009,algorithmic_rf,0.9625583333333333,TRUE
-Russia,2010,algorithmic_rf,0.9304055555555557,TRUE
-Russia,2011,algorithmic_rf,0.934277777777778,TRUE
-Russia,2012,qualitative_manual,NA,TRUE
-Russia,2013,qualitative_manual,NA,TRUE
-Russia,2014,qualitative_manual,NA,TRUE
-Russia,2015,qualitative_manual,NA,TRUE
-Russia,2016,qualitative_manual,NA,TRUE
-Russia,2017,qualitative_manual,NA,TRUE
-Russia,2018,qualitative_manual,NA,TRUE
-Russia,2019,qualitative_manual,NA,TRUE
-Russia,2020,qualitative_manual,NA,TRUE
-Russia,2021,qualitative_manual,NA,TRUE
-Russia,2022,qualitative_manual,NA,TRUE
-Russia,2023,qualitative_manual,NA,TRUE
-Russia,2024,qualitative_manual,NA,TRUE
-Russia,2025,qualitative_manual,NA,TRUE
-Serbia,1991,algorithmic_rf,0.7790805555555556,TRUE
-Serbia,1992,algorithmic_rf,0.7656376984126984,TRUE
-Serbia,1993,algorithmic_rf,0.8309083333333335,TRUE
-Serbia,1994,algorithmic_rf,0.847632142857143,TRUE
-Serbia,1995,algorithmic_rf,0.8596488095238096,TRUE
-Serbia,1996,algorithmic_rf,0.858875,TRUE
-Serbia,1997,algorithmic_rf,0.855875,TRUE
-Serbia,1998,algorithmic_rf,0.862982142857143,TRUE
-Serbia,1999,algorithmic_rf,0.8585654761904763,TRUE
-Serbia,2000,algorithmic_rf,0.7602396825396824,TRUE
-Serbia,2001,algorithmic_rf,0.6607492063492063,TRUE
-Serbia,2002,algorithmic_rf,0.653763492063492,TRUE
-Serbia,2003,algorithmic_rf,0.5523095238095238,TRUE
-Serbia,2004,algorithmic_rf,0.6212615079365079,TRUE
-Serbia,2005,algorithmic_rf,0.5777761904761906,TRUE
-Serbia,2006,algorithmic_rf,0.6780333333333333,TRUE
-Serbia,2007,algorithmic_rf,0.682313888888889,TRUE
-Serbia,2008,algorithmic_rf,0.67351626984127,TRUE
-Serbia,2009,algorithmic_rf,0.6351464285714287,TRUE
-Serbia,2010,algorithmic_rf,0.7592146825396824,TRUE
-Serbia,2011,algorithmic_rf,0.7221507936507938,TRUE
-Serbia,2012,qualitative_manual,NA,TRUE
-Serbia,2013,qualitative_manual,NA,TRUE
-Serbia,2014,qualitative_manual,NA,TRUE
-Serbia,2015,qualitative_manual,NA,TRUE
-Serbia,2016,qualitative_manual,NA,TRUE
-Serbia,2017,qualitative_manual,NA,TRUE
-Serbia,2018,qualitative_manual,NA,TRUE
-Serbia,2019,qualitative_manual,NA,TRUE
-Serbia,2020,qualitative_manual,NA,TRUE
-Serbia,2021,qualitative_manual,NA,TRUE
-Serbia,2022,qualitative_manual,NA,TRUE
-Serbia,2023,qualitative_manual,NA,TRUE
-Serbia,2024,qualitative_manual,NA,TRUE
-Serbia,2025,qualitative_manual,NA,TRUE
-Slovakia,1994,algorithmic_rf,0.7400992063492061,TRUE
-Slovakia,1995,algorithmic_rf,0.7146297619047617,TRUE
-Slovakia,1996,algorithmic_rf,0.713760714285714,TRUE
-Slovakia,1997,algorithmic_rf,0.7173083333333331,TRUE
-Slovakia,1998,algorithmic_rf,0.6662174603174603,TRUE
-Slovakia,2006,algorithmic_rf,0.5164948412698411,TRUE
-Slovakia,2007,algorithmic_rf,0.501138095238095,TRUE
-Slovakia,2008,algorithmic_rf,0.5027714285714284,TRUE
-Slovakia,2009,algorithmic_rf,0.5276841269841269,TRUE
-Slovakia,2012,algorithmic_rf,0.5103301587301587,TRUE
-Slovakia,2013,algorithmic_rf,0.5499559523809523,TRUE
-Slovakia,2014,algorithmic_rf,0.5209992063492063,TRUE
-Slovakia,2015,algorithmic_rf,0.5417281746031746,TRUE
-Slovakia,2016,algorithmic_rf,0.5286174603174602,TRUE
-Slovakia,2017,algorithmic_rf,0.5273547619047618,TRUE
-Slovakia,2018,algorithmic_rf,0.5487222222222222,TRUE
-Slovakia,2019,algorithmic_rf,0.5308757936507935,TRUE
-Slovakia,2020,algorithmic_rf,0.5634996031746035,TRUE
-Slovakia,2023,algorithmic_rf,0.6315281746031748,TRUE
-Slovakia,2024,algorithmic_rf,0.8005928571428569,TRUE
-Slovakia,2025,algorithmic_rf,0.8100984126984125,TRUE
-Slovenia,2005,algorithmic_rf,0.504865873015873,TRUE
-Slovenia,2020,algorithmic_rf,0.6061646825396827,TRUE
-Slovenia,2021,algorithmic_rf,0.6497869047619049,TRUE
-Slovenia,2023,algorithmic_rf,0.5896793650793652,TRUE
-Slovenia,2024,algorithmic_rf,0.6025531746031746,TRUE
-Slovenia,2025,algorithmic_rf,0.6075845238095239,TRUE
-Sri Lanka,2019,algorithmic_rf,0.5426722222222221,TRUE
-Taiwan,2024,algorithmic_rf,0.5046706349206349,TRUE
-Taiwan,2025,algorithmic_rf,0.5152686507936507,TRUE
-Türkiye,1991,algorithmic_rf,0.6447321428571425,TRUE
-Türkiye,1992,algorithmic_rf,0.6332571428571425,TRUE
-Türkiye,2005,algorithmic_rf,0.5823988095238096,TRUE
-Türkiye,2007,algorithmic_rf,0.6580214285714286,TRUE
-Türkiye,2008,algorithmic_rf,0.6977146825396827,TRUE
-Türkiye,2009,algorithmic_rf,0.6672484126984128,TRUE
-Türkiye,2010,qualitative_manual,NA,TRUE
-Türkiye,2011,qualitative_manual,NA,TRUE
-Türkiye,2012,qualitative_manual,NA,TRUE
-Türkiye,2013,qualitative_manual,NA,TRUE
-Türkiye,2014,qualitative_manual,NA,TRUE
-Türkiye,2015,qualitative_manual,NA,TRUE
-Türkiye,2016,qualitative_manual,NA,TRUE
-Türkiye,2017,qualitative_manual,NA,TRUE
-Türkiye,2018,qualitative_manual,NA,TRUE
-Türkiye,2019,qualitative_manual,NA,TRUE
-Türkiye,2020,algorithmic_rf,0.742836507936508,TRUE
-Türkiye,2021,algorithmic_rf,0.7078535714285713,TRUE
-Türkiye,2022,algorithmic_rf,0.7004658730158732,TRUE
-Türkiye,2023,qualitative_manual,NA,TRUE
-Türkiye,2024,qualitative_manual,NA,TRUE
-Türkiye,2025,qualitative_manual,NA,TRUE
-Uganda,2005,algorithmic_rf,0.5286281746031747,TRUE
-Uganda,2006,algorithmic_rf,0.5343261904761905,TRUE
-Uganda,2007,algorithmic_rf,0.5324150793650794,TRUE
-Uganda,2008,algorithmic_rf,0.5378234126984127,TRUE
-Uganda,2009,algorithmic_rf,0.5335448412698411,TRUE
-Uganda,2010,algorithmic_rf,0.5399293650793651,TRUE
-Uganda,2011,algorithmic_rf,0.5316289682539682,TRUE
-Uganda,2012,algorithmic_rf,0.5039511904761905,TRUE
-Ukraine,1991,algorithmic_rf,0.5145765873015871,TRUE
-Ukraine,1996,algorithmic_rf,0.6738309523809523,TRUE
-Ukraine,1997,algorithmic_rf,0.6517809523809523,TRUE
-Ukraine,1998,algorithmic_rf,0.6786892857142857,TRUE
-Ukraine,1999,algorithmic_rf,0.7026234126984126,TRUE
-Ukraine,2000,algorithmic_rf,0.8770468253968254,TRUE
-Ukraine,2001,algorithmic_rf,0.8624658730158729,TRUE
-Ukraine,2002,algorithmic_rf,0.8479686507936508,TRUE
-Ukraine,2003,algorithmic_rf,0.8591757936507937,TRUE
-Ukraine,2004,algorithmic_rf,0.8600039682539683,TRUE
-Ukraine,2005,algorithmic_rf,0.7672980158730159,TRUE
-Ukraine,2006,algorithmic_rf,0.7635468253968255,TRUE
-Ukraine,2007,algorithmic_rf,0.7529996031746033,TRUE
-Ukraine,2008,algorithmic_rf,0.7804051587301588,TRUE
-Ukraine,2009,algorithmic_rf,0.7031428571428573,TRUE
-Ukraine,2010,qualitative_manual,NA,TRUE
-Ukraine,2011,qualitative_manual,NA,TRUE
-Ukraine,2012,qualitative_manual,NA,TRUE
-Ukraine,2013,qualitative_manual,NA,TRUE
-Ukraine,2014,qualitative_manual,NA,TRUE
-Ukraine,2015,algorithmic_rf,0.8016619047619048,TRUE
-Ukraine,2016,algorithmic_rf,0.7732218253968255,TRUE
-Ukraine,2017,algorithmic_rf,0.7751880952380954,TRUE
-Ukraine,2018,algorithmic_rf,0.7003920634920636,TRUE
-Ukraine,2019,algorithmic_rf,0.5223309523809525,TRUE
-Ukraine,2020,algorithmic_rf,0.598492857142857,TRUE
-Ukraine,2021,algorithmic_rf,0.7357333333333335,TRUE
-Ukraine,2022,algorithmic_rf,0.7465892857142856,TRUE
-Ukraine,2023,algorithmic_rf,0.6550619047619047,TRUE
-Ukraine,2024,algorithmic_rf,0.6781992063492064,TRUE
-Ukraine,2025,algorithmic_rf,0.6450912698412697,TRUE
-United States of America,2001,algorithmic_rf,0.5050162698412697,TRUE
-United States of America,2016,algorithmic_rf,0.5175261904761903,TRUE
-United States of America,2017,qualitative_manual,NA,TRUE
-United States of America,2018,qualitative_manual,NA,TRUE
-United States of America,2019,qualitative_manual,NA,TRUE
-United States of America,2020,qualitative_manual,NA,TRUE
-United States of America,2021,qualitative_manual,NA,TRUE
-United States of America,2022,algorithmic_rf,0.5868690476190475,TRUE
-United States of America,2023,algorithmic_rf,0.5886007936507937,TRUE
-United States of America,2024,algorithmic_rf,0.6529714285714285,TRUE
-United States of America,2025,qualitative_manual,NA,TRUE
-Uruguay,2022,algorithmic_rf,0.5379559523809522,TRUE
-Uruguay,2023,algorithmic_rf,0.5103230158730159,TRUE
-Venezuela,1999,qualitative_manual,NA,TRUE
-Venezuela,2000,qualitative_manual,NA,TRUE
-Venezuela,2001,qualitative_manual,NA,TRUE
-Venezuela,2002,qualitative_manual,NA,TRUE
-Venezuela,2003,qualitative_manual,NA,TRUE
-Venezuela,2004,qualitative_manual,NA,TRUE
-Venezuela,2005,qualitative_manual,NA,TRUE
-Venezuela,2006,qualitative_manual,NA,TRUE
-Venezuela,2007,qualitative_manual,NA,TRUE
-Venezuela,2008,qualitative_manual,NA,TRUE
-Venezuela,2009,qualitative_manual,NA,TRUE
-Venezuela,2010,qualitative_manual,NA,TRUE
-Venezuela,2011,qualitative_manual,NA,TRUE
-Venezuela,2012,qualitative_manual,NA,TRUE
-Venezuela,2013,qualitative_manual,NA,TRUE
-Venezuela,2014,qualitative_manual,NA,TRUE
-Venezuela,2015,qualitative_manual,NA,TRUE
-Venezuela,2016,qualitative_manual,NA,TRUE
-Venezuela,2017,qualitative_manual,NA,TRUE
-Venezuela,2018,qualitative_manual,NA,TRUE
-Venezuela,2019,qualitative_manual,NA,TRUE
-Venezuela,2020,algorithmic_rf,0.8205825396825397,TRUE
-Venezuela,2021,algorithmic_rf,0.8283912698412698,TRUE
-Venezuela,2022,algorithmic_rf,0.8433845238095238,TRUE
-Venezuela,2023,algorithmic_rf,0.8903285714285716,TRUE
-Venezuela,2024,algorithmic_rf,0.9052325396825396,TRUE
-Venezuela,2025,algorithmic_rf,0.9000952380952381,TRUE
-Zambia,2010,algorithmic_rf,0.5045305555555556,TRUE
-Zambia,2011,qualitative_manual,NA,TRUE
-Zambia,2012,qualitative_manual,NA,TRUE
-Zambia,2013,qualitative_manual,NA,TRUE
-Zambia,2014,qualitative_manual,NA,TRUE
-Zambia,2015,qualitative_manual,NA,TRUE
-Zambia,2016,qualitative_manual,NA,TRUE
-Zambia,2017,qualitative_manual,NA,TRUE
-Zambia,2018,qualitative_manual,NA,TRUE
-Zambia,2019,qualitative_manual,NA,TRUE
-Zambia,2020,qualitative_manual,NA,TRUE
-Zambia,2021,qualitative_manual,NA,TRUE
-Zambia,2024,algorithmic_rf,0.5844698412698414,TRUE
-Zambia,2025,algorithmic_rf,0.5952674603174603,TRUE
+country_name,year,final_backslided,.pred_TRUE,v2x_polyarchy,diff_polyarchy
+Albania,1998,TRUE,0.542999603174603,0.39,0.019000000000000017
+Albania,1999,TRUE,0.5281587301587302,0.392,0.0020000000000000018
+Albania,2013,TRUE,0.5354043650793652,0.523,-0.017000000000000015
+Albania,2014,TRUE,0.5172376984126986,0.522,-0.0010000000000000009
+Albania,2015,TRUE,0.5164876984126985,0.518,-0.0040000000000000036
+Albania,2016,TRUE,0.510893253968254,0.52,0.0020000000000000018
+Albania,2017,TRUE,0.5194781746031747,0.536,0.016000000000000014
+Albania,2018,TRUE,0.5893202380952381,0.524,-0.01200000000000001
+Albania,2019,TRUE,0.6061603174603174,0.511,-0.013000000000000012
+Albania,2020,TRUE,0.5997011904761905,0.528,0.017000000000000015
+Albania,2021,TRUE,0.5479099206349207,0.526,-0.0020000000000000018
+Albania,2022,TRUE,0.5313742063492065,0.517,-0.009000000000000008
+Albania,2023,TRUE,0.5914476190476192,0.505,-0.01200000000000001
+Albania,2024,TRUE,0.5768146825396827,0.51,0.0050000000000000044
+Albania,2025,TRUE,0.5833234126984128,0.484,-0.026000000000000023
+Argentina,2024,TRUE,0.538484126984127,0.721,-0.11699999999999999
+Argentina,2025,TRUE,0.6066992063492062,0.69,-0.031000000000000028
+Belarus,1996,TRUE,0.551009523809524,0.443,-0.057999999999999996
+Bolivia,2005,TRUE,0.5886142857142859,0.746,-0.007000000000000006
+Bolivia,2006,TRUE,0.9627539682539684,0.724,-0.02200000000000002
+Bolivia,2007,TRUE,NA,0.719,-0.0050000000000000044
+Bolivia,2008,TRUE,NA,0.719,0
+Bolivia,2009,TRUE,NA,0.714,-0.0050000000000000044
+Bolivia,2010,TRUE,NA,0.68,-0.03399999999999992
+Bolivia,2011,TRUE,NA,0.677,-0.0030000000000000027
+Bolivia,2012,TRUE,NA,0.67,-0.007000000000000006
+Bolivia,2013,TRUE,NA,0.658,-0.01200000000000001
+Bolivia,2014,TRUE,NA,0.647,-0.01100000000000001
+Bolivia,2015,TRUE,NA,0.609,-0.038000000000000034
+Bolivia,2016,TRUE,NA,0.62,0.01100000000000001
+Bolivia,2017,TRUE,NA,0.609,-0.01100000000000001
+Bolivia,2018,TRUE,NA,0.593,-0.016000000000000014
+Bolivia,2019,TRUE,NA,0.456,-0.13699999999999996
+Bolivia,2020,TRUE,0.8267448412698416,0.275,-0.181
+Bolivia,2021,TRUE,0.749288492063492,0.608,0.33299999999999996
+Bolivia,2022,TRUE,0.7667833333333333,0.587,-0.02100000000000002
+Bolivia,2023,TRUE,0.7941694444444446,0.586,-0.0010000000000000009
+Bolivia,2024,TRUE,0.7657349206349208,0.577,-0.009000000000000008
+Bolivia,2025,TRUE,0.7699654761904762,0.605,0.028000000000000025
+Brazil,2014,TRUE,0.5106956349206349,0.873,0
+Brazil,2015,TRUE,0.5089376984126983,0.861,-0.01200000000000001
+Brazil,2016,TRUE,NA,0.781,-0.07999999999999996
+Brazil,2017,TRUE,NA,0.774,-0.007000000000000006
+Brazil,2018,TRUE,NA,0.749,-0.025000000000000022
+Brazil,2019,TRUE,NA,0.691,-0.05800000000000005
+Brazil,2020,TRUE,NA,0.699,0.008000000000000007
+Brazil,2021,TRUE,NA,0.69,-0.009000000000000008
+Brazil,2022,TRUE,NA,0.699,0.009000000000000008
+Bulgaria,2016,TRUE,0.6185170634920633,0.667,-0.0040000000000000036
+Bulgaria,2017,TRUE,0.6652206349206345,0.624,-0.04300000000000004
+Bulgaria,2018,TRUE,0.6825813492063489,0.612,-0.01200000000000001
+Bulgaria,2019,TRUE,0.7129321428571428,0.609,-0.0030000000000000027
+Bulgaria,2020,TRUE,0.76034246031746,0.607,-0.0020000000000000018
+Bulgaria,2021,TRUE,0.6589615079365079,0.665,0.05800000000000005
+Bulgaria,2022,TRUE,0.6725694444444444,0.679,0.014000000000000012
+Bulgaria,2023,TRUE,0.6264984126984128,0.659,-0.020000000000000018
+Bulgaria,2024,TRUE,0.6100662698412699,0.645,-0.014000000000000012
+Bulgaria,2025,TRUE,0.705027380952381,0.599,-0.04600000000000004
+Croatia,2016,TRUE,0.608229761904762,0.765,-0.050999999999999934
+Croatia,2017,TRUE,0.6084623015873016,0.739,-0.026000000000000023
+Croatia,2018,TRUE,0.6244452380952382,0.729,-0.010000000000000009
+Croatia,2019,TRUE,0.6091694444444444,0.734,0.0050000000000000044
+Croatia,2020,TRUE,0.553801984126984,0.756,0.02200000000000002
+Croatia,2021,TRUE,0.540023015873016,0.747,-0.009000000000000008
+Croatia,2022,TRUE,0.5840126984126986,0.724,-0.02300000000000002
+Croatia,2023,TRUE,0.6220146825396826,0.725,0.0010000000000000009
+Croatia,2024,TRUE,0.6155841269841271,0.71,-0.015000000000000013
+Croatia,2025,TRUE,0.6222404761904763,0.686,-0.02399999999999991
+Dominican Republic,2013,TRUE,0.5298103174603177,0.6,-0.01200000000000001
+Dominican Republic,2014,TRUE,0.5290103174603177,0.6,0
+Dominican Republic,2015,TRUE,0.5484761904761907,0.59,-0.010000000000000009
+Dominican Republic,2016,TRUE,0.5599706349206351,0.571,-0.019000000000000017
+Dominican Republic,2017,TRUE,0.5593658730158733,0.559,-0.0119999999999999
+Dominican Republic,2018,TRUE,0.5503412698412701,0.573,0.013999999999999901
+Dominican Republic,2019,TRUE,0.5522186507936511,0.569,-0.0040000000000000036
+Ecuador,1996,TRUE,0.520922619047619,0.696,-0.0030000000000000027
+Ecuador,1997,TRUE,0.5527250000000001,0.695,-0.0010000000000000009
+Ecuador,1998,TRUE,0.7611920634920637,0.696,0.0010000000000000009
+Ecuador,1999,TRUE,0.8006805555555557,0.693,-0.0030000000000000027
+Ecuador,2000,TRUE,0.7963337301587304,0.689,-0.0040000000000000036
+Ecuador,2001,TRUE,0.7877861111111114,0.689,0
+Ecuador,2002,TRUE,0.7837694444444447,0.689,0
+Ecuador,2003,TRUE,0.7662305555555559,0.698,0.009000000000000008
+Ecuador,2004,TRUE,0.7773972222222225,0.698,0
+Ecuador,2005,TRUE,0.7236321428571427,0.698,0
+Ecuador,2006,TRUE,0.7357198412698412,0.693,-0.0050000000000000044
+Ecuador,2007,TRUE,0.7316837301587303,0.671,-0.02199999999999991
+Ecuador,2008,TRUE,0.8960551587301587,0.634,-0.03700000000000003
+Ecuador,2009,TRUE,NA,0.613,-0.02100000000000002
+Ecuador,2010,TRUE,NA,0.588,-0.025000000000000022
+Ecuador,2011,TRUE,NA,0.581,-0.007000000000000006
+Ecuador,2012,TRUE,NA,0.586,0.0050000000000000044
+Ecuador,2013,TRUE,NA,0.538,-0.04799999999999993
+Ecuador,2014,TRUE,NA,0.534,-0.0040000000000000036
+Ecuador,2015,TRUE,NA,0.533,-0.0010000000000000009
+Ecuador,2016,TRUE,NA,0.54,0.007000000000000006
+Ecuador,2017,TRUE,NA,0.552,0.01200000000000001
+Ecuador,2018,TRUE,0.7405587301587303,0.641,0.08899999999999997
+Ecuador,2019,TRUE,0.8635646825396825,0.617,-0.02400000000000002
+Ecuador,2020,TRUE,0.7575543650793651,0.626,0.009000000000000008
+Ecuador,2021,TRUE,0.7917773809523811,0.625,-0.0010000000000000009
+Ecuador,2022,TRUE,0.7756182539682538,0.661,0.03600000000000003
+Ecuador,2023,TRUE,NA,0.641,-0.020000000000000018
+Ecuador,2024,TRUE,NA,0.641,0
+Ecuador,2025,TRUE,NA,0.607,-0.03400000000000003
+Egypt,2012,TRUE,0.5088587301587302,0.298,0.094
+El Salvador,1995,TRUE,0.5569214285714286,0.484,0.013000000000000012
+El Salvador,1996,TRUE,0.5442452380952381,0.491,0.007000000000000006
+El Salvador,1997,TRUE,0.5770472222222223,0.493,0.0020000000000000018
+El Salvador,1998,TRUE,0.6201111111111113,0.492,-0.0010000000000000009
+El Salvador,1999,TRUE,0.6093571428571429,0.505,0.013000000000000012
+El Salvador,2000,TRUE,0.5930777777777778,0.522,0.017000000000000015
+El Salvador,2001,TRUE,0.6146968253968254,0.534,0.01200000000000001
+El Salvador,2002,TRUE,0.6437011904761906,0.543,0.009000000000000008
+El Salvador,2003,TRUE,0.649534523809524,0.537,-0.006000000000000005
+El Salvador,2004,TRUE,0.6500269841269842,0.539,0.0020000000000000018
+El Salvador,2005,TRUE,0.7554916666666666,0.542,0.0030000000000000027
+El Salvador,2006,TRUE,0.7770630952380951,0.557,0.015000000000000013
+El Salvador,2007,TRUE,0.7616583333333332,0.56,0.0030000000000000027
+El Salvador,2008,TRUE,0.7621583333333332,0.561,0.0010000000000000009
+El Salvador,2009,TRUE,NA,0.594,0.03299999999999992
+El Salvador,2010,TRUE,NA,0.613,0.019000000000000017
+El Salvador,2011,TRUE,NA,0.613,0
+El Salvador,2012,TRUE,NA,0.615,0.0020000000000000018
+El Salvador,2013,TRUE,NA,0.626,0.01100000000000001
+El Salvador,2014,TRUE,NA,0.665,0.039000000000000035
+El Salvador,2015,TRUE,NA,0.658,-0.007000000000000006
+El Salvador,2016,TRUE,NA,0.659,0.0010000000000000009
+El Salvador,2017,TRUE,NA,0.672,0.013000000000000012
+El Salvador,2018,TRUE,0.8411626984126983,0.631,-0.041000000000000036
+El Salvador,2019,TRUE,0.752861111111111,0.599,-0.03200000000000003
+El Salvador,2020,TRUE,0.7015686507936508,0.518,-0.08099999999999996
+El Salvador,2021,TRUE,0.8016059523809524,0.403,-0.11499999999999999
+El Salvador,2022,TRUE,0.8233440476190478,0.378,-0.025000000000000022
+El Salvador,2023,TRUE,NA,0.377,-0.0010000000000000009
+El Salvador,2024,TRUE,NA,0.335,-0.04199999999999998
+El Salvador,2025,TRUE,NA,0.321,-0.014000000000000012
+Georgia,2003,TRUE,0.5589242063492064,0.384,0.0050000000000000044
+Georgia,2004,TRUE,0.5356281746031747,0.548,0.16400000000000003
+Georgia,2005,TRUE,0.5612075396825398,0.547,-0.0010000000000000009
+Georgia,2006,TRUE,0.5627630952380954,0.548,0.0010000000000000009
+Georgia,2007,TRUE,0.5899519841269841,0.539,-0.009000000000000008
+Georgia,2008,TRUE,0.6157849206349207,0.495,-0.04400000000000004
+Georgia,2009,TRUE,0.6176468253968255,0.491,-0.0040000000000000036
+Georgia,2010,TRUE,0.6455396825396826,0.496,0.0050000000000000044
+Georgia,2011,TRUE,0.6641396825396825,0.5,0.0040000000000000036
+Georgia,2012,TRUE,0.6433249999999999,0.519,0.019000000000000017
+Greece,2015,TRUE,0.5161531746031747,0.88,-0.009000000000000008
+Greece,2016,TRUE,0.5136234126984127,0.872,-0.008000000000000007
+Greece,2017,TRUE,0.5402670634920634,0.868,-0.0040000000000000036
+Greece,2018,TRUE,0.5681087301587302,0.859,-0.009000000000000008
+Greece,2019,TRUE,NA,0.864,0.0050000000000000044
+Greece,2020,TRUE,NA,0.788,-0.07599999999999996
+Greece,2021,TRUE,NA,0.76,-0.028000000000000025
+Greece,2022,TRUE,NA,0.762,0.0020000000000000018
+Greece,2023,TRUE,NA,0.735,-0.027000000000000024
+Greece,2024,TRUE,NA,0.744,0.009000000000000008
+Greece,2025,TRUE,NA,0.741,-0.0030000000000000027
+Guatemala,2007,TRUE,0.5051261904761905,0.563,0.010999999999999899
+Guatemala,2008,TRUE,0.5031650793650794,0.582,0.019000000000000017
+Guatemala,2009,TRUE,0.5017436507936507,0.58,-0.0020000000000000018
+Guatemala,2010,TRUE,0.5031650793650794,0.583,0.0030000000000000027
+Guatemala,2011,TRUE,0.5088869047619047,0.581,-0.0020000000000000018
+Guatemala,2012,TRUE,0.5151924603174602,0.576,-0.0050000000000000044
+Guatemala,2013,TRUE,0.5219531746031746,0.574,-0.0020000000000000018
+Guatemala,2014,TRUE,0.5210642857142856,0.572,-0.0020000000000000018
+Guatemala,2015,TRUE,0.5060785714285714,0.587,0.015000000000000013
+Guatemala,2016,TRUE,0.5053968253968254,0.626,0.039000000000000035
+Guatemala,2017,TRUE,0.5310380952380952,0.621,-0.0050000000000000044
+Guatemala,2018,TRUE,0.5828246031746034,0.602,-0.019000000000000017
+Guatemala,2019,TRUE,0.5862222222222223,0.597,-0.0050000000000000044
+Guatemala,2020,TRUE,0.5936293650793653,0.589,-0.008000000000000007
+Guatemala,2021,TRUE,0.6235944444444447,0.555,-0.03399999999999992
+Guatemala,2022,TRUE,0.6145285714285715,0.509,-0.04600000000000004
+Guatemala,2023,TRUE,0.5995944444444448,0.506,-0.0030000000000000027
+Guatemala,2024,TRUE,0.5200841269841271,0.609,0.10299999999999998
+Honduras,2009,TRUE,0.6258420634920636,0.441,-0.07800000000000001
+Honduras,2010,TRUE,0.5538861111111113,0.408,-0.03300000000000003
+Honduras,2011,TRUE,0.5559710317460318,0.419,0.01100000000000001
+Honduras,2012,TRUE,0.5995337301587302,0.418,-0.0010000000000000009
+Honduras,2013,TRUE,0.6073503968253969,0.413,-0.0050000000000000044
+Honduras,2014,TRUE,0.5711904761904764,0.433,0.020000000000000018
+Honduras,2015,TRUE,0.5908472222222224,0.426,-0.007000000000000006
+Honduras,2016,TRUE,0.5900630952380954,0.425,-0.0010000000000000009
+Honduras,2017,TRUE,0.5746896825396827,0.414,-0.01100000000000001
+Honduras,2018,TRUE,0.5529765873015873,0.361,-0.05299999999999999
+Honduras,2019,TRUE,0.5472734126984127,0.368,0.007000000000000006
+Honduras,2020,TRUE,0.5819273809523811,0.372,0.0040000000000000036
+Honduras,2021,TRUE,0.6092861111111113,0.394,0.02200000000000002
+Honduras,2022,TRUE,0.5036055555555554,0.544,0.15000000000000002
+Honduras,2024,TRUE,0.5114900793650794,0.538,-0.0010000000000000009
+Honduras,2025,TRUE,0.560125396825397,0.511,-0.027000000000000024
+Hungary,2003,TRUE,0.5009607142857144,0.843,0.0010000000000000009
+Hungary,2004,TRUE,0.5245496031746033,0.843,0
+Hungary,2005,TRUE,0.552602380952381,0.843,0
+Hungary,2006,TRUE,0.5924075396825397,0.831,-0.01200000000000001
+Hungary,2007,TRUE,0.5644218253968254,0.85,0.019000000000000017
+Hungary,2008,TRUE,0.5611996031746033,0.85,0
+Hungary,2009,TRUE,0.5620329365079365,0.85,0
+Hungary,2010,TRUE,NA,0.808,-0.041999999999999926
+Hungary,2011,TRUE,NA,0.778,-0.030000000000000027
+Hungary,2012,TRUE,NA,0.773,-0.0050000000000000044
+Hungary,2013,TRUE,NA,0.738,-0.03500000000000003
+Hungary,2014,TRUE,NA,0.669,-0.06899999999999995
+Hungary,2015,TRUE,NA,0.617,-0.052000000000000046
+Hungary,2016,TRUE,NA,0.613,-0.0040000000000000036
+Hungary,2017,TRUE,NA,0.555,-0.05799999999999994
+Hungary,2018,TRUE,NA,0.481,-0.07400000000000007
+Hungary,2019,TRUE,NA,0.466,-0.014999999999999958
+Hungary,2020,TRUE,NA,0.46,-0.006000000000000005
+Hungary,2021,TRUE,NA,0.45,-0.010000000000000009
+Hungary,2022,TRUE,NA,0.447,-0.0030000000000000027
+Hungary,2023,TRUE,NA,0.434,-0.013000000000000012
+Hungary,2024,TRUE,NA,0.444,0.010000000000000009
+Hungary,2025,TRUE,NA,0.421,-0.02300000000000002
+Italy,2025,TRUE,0.5315369047619047,0.745,-0.039000000000000035
+Kyrgyzstan,2021,TRUE,0.5755563492063496,0.41,0.024999999999999967
+Kyrgyzstan,2022,TRUE,0.5407515873015872,0.38,-0.02999999999999997
+Kyrgyzstan,2023,TRUE,0.5567384920634922,0.348,-0.03200000000000003
+Kyrgyzstan,2024,TRUE,0.5067801587301589,0.321,-0.02699999999999997
+Kyrgyzstan,2025,TRUE,0.5054956349206351,0.313,-0.008000000000000007
+Lithuania,1992,TRUE,0.5029095238095238,0.799,0.008000000000000007
+Maldives,2018,TRUE,0.5058646825396826,0.391,0.038000000000000034
+Mexico,2017,TRUE,0.5355333333333334,0.638,-0.0050000000000000044
+Mexico,2018,TRUE,0.5434956349206349,0.675,0.03700000000000003
+Mexico,2019,TRUE,0.6421583333333333,0.684,0.009000000000000008
+Mexico,2020,TRUE,0.7301765873015872,0.664,-0.020000000000000018
+Mexico,2021,TRUE,0.7362781746031747,0.624,-0.040000000000000036
+Mexico,2022,TRUE,0.8234527777777778,0.584,-0.040000000000000036
+Mexico,2023,TRUE,0.8628424603174603,0.548,-0.03599999999999992
+Mexico,2024,TRUE,0.8971480158730157,0.496,-0.052000000000000046
+Mexico,2025,TRUE,0.8784765873015872,0.469,-0.027000000000000024
+Moldova,2024,TRUE,0.5856666666666667,0.622,-0.08999999999999997
+Moldova,2025,TRUE,0.5751051587301587,0.553,-0.06899999999999995
+Nicaragua,2000,TRUE,0.6900654761904763,0.586,-0.01100000000000001
+Nicaragua,2001,TRUE,0.6294829365079365,0.588,0.0020000000000000018
+Nicaragua,2002,TRUE,0.5668690476190477,0.601,0.013000000000000012
+Nicaragua,2003,TRUE,0.5743492063492063,0.591,-0.010000000000000009
+Nicaragua,2004,TRUE,0.6119011904761904,0.591,0
+Nicaragua,2005,TRUE,0.6447773809523809,0.591,0
+Nicaragua,2006,TRUE,0.8003988095238095,0.563,-0.028000000000000025
+Nicaragua,2007,TRUE,0.946022619047619,0.457,-0.10599999999999993
+Nicaragua,2008,TRUE,NA,0.445,-0.01200000000000001
+Nicaragua,2009,TRUE,NA,0.441,-0.0040000000000000036
+Nicaragua,2010,TRUE,NA,0.436,-0.0050000000000000044
+Nicaragua,2011,TRUE,NA,0.425,-0.01100000000000001
+Nicaragua,2012,TRUE,NA,0.371,-0.05399999999999999
+Nicaragua,2013,TRUE,NA,0.319,-0.05199999999999999
+Nicaragua,2014,TRUE,NA,0.319,0
+Nicaragua,2015,TRUE,NA,0.318,-0.0010000000000000009
+Nicaragua,2016,TRUE,NA,0.305,-0.013000000000000012
+Nicaragua,2017,TRUE,NA,0.281,-0.023999999999999966
+Nicaragua,2018,TRUE,NA,0.221,-0.060000000000000026
+Nicaragua,2019,TRUE,NA,0.215,-0.006000000000000005
+Nicaragua,2020,TRUE,NA,0.215,0
+Nicaragua,2021,TRUE,NA,0.195,-0.01999999999999999
+Nicaragua,2022,TRUE,NA,0.158,-0.037000000000000005
+Nicaragua,2023,TRUE,NA,0.158,0
+Nicaragua,2024,TRUE,NA,0.151,-0.007000000000000006
+Nicaragua,2025,TRUE,NA,0.151,0
+North Macedonia,2004,TRUE,0.5423115079365077,0.618,0.0010000000000000009
+North Macedonia,2005,TRUE,0.6022035714285713,0.603,-0.015000000000000013
+North Macedonia,2006,TRUE,0.6305531746031745,0.597,-0.006000000000000005
+North Macedonia,2007,TRUE,0.669779365079365,0.584,-0.013000000000000012
+North Macedonia,2008,TRUE,0.6975607142857143,0.553,-0.030999999999999917
+North Macedonia,2009,TRUE,0.8258948412698413,0.528,-0.025000000000000022
+North Macedonia,2010,TRUE,0.8458718253968253,0.526,-0.0020000000000000018
+North Macedonia,2011,TRUE,NA,0.478,-0.04800000000000004
+North Macedonia,2012,TRUE,NA,0.45,-0.02799999999999997
+North Macedonia,2013,TRUE,NA,0.448,-0.0020000000000000018
+North Macedonia,2014,TRUE,NA,0.447,-0.0010000000000000009
+North Macedonia,2015,TRUE,NA,0.44,-0.007000000000000006
+North Macedonia,2016,TRUE,NA,0.449,0.009000000000000008
+North Macedonia,2017,TRUE,0.6439869047619047,0.548,0.09900000000000003
+North Macedonia,2018,TRUE,0.6717654761904764,0.575,0.026999999999999913
+North Macedonia,2019,TRUE,0.7171115079365081,0.602,0.027000000000000024
+North Macedonia,2020,TRUE,0.7084984126984131,0.598,-0.0040000000000000036
+North Macedonia,2021,TRUE,0.7021948412698417,0.592,-0.006000000000000005
+North Macedonia,2022,TRUE,0.7350888888888892,0.56,-0.03199999999999992
+North Macedonia,2023,TRUE,0.6853694444444446,0.562,0.0020000000000000018
+North Macedonia,2024,TRUE,0.7262023809523811,0.557,-0.0050000000000000044
+North Macedonia,2025,TRUE,0.7342027777777782,0.562,0.0050000000000000044
+Peru,1995,TRUE,0.515084523809524,0.285,0.03899999999999998
+Peru,1996,TRUE,0.5275242063492065,0.362,0.07700000000000001
+Peru,1997,TRUE,0.5272384920634922,0.362,0
+Peru,1998,TRUE,0.5343515873015874,0.349,-0.013000000000000012
+Peru,1999,TRUE,0.5270515873015873,0.349,0
+Peru,2022,TRUE,0.5746043650793652,0.733,-0.038000000000000034
+Peru,2023,TRUE,0.6198301587301587,0.7,-0.03300000000000003
+Peru,2024,TRUE,0.6451769841269842,0.642,-0.05799999999999994
+Peru,2025,TRUE,0.6394738095238096,0.667,0.025000000000000022
+Philippines,2016,TRUE,0.5322817460317462,0.485,-0.03700000000000003
+Philippines,2017,TRUE,0.558254761904762,0.469,-0.016000000000000014
+Philippines,2018,TRUE,0.5984575396825396,0.45,-0.01899999999999996
+Philippines,2019,TRUE,0.6296825396825395,0.428,-0.02200000000000002
+Philippines,2020,TRUE,0.6668757936507935,0.405,-0.022999999999999965
+Philippines,2021,TRUE,0.6361388888888888,0.411,0.00599999999999995
+Philippines,2022,TRUE,0.6873234126984127,0.411,0
+Philippines,2023,TRUE,0.6932880952380951,0.416,0.0050000000000000044
+Philippines,2024,TRUE,0.7002269841269843,0.411,-0.0050000000000000044
+Philippines,2025,TRUE,0.7067162698412698,0.392,-0.01899999999999996
+Poland,2016,TRUE,NA,0.731,-0.14500000000000002
+Poland,2017,TRUE,NA,0.698,-0.03300000000000003
+Poland,2018,TRUE,NA,0.694,-0.0040000000000000036
+Poland,2019,TRUE,NA,0.682,-0.0119999999999999
+Poland,2020,TRUE,NA,0.616,-0.06600000000000006
+Poland,2021,TRUE,NA,0.587,-0.029000000000000026
+Poland,2022,TRUE,NA,0.578,-0.009000000000000008
+Poland,2023,TRUE,0.8905472222222223,0.598,0.020000000000000018
+Poland,2024,TRUE,0.5018777777777779,0.73,0.132
+Romania,2001,TRUE,0.5071178571428572,0.597,-0.014000000000000012
+Romania,2003,TRUE,0.6610178571428571,0.609,0.01200000000000001
+Romania,2004,TRUE,0.6383210317460317,0.592,-0.017000000000000015
+Romania,2007,TRUE,0.5232273809523811,0.609,-0.0020000000000000018
+Romania,2008,TRUE,0.5009079365079367,0.621,0.01200000000000001
+Romania,2009,TRUE,0.5237107142857145,0.666,0.04500000000000004
+Romania,2010,TRUE,0.5381773809523812,0.68,0.014000000000000012
+Romania,2011,TRUE,0.5329273809523812,0.684,0.0040000000000000036
+Romania,2012,TRUE,0.5901448412698415,0.674,-0.010000000000000009
+Romania,2013,TRUE,0.5681361111111112,0.672,-0.0020000000000000018
+Romania,2014,TRUE,0.5722234126984128,0.676,0.0040000000000000036
+Romania,2015,TRUE,0.5442817460317462,0.716,0.039999999999999925
+Romania,2017,TRUE,0.6891964285714285,0.695,-0.038000000000000034
+Romania,2018,TRUE,0.8437246031746028,0.692,-0.0030000000000000027
+Romania,2019,TRUE,0.7700007936507935,0.75,0.05800000000000005
+Romania,2020,TRUE,0.6437884920634921,0.805,0.05500000000000005
+Romania,2021,TRUE,0.6265376984126984,0.766,-0.039000000000000035
+Romania,2022,TRUE,0.818772222222222,0.691,-0.07500000000000007
+Romania,2023,TRUE,0.8225702380952378,0.677,-0.013999999999999901
+Romania,2024,TRUE,0.8393365079365075,0.628,-0.049000000000000044
+Romania,2025,TRUE,0.80036746031746,0.605,-0.02300000000000002
+Russia,1993,TRUE,0.6243440476190476,0.48,-0.018000000000000016
+Russia,1994,TRUE,0.5734809523809523,0.477,-0.0030000000000000027
+Russia,1995,TRUE,0.621986111111111,0.477,0
+Russia,1996,TRUE,0.616736111111111,0.461,-0.01599999999999996
+Russia,1997,TRUE,0.6188571428571428,0.456,-0.0050000000000000044
+Russia,1998,TRUE,0.6228571428571428,0.456,0
+Russia,1999,TRUE,0.6302103174603174,0.461,0.0050000000000000044
+Russia,2000,TRUE,NA,0.403,-0.057999999999999996
+Russia,2001,TRUE,NA,0.374,-0.029000000000000026
+Russia,2002,TRUE,NA,0.354,-0.020000000000000018
+Russia,2003,TRUE,NA,0.339,-0.014999999999999958
+Russia,2004,TRUE,NA,0.321,-0.018000000000000016
+Russia,2005,TRUE,NA,0.32,-0.0010000000000000009
+Russia,2006,TRUE,NA,0.322,0.0020000000000000018
+Russia,2007,TRUE,NA,0.316,-0.006000000000000005
+Russia,2008,TRUE,NA,0.302,-0.014000000000000012
+Russia,2009,TRUE,0.982172619047619,0.309,0.007000000000000006
+Russia,2010,TRUE,0.9380337301587302,0.306,-0.0030000000000000027
+Russia,2011,TRUE,0.9357337301587302,0.299,-0.007000000000000006
+Russia,2012,TRUE,NA,0.278,-0.020999999999999963
+Russia,2013,TRUE,NA,0.276,-0.0020000000000000018
+Russia,2014,TRUE,NA,0.264,-0.01200000000000001
+Russia,2015,TRUE,NA,0.265,0.0010000000000000009
+Russia,2016,TRUE,NA,0.263,-0.0020000000000000018
+Russia,2017,TRUE,NA,0.261,-0.0020000000000000018
+Russia,2018,TRUE,NA,0.264,0.0030000000000000027
+Russia,2019,TRUE,NA,0.259,-0.0050000000000000044
+Russia,2020,TRUE,NA,0.255,-0.0040000000000000036
+Russia,2021,TRUE,NA,0.245,-0.010000000000000009
+Russia,2022,TRUE,NA,0.206,-0.03900000000000001
+Russia,2023,TRUE,NA,0.19,-0.015999999999999986
+Russia,2024,TRUE,NA,0.171,-0.01899999999999999
+Russia,2025,TRUE,NA,0.17,-0.0010000000000000009
+Serbia,1991,TRUE,0.6926480158730158,0.164,-0.036000000000000004
+Serbia,1992,TRUE,0.7432722222222223,0.238,0.07399999999999998
+Serbia,1993,TRUE,0.8131031746031748,0.288,0.04999999999999999
+Serbia,1994,TRUE,0.8131031746031748,0.288,0
+Serbia,1995,TRUE,0.8114841269841271,0.288,0
+Serbia,1996,TRUE,0.816127380952381,0.293,0.0050000000000000044
+Serbia,1997,TRUE,0.813877380952381,0.299,0.006000000000000005
+Serbia,1998,TRUE,0.815127380952381,0.298,-0.0010000000000000009
+Serbia,1999,TRUE,0.8139607142857143,0.298,0
+Serbia,2000,TRUE,0.7469293650793651,0.364,0.066
+Serbia,2001,TRUE,0.6545634920634922,0.584,0.21999999999999997
+Serbia,2002,TRUE,0.6186412698412698,0.61,0.026000000000000023
+Serbia,2003,TRUE,0.6027630952380952,0.646,0.03600000000000003
+Serbia,2004,TRUE,0.6225281746031748,0.634,-0.01200000000000001
+Serbia,2005,TRUE,0.6401972222222224,0.634,0
+Serbia,2006,TRUE,0.6895158730158731,0.633,-0.0010000000000000009
+Serbia,2007,TRUE,0.6596293650793651,0.628,-0.0050000000000000044
+Serbia,2008,TRUE,0.7002738095238092,0.628,0
+Serbia,2009,TRUE,0.6780261904761904,0.623,-0.0050000000000000044
+Serbia,2010,TRUE,0.7499888888888888,0.61,-0.013000000000000012
+Serbia,2011,TRUE,0.7450539682539682,0.607,-0.0030000000000000027
+Serbia,2012,TRUE,NA,0.593,-0.014000000000000012
+Serbia,2013,TRUE,NA,0.502,-0.09099999999999997
+Serbia,2014,TRUE,NA,0.44,-0.062
+Serbia,2015,TRUE,NA,0.422,-0.018000000000000016
+Serbia,2016,TRUE,NA,0.411,-0.01100000000000001
+Serbia,2017,TRUE,NA,0.376,-0.034999999999999976
+Serbia,2018,TRUE,NA,0.354,-0.02200000000000002
+Serbia,2019,TRUE,NA,0.365,0.01100000000000001
+Serbia,2020,TRUE,NA,0.349,-0.016000000000000014
+Serbia,2021,TRUE,NA,0.336,-0.012999999999999956
+Serbia,2022,TRUE,NA,0.357,0.020999999999999963
+Serbia,2023,TRUE,NA,0.36,0.0030000000000000027
+Serbia,2024,TRUE,NA,0.315,-0.044999999999999984
+Serbia,2025,TRUE,NA,0.3,-0.015000000000000013
+Slovakia,1994,TRUE,0.6437742063492066,0.704,-0.04600000000000004
+Slovakia,1995,TRUE,0.6437742063492066,0.702,-0.0020000000000000018
+Slovakia,1996,TRUE,0.6446849206349208,0.702,0
+Slovakia,1997,TRUE,0.6479944444444447,0.702,0
+Slovakia,1998,TRUE,0.5894638888888892,0.765,0.06300000000000006
+Slovakia,2020,TRUE,0.5149801587301588,0.84,-0.0010000000000000009
+Slovakia,2023,TRUE,0.5566107142857145,0.812,-0.02499999999999991
+Slovakia,2024,TRUE,0.7911063492063493,0.746,-0.06600000000000006
+Slovakia,2025,TRUE,0.8224119047619048,0.733,-0.013000000000000012
+Slovenia,2020,TRUE,0.5210964285714286,0.752,-0.061999999999999944
+Slovenia,2021,TRUE,0.598838492063492,0.715,-0.03700000000000003
+Slovenia,2023,TRUE,0.5056503968253969,0.76,-0.04800000000000004
+Slovenia,2024,TRUE,0.5217992063492064,0.725,-0.03500000000000003
+Slovenia,2025,TRUE,0.5282226190476192,0.692,-0.03300000000000003
+Sri Lanka,2013,TRUE,0.5184797619047617,0.418,0.02799999999999997
+Sri Lanka,2014,TRUE,0.5004281746031746,0.417,-0.0010000000000000009
+Sri Lanka,2019,TRUE,0.510511507936508,0.564,-0.04800000000000004
+Sri Lanka,2020,TRUE,0.5554678571428573,0.579,0.015000000000000013
+Sri Lanka,2021,TRUE,0.5304091269841269,0.572,-0.007000000000000006
+Türkiye,1991,TRUE,0.5668023809523809,0.518,0.0010000000000000009
+Türkiye,1992,TRUE,0.5439309523809525,0.533,0.015000000000000013
+Türkiye,2005,TRUE,0.5665373015873015,0.643,-0.014000000000000012
+Türkiye,2006,TRUE,0.5689373015873015,0.643,0
+Türkiye,2007,TRUE,0.6584269841269844,0.616,-0.027000000000000024
+Türkiye,2008,TRUE,0.7067317460317462,0.554,-0.061999999999999944
+Türkiye,2009,TRUE,0.7106996031746033,0.545,-0.009000000000000008
+Türkiye,2010,TRUE,NA,0.525,-0.020000000000000018
+Türkiye,2011,TRUE,NA,0.522,-0.0030000000000000027
+Türkiye,2012,TRUE,NA,0.508,-0.014000000000000012
+Türkiye,2013,TRUE,NA,0.469,-0.039000000000000035
+Türkiye,2014,TRUE,NA,0.426,-0.04299999999999998
+Türkiye,2015,TRUE,NA,0.388,-0.03799999999999998
+Türkiye,2016,TRUE,NA,0.308,-0.08000000000000002
+Türkiye,2017,TRUE,NA,0.29,-0.018000000000000016
+Türkiye,2018,TRUE,NA,0.295,0.0050000000000000044
+Türkiye,2019,TRUE,NA,0.289,-0.006000000000000005
+Türkiye,2020,TRUE,0.7842678571428572,0.292,0.0030000000000000027
+Türkiye,2021,TRUE,0.7311821428571429,0.287,-0.0050000000000000044
+Türkiye,2022,TRUE,0.7445210317460318,0.285,-0.0020000000000000018
+Türkiye,2023,TRUE,NA,0.285,0
+Türkiye,2024,TRUE,NA,0.289,0.0040000000000000036
+Türkiye,2025,TRUE,NA,0.293,0.0040000000000000036
+Ukraine,1996,TRUE,0.5095599206349205,0.543,-0.009000000000000008
+Ukraine,1998,TRUE,0.5117619047619048,0.448,-0.07500000000000001
+Ukraine,1999,TRUE,0.540988888888889,0.422,-0.026000000000000023
+Ukraine,2000,TRUE,0.803436111111111,0.389,-0.032999999999999974
+Ukraine,2001,TRUE,0.8037361111111111,0.384,-0.0050000000000000044
+Ukraine,2002,TRUE,0.790736111111111,0.394,0.010000000000000009
+Ukraine,2003,TRUE,0.7994027777777777,0.392,-0.0020000000000000018
+Ukraine,2004,TRUE,0.8174186507936507,0.383,-0.009000000000000008
+Ukraine,2005,TRUE,0.7373345238095238,0.448,0.065
+Ukraine,2006,TRUE,0.6922829365079368,0.574,0.12599999999999995
+Ukraine,2007,TRUE,0.6965341269841272,0.607,0.03300000000000003
+Ukraine,2008,TRUE,0.7178567460317461,0.608,0.0010000000000000009
+Ukraine,2009,TRUE,0.6807404761904761,0.604,-0.0040000000000000036
+Ukraine,2010,TRUE,NA,0.484,-0.12
+Ukraine,2011,TRUE,NA,0.483,-0.0010000000000000009
+Ukraine,2012,TRUE,NA,0.479,-0.0040000000000000036
+Ukraine,2013,TRUE,NA,0.459,-0.019999999999999962
+Ukraine,2014,TRUE,NA,0.417,-0.04200000000000004
+Ukraine,2015,TRUE,0.7955265873015873,0.42,0.0030000000000000027
+Ukraine,2016,TRUE,0.788995634920635,0.433,0.013000000000000012
+Ukraine,2017,TRUE,0.7746142857142855,0.43,-0.0030000000000000027
+Ukraine,2018,TRUE,0.7206773809523809,0.43,0
+Ukraine,2019,TRUE,0.5429448412698412,0.528,0.09800000000000003
+Ukraine,2020,TRUE,0.5719607142857144,0.552,0.02400000000000002
+Ukraine,2021,TRUE,0.6572083333333333,0.537,-0.015000000000000013
+Ukraine,2022,TRUE,0.6393674603174602,0.392,-0.14500000000000002
+Ukraine,2023,TRUE,0.631809126984127,0.39,-0.0020000000000000018
+Ukraine,2024,TRUE,0.6387686507936506,0.387,-0.0030000000000000027
+Ukraine,2025,TRUE,0.6182714285714284,0.386,-0.0010000000000000009
+United States of America,2002,TRUE,0.5013499999999999,0.829,0.0010000000000000009
+United States of America,2006,TRUE,0.5057980158730158,0.862,0.006000000000000005
+United States of America,2016,TRUE,0.535774603174603,0.885,-0.015000000000000013
+United States of America,2017,TRUE,NA,0.834,-0.051000000000000045
+United States of America,2018,TRUE,NA,0.824,-0.010000000000000009
+United States of America,2019,TRUE,NA,0.818,-0.006000000000000005
+United States of America,2020,TRUE,NA,0.815,-0.0030000000000000027
+United States of America,2021,TRUE,NA,0.821,0.006000000000000005
+United States of America,2022,TRUE,0.5820269841269841,0.833,0.01200000000000001
+United States of America,2023,TRUE,0.5861166666666666,0.857,0.02400000000000002
+United States of America,2024,TRUE,0.6224531746031747,0.843,-0.014000000000000012
+United States of America,2025,TRUE,NA,0.735,-0.10799999999999998
+Venezuela,1999,TRUE,NA,0.665,-0.06499999999999995
+Venezuela,2000,TRUE,NA,0.573,-0.09200000000000008
+Venezuela,2001,TRUE,NA,0.529,-0.04399999999999993
+Venezuela,2002,TRUE,NA,0.495,-0.03400000000000003
+Venezuela,2003,TRUE,NA,0.487,-0.008000000000000007
+Venezuela,2004,TRUE,NA,0.475,-0.01200000000000001
+Venezuela,2005,TRUE,NA,0.474,-0.0010000000000000009
+Venezuela,2006,TRUE,NA,0.45,-0.023999999999999966
+Venezuela,2007,TRUE,NA,0.434,-0.016000000000000014
+Venezuela,2008,TRUE,NA,0.432,-0.0020000000000000018
+Venezuela,2009,TRUE,NA,0.431,-0.0010000000000000009
+Venezuela,2010,TRUE,NA,0.419,-0.01200000000000001
+Venezuela,2011,TRUE,NA,0.415,-0.0040000000000000036
+Venezuela,2012,TRUE,NA,0.399,-0.01599999999999996
+Venezuela,2013,TRUE,NA,0.327,-0.07200000000000001
+Venezuela,2014,TRUE,NA,0.312,-0.015000000000000013
+Venezuela,2015,TRUE,NA,0.3,-0.01200000000000001
+Venezuela,2016,TRUE,NA,0.293,-0.007000000000000006
+Venezuela,2017,TRUE,NA,0.233,-0.05999999999999997
+Venezuela,2018,TRUE,NA,0.213,-0.020000000000000018
+Venezuela,2019,TRUE,NA,0.209,-0.0040000000000000036
+Venezuela,2020,TRUE,0.8328174603174603,0.206,-0.0030000000000000027
+Venezuela,2021,TRUE,0.814936507936508,0.215,0.009000000000000008
+Venezuela,2022,TRUE,0.812952380952381,0.209,-0.006000000000000005
+Venezuela,2023,TRUE,0.8432789682539683,0.206,-0.0030000000000000027
+Venezuela,2024,TRUE,0.8428345238095237,0.196,-0.009999999999999981
+Venezuela,2025,TRUE,0.836390873015873,0.181,-0.015000000000000013
+Zambia,2008,TRUE,0.536488888888889,0.51,0.010000000000000009
+Zambia,2009,TRUE,0.5449031746031747,0.517,0.007000000000000006
+Zambia,2010,TRUE,0.5796531746031749,0.514,-0.0030000000000000027
+Zambia,2011,TRUE,NA,0.503,-0.01100000000000001
+Zambia,2012,TRUE,NA,0.503,0
+Zambia,2013,TRUE,NA,0.485,-0.018000000000000016
+Zambia,2014,TRUE,NA,0.478,-0.007000000000000006
+Zambia,2015,TRUE,NA,0.458,-0.019999999999999962
+Zambia,2016,TRUE,NA,0.397,-0.061
+Zambia,2017,TRUE,NA,0.36,-0.03700000000000003
+Zambia,2018,TRUE,NA,0.37,0.010000000000000009
+Zambia,2019,TRUE,NA,0.358,-0.01200000000000001
+Zambia,2020,TRUE,NA,0.353,-0.0050000000000000044
+Zambia,2021,TRUE,NA,0.421,0.068
+Zambia,2022,TRUE,0.5250678571428571,0.52,0.09900000000000003
+Zambia,2023,TRUE,0.5101174603174604,0.525,0.0050000000000000044
+Zambia,2024,TRUE,0.5694079365079365,0.512,-0.013000000000000012
+Zambia,2025,TRUE,0.5913805555555555,0.497,-0.015000000000000013

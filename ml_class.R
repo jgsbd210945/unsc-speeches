@@ -10,6 +10,9 @@ model_data <- vdem_work |>
     )
   )
 
+model_data <- model_data |>
+  select(-starts_with("e_"))
+
 labeled_df <- model_data |>
   filter(!is.na(backslided)) |>
   mutate(backslided = factor(backslided, levels = c("TRUE", "FALSE")))
@@ -23,7 +26,7 @@ train_data <- training(data_split)
 test_data <- testing(data_split)
 
 db_rec <- recipe(backslided ~ ., data = train_data) |>
-  update_role(country_name, year, country_text_id, new_role = "id") |>
+  update_role(country_name, year, country_text_id, diff_polyarchy, v2x_polyarchy, new_role = "id") |>
   step_dummy(all_nominal_predictors()) |>
   step_zv(all_predictors()) |>
   step_normalize(all_numeric_predictors())
@@ -92,6 +95,11 @@ final_db |>
   ylab("Electoral Democracy Score") +
   xlab("Difference in Electoral Democracy Score")
 
+final_db |>
+  filter(final_backslided) |>
+  select(country_name, year, final_backslided, .pred_TRUE, v2x_polyarchy, diff_polyarchy) |>
+  write_csv("testresults.csv")
+
 mgwreg <- final_db |>
   select(country_name, country_text_id, year, v2x_polyarchy, v2x_regime_amb, diff_polyarchy, final_backslided, regime) |>
   rename(backslided = final_backslided)
@@ -99,3 +107,6 @@ mgwreg <- final_db |>
 mgwreg$bve <- ifelse(grepl("backslide_", mgwreg$regime), "backsliding",
                      ifelse(grepl("dem", mgwreg$regime), "democratic",
                             "entrenched"))
+## I think the issue currently is that it's giving an ROC/AUC of 1 since I have literally hundreds of variables.
+## So it's overfitting.
+
