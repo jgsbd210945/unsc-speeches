@@ -10,9 +10,6 @@ model_data <- vdem_work |>
     )
   )
 
-model_data <- model_data |>
-  select(-starts_with("e_"))
-
 labeled_df <- model_data |>
   filter(!is.na(backslided)) |>
   mutate(backslided = factor(backslided, levels = c("TRUE", "FALSE")))
@@ -26,7 +23,7 @@ train_data <- training(data_split)
 test_data <- testing(data_split)
 
 db_rec <- recipe(backslided ~ ., data = train_data) |>
-  update_role(country_name, year, country_text_id, diff_polyarchy, v2x_polyarchy, new_role = "id") |>
+  update_role(country_name, year, country_text_id, new_role = "id") |>
   step_dummy(all_nominal_predictors()) |>
   step_zv(all_predictors()) |>
   step_normalize(all_numeric_predictors())
@@ -49,7 +46,7 @@ results <- test_data |>
 
 results |> metrics(truth = backslided, estimate = .pred_class)
 results |> roc_auc(truth = backslided, .pred_TRUE)
-# accuracy = .993; roc_auc = 1
+# accuracy = .935; roc_auc = .987
 
 # onto unlabeled data
 
@@ -71,7 +68,8 @@ full_db <- labeled_df |>
   arrange(country_name, year) |>
   mutate(final_backslided = as.logical(final_backslided)) # un-factorizing it
 
-final_db <- full_db |> mutate(
+final_db <- full_db |> 
+  mutate(
   regime = case_when(
     (final_backslided & v2x_regime_amb > 4) ~ "backslide_erode",
     (final_backslided & between(v2x_regime_amb, 3, 4)) ~ "backslide_revert",
@@ -83,7 +81,7 @@ final_db <- full_db |> mutate(
   filter(!is.na(regime))
 
 final_db |>
-  ggplot(aes(x = diff_polyarchy, y = v2x_polyarchy, color = regime)) +
+  ggplot(aes(x = diff1_v2x_polyarchy, y = v2x_polyarchy, color = regime)) +
   geom_point(alpha = 0.75) +
   labs(color = "Regime") +
   scale_color_manual(values = color_scheme,
@@ -97,12 +95,13 @@ final_db |>
 
 final_db |>
   filter(final_backslided) |>
-  select(country_name, year, final_backslided, .pred_TRUE, v2x_polyarchy, diff_polyarchy) |>
+  select(country_name, year, final_backslided, .pred_TRUE, v2x_polyarchy, diff1_v2x_polyarchy) |>
   write_csv("testresults.csv")
 
 mgwreg <- final_db |>
-  select(country_name, country_text_id, year, v2x_polyarchy, v2x_regime_amb, diff_polyarchy, final_backslided, regime) |>
-  rename(backslided = final_backslided)
+  select(country_name, country_text_id, year, v2x_polyarchy, v2x_regime_amb, diff1_v2x_polyarchy, final_backslided, regime) |>
+  rename(backslided = final_backslided,
+         diff_polyarchy = diff1_v2x_polyarchy)
 
 mgwreg$bve <- ifelse(grepl("backslide_", mgwreg$regime), "backsliding",
                      ifelse(grepl("dem", mgwreg$regime), "democratic",
